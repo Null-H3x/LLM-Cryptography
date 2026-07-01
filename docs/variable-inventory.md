@@ -435,6 +435,7 @@ The following are **not** persisted as dataset fields today but have reserved at
 pip install -r requirements-validate.txt
 PYTHONPATH=. python3 scripts/sync_repo.py
 PYTHONPATH=. python3 scripts/comprehensive_validate.py --deep
+PYTHONPATH=. python3 scripts/paranoia_audit.py
 ```
 
 See also: [`datasets/ciphertext-properties/README.md`](../datasets/ciphertext-properties/README.md), [`Pre-LLM-Ingestion/README.md`](../Pre-LLM-Ingestion/README.md).

@@ -42,6 +42,8 @@ pip install -r requirements-validate.txt   # cipher + dataset validation only
 
 ```bash
 PYTHONPATH=. python3 scripts/comprehensive_validate.py
+PYTHONPATH=. python3 scripts/comprehensive_validate.py --deep   # includes math_audit
+PYTHONPATH=. python3 scripts/paranoia_audit.py                 # paths, invariants, full suite
 ```
 
 Regenerate everything (datasets, ground truth, validation):
@@ -96,6 +98,8 @@ LLM-Cryptography/
 │   ├── import_eyes_corpus.py   # Import unsolved Noita eye corpus from Eyes repo
 │   ├── sync_repo.py            # Regenerate datasets + ground truth + validate
 │   ├── comprehensive_validate.py  # Full audit (solved + unsolved)
+│   ├── paranoia_audit.py          # Path anchoring, invariants, full script suite
+│   ├── math_audit.py              # KATs, roundtrips, analysis edge cases
 │   └── build_ground_truth.py   # Build Pre-LLM-Ingestion/processed corpus
 ├── requirements-validate.txt   # Minimal deps for CI / dataset validation
 └── requirements.txt            # Full stack (ML fine-tuning + crypto)

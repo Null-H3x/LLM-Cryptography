@@ -16,8 +16,9 @@ EYES_REPO = "https://github.com/Null-H3x/Eyes.git"
 EYES_CORPUS_REL = "noita_eye_core/corpus.json"
 EYES_RAW_BASE5_REL = "data/Raw Base5"
 
-OUT_DIR = Path("datasets/unsolved/noita-eye-messages")
-MANIFEST_PATH = Path("datasets/unsolved/manifest.json")
+ROOT = Path(__file__).resolve().parents[1]
+OUT_DIR = ROOT / "datasets" / "unsolved" / "noita-eye-messages"
+MANIFEST_PATH = ROOT / "datasets" / "unsolved" / "manifest.json"
 MATH_REF = "docs/math-formulas/noita-eye.md"
 SLUG = "noita-eye-messages"
 
@@ -53,14 +54,18 @@ def fetch_corpus(source: Path | None, clone: bool) -> dict:
 
     if clone:
         with tempfile.TemporaryDirectory(prefix="eyes-import-") as tmp:
+            tmp_path = Path(tmp)
             subprocess.run(
-                ["git", "clone", "--depth", "1", EYES_REPO, tmp],
+                ["git", "clone", "--depth", "1", EYES_REPO, str(tmp_path)],
                 check=True,
                 capture_output=True,
                 text=True,
             )
-            path = Path(tmp) / EYES_CORPUS_REL
-            return json.loads(path.read_text(encoding="utf-8"))
+            path = tmp_path / EYES_CORPUS_REL
+            raw = json.loads(path.read_text(encoding="utf-8"))
+            maybe_copy_raw_base5(tmp_path)
+            raw["_imported_from"] = EYES_REPO
+            return raw
 
     bundled = OUT_DIR / "corpus.json"
     if bundled.is_file():
@@ -202,9 +207,7 @@ def main() -> int:
     write_manifest(len(records))
 
     source_root = args.source if args.source and args.source.is_dir() else None
-    if args.clone:
-        maybe_copy_raw_base5(None)
-    else:
+    if not args.clone:
         maybe_copy_raw_base5(source_root)
 
     print(f"wrote {data_path} ({len(records)} records)")

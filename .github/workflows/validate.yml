@@ -30,3 +30,6 @@ jobs:
 
       - name: Math and implementation audit
         run: PYTHONPATH=. python3 scripts/math_audit.py
+
+      - name: Paranoia audit (paths, invariants, full suite)
+        run: PYTHONPATH=. python3 scripts/paranoia_audit.py

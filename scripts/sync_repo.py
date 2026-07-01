@@ -66,6 +66,10 @@ def main() -> int:
         [sys.executable, "scripts/math_audit.py"],
         label="Math & implementation audit",
     )
+    run(
+        [sys.executable, "scripts/paranoia_audit.py"],
+        label="Paranoia audit (paths, invariants, full suite)",
+    )
 
     print("\nSync complete.")
     return 0

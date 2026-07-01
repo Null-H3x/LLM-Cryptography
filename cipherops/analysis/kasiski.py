@@ -6,7 +6,9 @@ import math
 from collections import Counter, defaultdict
 
 
-def _gcd_list(values: list[int]) -> int:
+def _gcd_list(values: list[int]) -> int | None:
+    if not values:
+        return None
     result = values[0]
     for value in values[1:]:
         result = math.gcd(result, value)

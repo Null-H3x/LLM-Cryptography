@@ -4,10 +4,13 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 from cipherops.ciphers.registry import CIPHER_REGISTRY, PLAIN_SAMPLES
 from cipherops.ciphers.utils import clean_alpha, sha256_text
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def _normalize_for_compare(text: str, family: str) -> str:
@@ -73,7 +76,7 @@ def generate_dataset(spec, output_root: Path) -> dict:
 
 
 def main() -> None:
-    root = Path("datasets/fingerprinted")
+    root = ROOT / "datasets" / "fingerprinted"
     summary = []
     for spec in CIPHER_REGISTRY:
         summary.append(generate_dataset(spec, root))
@@ -85,4 +88,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        raise SystemExit(1) from exc

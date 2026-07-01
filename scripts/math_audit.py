@@ -13,8 +13,10 @@ from pathlib import Path
 from cipherops.analysis.coset_ic import coset_ic_profile
 from cipherops.analysis.fingerprint import (
     ENGLISH_IC,
+    chi_squared_english,
     index_of_coincidence,
     shannon_entropy,
+    friedman_key_length_estimate,
 )
 from cipherops.analysis.kasiski import kasiski_examination
 from cipherops.analysis.keyspace import estimate_keyspace
@@ -265,7 +267,7 @@ def audit_analysis_kats(report: AuditReport) -> None:
         ("autokey", None, "26^3 (priming seed only)"),
     ]
     for family, exact, label in ks_checks:
-        params = {"key": "KEY"} if family == "vigenere" else {}
+        params = {"key": "KEY"} if family in {"vigenere", "autokey"} else {}
         ks = estimate_keyspace(family, params=params)
         if ks.get("label") != label:
             report.fail(f"Keyspace KAT {family}: expected label {label!r}, got {ks.get('label')!r}")
@@ -294,6 +296,25 @@ def audit_analysis_kats(report: AuditReport) -> None:
     else:
         ic = prof["fingerprint"]["index_of_coincidence"]
         report.ok(f"Autokey profile: coset_ic omitted, IC={ic:.4f}, bf={prof['attacks']['brute_force']['notes'][:40]}...")
+
+    if chi_squared_english("") is not None or chi_squared_english("123") is not None:
+        report.fail("chi_squared_english: non-alpha input should return None")
+    else:
+        report.ok("chi_squared_english: non-alpha → None")
+
+    if friedman_key_length_estimate("SHORT") is not None:
+        report.fail("Friedman: n<20 should return None")
+    else:
+        report.ok("Friedman: short text → None")
+
+    rk_pt = "".join(ch for ch in ("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG " * 3) if ch.isalpha())
+    rk_key = "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG AND THEN SOME EXTRA TEXT FOR KEY LENGTH " * 2
+    rk_ct = classical.running_key(rk_pt, rk_key)
+    rk_prof = analyze_ciphertext(rk_ct, cipher_family="running_key", params={"key_source": "book"})
+    if rk_prof.get("coset_ic") is not None or rk_prof.get("analysis_guidance", {}).get("periodicity") != "non_periodic":
+        report.fail("Running key profile KAT: non_periodic invariants failed")
+    else:
+        report.ok("Running key profile: coset_ic omitted, non_periodic guidance present")
 
 
 def audit_unsolved_corpus(report: AuditReport) -> None:

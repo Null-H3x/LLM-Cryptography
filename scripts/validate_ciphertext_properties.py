@@ -10,6 +10,8 @@ from pathlib import Path
 
 from cipherops.analysis.profile import ANALYZER_VERSION, analyze_ciphertext
 
+from cipherops.analysis.guidance import NON_PERIODIC_POLYALPHABETIC
+
 ROOT = Path(__file__).resolve().parents[1]
 PROPERTIES_ROOT = ROOT / "datasets" / "ciphertext-properties"
 MANIFEST = PROPERTIES_ROOT / "manifest.json"
@@ -94,6 +96,14 @@ def validate_file(path: Path, source_path: Path) -> tuple[int, list[str]]:
             errors.append(f"{prefix}: properties_sha256 mismatch for {record['id']}")
         if record["validation"].get("analyzer_version") != ANALYZER_VERSION:
             errors.append(f"{prefix}: analyzer_version mismatch")
+
+        family = src["cipher_family"].replace("-", "_")
+        if family in NON_PERIODIC_POLYALPHABETIC:
+            if recomputed.get("coset_ic") is not None:
+                errors.append(f"{prefix}: coset_ic must be null for {family}")
+            guidance = recomputed.get("analysis_guidance") or {}
+            if guidance.get("periodicity") != "non_periodic":
+                errors.append(f"{prefix}: missing non_periodic analysis_guidance for {family}")
 
     if len(lines) != len(source_records):
         errors.append(f"{path.parent.name}: expected {len(source_records)} records, found {len(lines)}")

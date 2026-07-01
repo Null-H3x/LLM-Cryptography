@@ -355,6 +355,7 @@ def validate_ciphertext_properties(report: ValidationReport) -> None:
         report.fail(f"Missing properties manifest: {PROPERTIES_MANIFEST}")
         return
 
+    from cipherops.analysis.guidance import NON_PERIODIC_POLYALPHABETIC
     from cipherops.analysis.profile import ANALYZER_VERSION, analyze_ciphertext
 
     manifest = json.loads(PROPERTIES_MANIFEST.read_text())
@@ -414,6 +415,13 @@ def validate_ciphertext_properties(report: ValidationReport) -> None:
             elif record["validation"].get("analyzer_version") != ANALYZER_VERSION:
                 report.fail(f"{prefix}: analyzer_version mismatch")
             else:
+                family = src["cipher_family"].replace("-", "_")
+                if family in NON_PERIODIC_POLYALPHABETIC:
+                    if recomputed.get("coset_ic") is not None:
+                        report.fail(f"{prefix}: coset_ic must be null for {family}")
+                    guidance = recomputed.get("analysis_guidance") or {}
+                    if guidance.get("periodicity") != "non_periodic":
+                        report.fail(f"{prefix}: missing non_periodic analysis_guidance")
                 report.inc("properties_records_ok")
 
     report.ok(f"Ciphertext properties validated ({len(manifest)} corpora)")
@@ -499,7 +507,11 @@ def run_math_audit_subprocess() -> None:
     import subprocess
 
     script = ROOT / "scripts" / "math_audit.py"
-    result = subprocess.run([sys.executable, str(script)], cwd=ROOT, env={**dict(__import__("os").environ), "PYTHONPATH": str(ROOT)})
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=ROOT,
+        env={**dict(__import__("os").environ), "PYTHONPATH": str(ROOT)},
+    )
     if result.returncode != 0:
         raise SystemExit(result.returncode)
 

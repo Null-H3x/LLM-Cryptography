@@ -1,10 +1,27 @@
-# Autokey Cipher
+# Autokey Cipher Family
 
-## Mathematical Definition
+Polyalphabetic ciphers where the keystream is **primed** by a short key, then **extended automatically** from the message. All variants in this family are **non-periodic** — do not apply Vigenère period recovery.
 
-Polyalphabetic cipher where the keystream is **primed** by a short key, then **extended with plaintext** (standard) or uses Beaufort subtraction (beaufort variant).
+**Related:** [`gak.md`](gak.md) (Gronsfeld AutoKey), [`xgak.md`](xgak.md) (ciphertext Gronsfeld autokey), [`../cryptanalysis/non-periodic-polyalphabetic.md`](../cryptanalysis/non-periodic-polyalphabetic.md).
 
-**Keystream (standard, plaintext-autokey):**
+---
+
+## Variant matrix (this repo)
+
+| Slug | Extension | Combiner | Priming key |
+|------|-----------|----------|-------------|
+| `autokey-standard` | Plaintext | Vigenère (+) | Alphabetic |
+| `autokey-beaufort` | Plaintext | Beaufort (−) | Alphabetic |
+| `autokey-ciphertext` | Ciphertext | Vigenère (+) | Alphabetic |
+| `autokey-ciphertext-beaufort` | Ciphertext | Beaufort (−) | Alphabetic |
+| `gak-31415` | Plaintext | Gronsfeld (+) | Numeric `31415` |
+| `xgak-31415` | Ciphertext | Gronsfeld (+) | Numeric `31415` |
+
+---
+
+## Plaintext-autokey (text-autokey)
+
+**Keystream (alphabetic seed):**
 
 \[
 k_i = \begin{cases}
@@ -13,96 +30,118 @@ p_{i-|K|} & i \geq |K|
 \end{cases}
 \]
 
-**Encryption (standard Vigenère-style):**
+**Encryption (standard):** \(E(p_i) = (p_i + k_i) \mod 26\)
 
-\[
-E(p_i) = (p_i + k_i) \mod 26
-\]
-
-**Beaufort variant:**
-
-\[
-E(p_i) = (k_i - p_i) \mod 26
-\]
-
-**Decryption** recovers \(p_i\) from \(c_i\), then appends \(p_i\) to the keystream for subsequent positions.
-
-### Variants in this repo
-
-| Slug | Variant | Keystream extension |
-|------|---------|---------------------|
-| `autokey-standard` | Plaintext-autokey | \(k_i \leftarrow p_{i-|K|}\) after seed |
-| `autokey-beaufort` | Beaufort autokey | Same keystream, subtract combiner |
-
-### Not implemented: ciphertext-autokey
-
-Some historical sources extend the keystream with **prior ciphertext** instead of plaintext:
-
-\[
-k_i = \begin{cases} K_i & i < |K| \\ c_{i-|K|} & i \geq |K| \end{cases}
-\]
-
-That variant is documented here for completeness but **not** in `cipherops/ciphers/classical.py`. Do not assume plaintext-autokey formulas apply to ciphertext-autokey without verification.
+**Beaufort:** \(E(p_i) = (k_i - p_i) \mod 26\)
 
 ---
 
-## Cryptanalysis
+## Ciphertext-autokey (key-autokey)
 
-Autokey is **not periodic**. Do **not** apply Vigenère period recovery (Kasiski, Friedman, coset IC) — those tools are misleading for long messages.
+Historical variant: keystream extends with **prior ciphertext** letters.
+
+\[
+k_i = \begin{cases}
+K_i & i < |K| \\
+c_{i-|K|} & i \geq |K|
+\end{cases}
+\]
+
+**Properties vs plaintext-autokey:**
+
+- Receiver can decrypt with only priming key + ciphertext (no need to derive plaintext for extension).
+- Single decryption error propagates to all subsequent positions.
+- Crib-drag must align with ciphertext letters at extension offsets.
+
+Implemented as `autokey-ciphertext` and `autokey-ciphertext-beaufort`.
+
+---
+
+## GAK / XGAK (Gronsfeld autokey)
+
+Numeric priming seed with shifts in \(\{0,\ldots,9\}\). After seed exhaustion:
+
+- **GAK:** \(s_i = p_{i-m} \bmod 10\)
+- **XGAK:** \(s_i = c_{i-m} \bmod 10\)
+
+See dedicated docs: [`gak.md`](gak.md), [`xgak.md`](xgak.md).
+
+---
+
+## Cryptanalysis (all variants)
+
+Autokey family ciphers are **not periodic**. Do **not** apply Kasiski, Friedman, or coset IC for period recovery.
 
 ### Regimes
 
 | Regime | Condition | IC behavior | Practical attack |
 |--------|-----------|-------------|------------------|
-| **Seed-dominated** | \(n \leq |K|\) | Low IC, polyalphabetic-like | Brute-force \(26^{|K|}\) seed |
-| **Mixed** | \(|K| < n \leq 2|K|\) | Transitional | Seed brute force + prefix scoring |
-| **OTP-like** | \(n \gg |K|\) | IC → English (~0.067) | Ciphertext-only intractable; use cribs/KPT |
+| **Seed-dominated** | \(n \leq |K|\) | Low IC | Brute priming seed |
+| **Mixed** | \(|K| < n \leq 2|K|\) | Transitional | Seed brute + prefix scoring |
+| **OTP-like** | \(n \gg |K|\) | IC → English (~0.067) | Cribs / KPT only |
 
-Where \(n = |C|\) (alphabetic length), \(|K|\) = priming key length.
+### Known-plaintext attack
 
-### Known-plaintext attack (most powerful)
-
-Once any plaintext character \(p_j\) is known, the keystream extends:
+Once \(p_j\) is known (plaintext-autokey / GAK):
 
 \[
-k_{j+|K|} = p_j \quad\text{(standard plaintext-autokey)}
+k_{j+|K|} = p_j \quad\text{or}\quad s_{j+m} = p_j \bmod 10
 \]
 
-Decrypt left-to-right: each recovered \(p_i\) feeds \(k_{i+|K|}\). A crib of length \(|K|\) at the start recovers the full seed and unlocks the message.
+For ciphertext-autokey / XGAK, extension uses \(c_{j+|K|}\) from ciphertext.
 
 ### What does **not** work
 
-- Kasiski examination for period \(|K|\) (repeats reflect plaintext structure, not key period)
-- Friedman key-length estimate (often ≈ 1 on long ciphertext)
-- Coset IC at period \(|K|\) (no stable column structure)
-- Per-column Caesar shift recovery (MIC) as for Vigenère
+- Kasiski period = \(|K|\)
+- Friedman key-length on long messages
+- Coset IC at seed length
+- Per-column MIC as for periodic Vigenère
 
 ### Keyspace
 
-| Attack model | \|K\| |
-|--------------|-------|
-| Priming seed only | \(26^{|K|}\) |
-| Full message, ciphertext-only | \(26^n\) (OTP-like) |
-| With known plaintext / crib | Iterative; polynomial in message length |
+| Variant | Seed space |
+|---------|------------|
+| Alphabetic autokey | \(26^{|K|}\) |
+| GAK / XGAK | \(10^{|K|}\) |
 
-See [`../cryptanalysis/non-periodic-polyalphabetic.md`](../cryptanalysis/non-periodic-polyalphabetic.md) and [`../cryptanalysis/keyspace-reference.md`](../cryptanalysis/keyspace-reference.md).
+See [`../cryptanalysis/keyspace-reference.md`](../cryptanalysis/keyspace-reference.md).
+
+### Seed brute-force tooling
+
+```python
+from cipherops.analysis.autokey_solver import brute_force_autokey_seed, brute_force_gak_seed
+
+candidates = brute_force_autokey_seed(ciphertext, seed_length=3, extension="plaintext")
+gak_hits = brute_force_gak_seed(ciphertext, seed_length=5, extension="plaintext")
+```
 
 ---
 
 ## Python Implementation
 
-See `cipherops/ciphers/classical.py::autokey`, `autokey_decrypt`.
+| Function | Variants |
+|----------|----------|
+| `classical.autokey`, `autokey_decrypt` | Alphabetic; `extension=` / `variant=` |
+| `classical.gronsfeld_autokey`, `gronsfeld_autokey_decrypt` | GAK / XGAK |
+| `analysis.autokey_solver.brute_force_*` | Seed enumeration helpers |
 
 Property profiles set `analysis_guidance.periodicity = non_periodic` and omit `coset_ic`.
 
 ---
 
-## Dataset
+## Datasets
 
 - `datasets/fingerprinted/autokey-standard/data.jsonl`
 - `datasets/fingerprinted/autokey-beaufort/data.jsonl`
+- `datasets/fingerprinted/autokey-ciphertext/data.jsonl`
+- `datasets/fingerprinted/autokey-ciphertext-beaufort/data.jsonl`
+- `datasets/fingerprinted/gak-31415/data.jsonl`
+- `datasets/fingerprinted/xgak-31415/data.jsonl`
+
+---
 
 ## References
 
-- Standard treatment: Vigenère autokey (plaintext feedback)
-- Cross-check: [`../cryptanalysis/curated-sources.md`](../cryptanalysis/curated-sources.md)
+- Wikipedia: [Autokey cipher](https://en.wikipedia.org/wiki/Autokey_cipher) (text-autokey vs key-autokey)
+- Practical Cryptography: autokey + Gronsfeld
+- Repo: [`../cryptanalysis/curated-sources.md`](../cryptanalysis/curated-sources.md)

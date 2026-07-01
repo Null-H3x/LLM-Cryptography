@@ -98,6 +98,34 @@
     "source_path": "datasets/fingerprinted/autokey-beaufort/data.jsonl"
   },
   {
+    "slug": "autokey-ciphertext",
+    "count": 10,
+    "path": "datasets/ciphertext-properties/autokey-ciphertext/properties.jsonl",
+    "corpus_type": "fingerprinted",
+    "source_path": "datasets/fingerprinted/autokey-ciphertext/data.jsonl"
+  },
+  {
+    "slug": "autokey-ciphertext-beaufort",
+    "count": 10,
+    "path": "datasets/ciphertext-properties/autokey-ciphertext-beaufort/properties.jsonl",
+    "corpus_type": "fingerprinted",
+    "source_path": "datasets/fingerprinted/autokey-ciphertext-beaufort/data.jsonl"
+  },
+  {
+    "slug": "gak-31415",
+    "count": 10,
+    "path": "datasets/ciphertext-properties/gak-31415/properties.jsonl",
+    "corpus_type": "fingerprinted",
+    "source_path": "datasets/fingerprinted/gak-31415/data.jsonl"
+  },
+  {
+    "slug": "xgak-31415",
+    "count": 10,
+    "path": "datasets/ciphertext-properties/xgak-31415/properties.jsonl",
+    "corpus_type": "fingerprinted",
+    "source_path": "datasets/fingerprinted/xgak-31415/data.jsonl"
+  },
+  {
     "slug": "beaufort-keyword",
     "count": 10,
     "path": "datasets/ciphertext-properties/beaufort-keyword/properties.jsonl",

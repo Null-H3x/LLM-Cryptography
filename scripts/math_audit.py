@@ -10,6 +10,7 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from cipherops.analysis.autokey_solver import brute_force_autokey_seed, brute_force_gak_seed
 from cipherops.analysis.coset_ic import coset_ic_profile
 from cipherops.analysis.fingerprint import (
     ENGLISH_IC,
@@ -77,6 +78,38 @@ def audit_classical_kats(report: AuditReport) -> None:
                 classical.autokey("ATTACKATDAWN", "KEY", variant="beaufort"), "KEY", variant="beaufort"
             )
             == "ATTACKATDAWN",
+        ),
+        (
+            "autokey-ciphertext roundtrip",
+            classical.autokey_decrypt(
+                classical.autokey("ATTACKATDAWN", "KEY", extension="ciphertext"), "KEY", extension="ciphertext"
+            )
+            == "ATTACKATDAWN",
+        ),
+        (
+            "gak roundtrip",
+            classical.gronsfeld_autokey_decrypt(classical.gronsfeld_autokey("HELLO", "31415"), "31415") == "HELLO",
+        ),
+        (
+            "xgak roundtrip",
+            classical.gronsfeld_autokey_decrypt(
+                classical.gronsfeld_autokey("HELLO", "31415", extension="ciphertext"), "31415", extension="ciphertext"
+            )
+            == "HELLO",
+        ),
+        (
+            "autokey brute enumerates KEY",
+            any(
+                r["seed"] == "KEY" and r["plaintext"] == "HEL"
+                for r in brute_force_autokey_seed(classical.autokey("HEL", "KEY"), 3, top_n=17576)
+            ),
+        ),
+        (
+            "gak brute enumerates 314",
+            any(
+                r["seed"] == "314" and r["plaintext"] == "CAT"
+                for r in brute_force_gak_seed(classical.gronsfeld_autokey("CAT", "314"), 3, top_n=1000)
+            ),
         ),
         ("base64 Hello", encoding.base64_encode("Hello") == "SGVsbG8="),
         ("base64 roundtrip", encoding.base64_decode(encoding.base64_encode("Test123")) == "Test123"),

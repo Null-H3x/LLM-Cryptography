@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-NON_PERIODIC_FAMILIES = frozenset({"autokey", "running_key"})
+NON_PERIODIC_FAMILIES = frozenset({"autokey", "running_key", "gak", "xgak"})
 
 
 @dataclass
@@ -110,7 +110,7 @@ def audit_qna_overrides(report: ParanoiaReport) -> None:
 def audit_non_periodic_properties(report: ParanoiaReport) -> None:
     from cipherops.analysis.guidance import NON_PERIODIC_POLYALPHABETIC
 
-    for slug in ("autokey-standard", "autokey-beaufort", "running-key-book"):
+    for slug in ("autokey-standard", "autokey-beaufort", "autokey-ciphertext", "autokey-ciphertext-beaufort", "gak-31415", "xgak-31415", "running-key-book"):
         path = ROOT / "datasets" / "ciphertext-properties" / slug / "properties.jsonl"
         if not path.is_file():
             report.fail(f"Missing properties for non-periodic slug {slug}")

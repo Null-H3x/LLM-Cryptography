@@ -180,47 +180,148 @@ def nihilist_decrypt(text: str, numeric_key: str, *, polybius_key: str = "NIHILI
     return "".join(out)
 
 
-def autokey(text: str, key: str, *, variant: str = "standard") -> str:
+def _autokey_shift(plain_idx: int, key_idx: int, *, variant: str) -> int:
+    if variant == "beaufort":
+        return (key_idx - plain_idx) % 26
+    return (plain_idx + key_idx) % 26
+
+
+def _autokey_unshift(cipher_idx: int, key_idx: int, *, variant: str) -> int:
+    if variant == "beaufort":
+        return (key_idx - cipher_idx) % 26
+    return (cipher_idx - key_idx) % 26
+
+
+def autokey(
+    text: str,
+    key: str,
+    *,
+    variant: str = "standard",
+    extension: str = "plaintext",
+) -> str:
     """
-    Autokey cipher variants:
-    - standard: keystream = key || plaintext (Vigenere-style addition)
-    - beaufort: keystream = key || plaintext with Beaufort subtraction
+    Autokey cipher (alphabetic priming key).
+
+    - variant: ``standard`` (Vigenère addition) or ``beaufort`` (subtraction)
+    - extension: ``plaintext`` (text-autokey) or ``ciphertext`` (key-autokey)
     """
+    if extension not in {"plaintext", "ciphertext"}:
+        raise ValueError("Autokey extension must be 'plaintext' or 'ciphertext'")
     key = clean_alpha(key)
     if not key:
         raise ValueError("Autokey key required")
-    alpha = clean_alpha(text)
-    stream = list(key + alpha[:-1])
-    out = []
+    stream: list[str] = list(key)
+    out: list[str] = []
     ai = 0
     for ch in text:
         if ch.isalpha():
             k = char_index(stream[ai])
-            if variant == "beaufort":
-                out.append(index_char(k - char_index(ch), upper=ch.isupper()))
+            p = char_index(ch)
+            ct_idx = _autokey_shift(p, k, variant=variant)
+            ct_char = index_char(ct_idx, upper=ch.isupper())
+            out.append(ct_char)
+            if extension == "ciphertext":
+                stream.append(index_char(ct_idx))
             else:
-                out.append(index_char(char_index(ch) + k, upper=ch.isupper()))
+                stream.append(index_char(p))
             ai += 1
         else:
             out.append(ch)
     return "".join(out)
 
 
-def autokey_decrypt(text: str, key: str, *, variant: str = "standard") -> str:
+def autokey_decrypt(
+    text: str,
+    key: str,
+    *,
+    variant: str = "standard",
+    extension: str = "plaintext",
+) -> str:
+    if extension not in {"plaintext", "ciphertext"}:
+        raise ValueError("Autokey extension must be 'plaintext' or 'ciphertext'")
     key = clean_alpha(key)
-    stream = list(key)
-    out = []
+    if not key:
+        raise ValueError("Autokey key required")
+    stream: list[str] = list(key)
+    out: list[str] = []
     ai = 0
     for ch in text:
         if ch.isalpha():
             k = char_index(stream[ai])
-            if variant == "beaufort":
-                plain_idx = (k - char_index(ch)) % 26
-            else:
-                plain_idx = (char_index(ch) - k) % 26
+            ct_idx = char_index(ch)
+            plain_idx = _autokey_unshift(ct_idx, k, variant=variant)
             plain_char = index_char(plain_idx, upper=ch.isupper())
             out.append(plain_char)
-            stream.append(index_char(plain_idx))
+            if extension == "ciphertext":
+                stream.append(index_char(ct_idx))
+            else:
+                stream.append(index_char(plain_idx))
+            ai += 1
+        else:
+            out.append(ch)
+    return "".join(out)
+
+
+def gronsfeld_autokey(
+    text: str,
+    numeric_key: str,
+    *,
+    extension: str = "plaintext",
+) -> str:
+    """
+    Gronsfeld AutoKey (GAK): numeric priming key, then plaintext/ciphertext extension.
+
+    After the seed digits, each shift is ``char_index(letter) mod 10``.
+    ``extension='ciphertext'`` is XGAK (ciphertext-autokey Gronsfeld).
+    """
+    if extension not in {"plaintext", "ciphertext"}:
+        raise ValueError("Gronsfeld autokey extension must be 'plaintext' or 'ciphertext'")
+    if not numeric_key or not numeric_key.isdigit():
+        raise ValueError("Gronsfeld autokey key must be numeric")
+    stream: list[int] = [int(d) for d in numeric_key]
+    out: list[str] = []
+    ai = 0
+    for ch in text:
+        if ch.isalpha():
+            k = stream[ai]
+            p = char_index(ch)
+            ct_idx = (p + k) % 26
+            ct_char = index_char(ct_idx, upper=ch.isupper())
+            out.append(ct_char)
+            if extension == "ciphertext":
+                stream.append(ct_idx % 10)
+            else:
+                stream.append(p % 10)
+            ai += 1
+        else:
+            out.append(ch)
+    return "".join(out)
+
+
+def gronsfeld_autokey_decrypt(
+    text: str,
+    numeric_key: str,
+    *,
+    extension: str = "plaintext",
+) -> str:
+    if extension not in {"plaintext", "ciphertext"}:
+        raise ValueError("Gronsfeld autokey extension must be 'plaintext' or 'ciphertext'")
+    if not numeric_key or not numeric_key.isdigit():
+        raise ValueError("Gronsfeld autokey key must be numeric")
+    stream: list[int] = [int(d) for d in numeric_key]
+    out: list[str] = []
+    ai = 0
+    for ch in text:
+        if ch.isalpha():
+            k = stream[ai]
+            ct_idx = char_index(ch)
+            plain_idx = (ct_idx - k) % 26
+            plain_char = index_char(plain_idx, upper=ch.isupper())
+            out.append(plain_char)
+            if extension == "ciphertext":
+                stream.append(ct_idx % 10)
+            else:
+                stream.append(plain_idx % 10)
             ai += 1
         else:
             out.append(ch)

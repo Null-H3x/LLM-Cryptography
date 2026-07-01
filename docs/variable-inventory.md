@@ -2,7 +2,7 @@
 
 Complete reference of symbols, fields, and parameters tracked across LLM-Cryptography — from mathematical notation through datasets, property profiles, and ground truth.
 
-**Scope:** 53 solved cipher variants (530 fingerprinted records) + 1 unsolved corpus (9 Noita eye messages) + 539 ciphertext property profiles.
+**Scope:** 57 solved cipher variants (570 fingerprinted records) + 1 unsolved corpus (9 Noita eye messages) + 579 ciphertext property profiles.
 
 ---
 
@@ -80,7 +80,7 @@ Defined in [`docs/math-formulas/definitions.md`](math-formulas/definitions.md).
 
 ## 2. Cipher registry (`CipherSpec`)
 
-Source: `cipherops/ciphers/registry.py` — **53 variants**.
+Source: `cipherops/ciphers/registry.py` — **57 variants**.
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -97,7 +97,7 @@ Source: `cipherops/ciphers/registry.py` — **53 variants**.
 
 ## 3. Fingerprinted dataset records
 
-Path: `datasets/fingerprinted/{slug}/data.jsonl` — **530 records** (10 × 53 ciphers).
+Path: `datasets/fingerprinted/{slug}/data.jsonl` — **570 records** (10 × 57 ciphers).
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -116,7 +116,7 @@ Path: `datasets/fingerprinted/{slug}/data.jsonl` — **530 records** (10 × 53 c
 
 ### Canonical plaintext corpus (`PLAIN_SAMPLES`)
 
-Ten fixed English sentences shared identically across all 53 fingerprinted variants — ensures cross-cipher comparability.
+Ten fixed English sentences shared identically across all 57 fingerprinted variants — ensures cross-cipher comparability.
 
 ---
 
@@ -167,7 +167,7 @@ Path: `datasets/unsolved/noita-eye-messages/data.jsonl` — **9 records**.
 
 ## 5. Ciphertext property records
 
-Path: `datasets/ciphertext-properties/{slug}/properties.jsonl` — **539 records** (530 solved + 9 unsolved).
+Path: `datasets/ciphertext-properties/{slug}/properties.jsonl` — **579 records** (570 solved + 9 unsolved).
 
 Each row mirrors a fingerprinted or unsolved record by `id` and adds cryptanalytic metadata from `cipherops/analysis/`.
 
@@ -295,7 +295,7 @@ These slots reserve structure for future crib-drag, brute-force, dictionary, hil
 
 ## 6. Ground truth registry
 
-Path: `Pre-LLM-Ingestion/processed/cipher-ground-truth.jsonl` — **54 records** (53 solved variants + 1 unsolved corpus).
+Path: `Pre-LLM-Ingestion/processed/cipher-ground-truth.jsonl` — **58 records** (57 solved variants + 1 unsolved corpus).
 
 | Field | Description |
 |-------|-------------|
@@ -340,7 +340,8 @@ Parameters stored on every dataset record and ground-truth row.
 | Substitution | `mapping` |
 | Nomenclator | `codebook` |
 | Columnar | `key` |
-| Autokey | `key`, `variant` |
+| Autokey | `autokey-standard`, `autokey-beaufort`, `autokey-ciphertext`, `autokey-ciphertext-beaufort` | `key`, `variant`, `extension` |
+| GAK / XGAK | `gak-31415`, `xgak-31415` | `numeric_key`, `extension` |
 | Beaufort, Porta, Vigenère, Playfair, Bifid, Trifid | `key` |
 | Running key | `key_source` |
 | Gronsfeld | `numeric_key` |
@@ -404,12 +405,12 @@ Parameters stored on every dataset record and ground-truth row.
 
 | Layer | Records | Primary variables |
 |-------|---------|-----------------|
-| Math notation | 53 formula docs | P, C, K, E, D, IC, H, family-specific keys |
-| Cipher registry | 53 variants | family, slug, params, era, encrypt_only |
-| Fingerprinted datasets | 530 | plaintext, ciphertext, validation hashes |
+| Math notation | 57 formula docs | P, C, K, E, D, IC, H, family-specific keys |
+| Cipher registry | 57 variants | family, slug, params, era, encrypt_only |
+| Fingerprinted datasets | 570 | plaintext, ciphertext, validation hashes |
 | Unsolved datasets | 9 | integer ciphertext, header anomaly, σ₀ targets |
-| Ciphertext properties | 539 | fingerprint, frequency, kasiski, coset_ic, analysis_guidance, ngrams, patterns, attacks |
-| Ground truth | 54 | cross-links math ↔ data ↔ properties |
+| Ciphertext properties | 579 | fingerprint, frequency, kasiski, coset_ic, analysis_guidance, ngrams, patterns, attacks |
+| Ground truth | 58 | cross-links math ↔ data ↔ properties |
 
 ---
 

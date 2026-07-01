@@ -2,7 +2,7 @@
 
 Ciphers and systems **named in taxonomies** or **common in puzzles / history** but **not yet** in `cipherops` registry. Formulas are reference-only unless noted.
 
-**Implemented catalog:** 53 variants — see [`README.md`](README.md).  
+**Implemented catalog:** 57 variants — see [`README.md`](README.md).  
 **Encodings (PAM-5, etc.):** [`encodings-catalog.md`](encodings-catalog.md).  
 **Gap priorities:** [`../cryptanalysis/taxonomy-gap-map.md`](../cryptanalysis/taxonomy-gap-map.md).
 
@@ -53,7 +53,9 @@ Ciphers and systems **named in taxonomies** or **common in puzzles / history** b
 | **VIC** | Multi-stage | Straddling checkerboard + chain addition + transposition | Reference | P2 |
 | **Great cipher** | Louis XIV | Homophonic + nulls + traps | Reference | P2 |
 | **Bazeries** | Cylinder + substitution | Dual disk system | Reference | P3 |
-| **Ciphertext-autokey** | Autokey variant | \(k_i \leftarrow c_{i-\|K\|}\) after seed | Reference | P2 |
+| **Ciphertext-autokey** | Autokey variant | \(k_i \leftarrow c_{i-\|K\|}\) after seed | **Implemented** (`autokey-ciphertext`, `autokey-ciphertext-beaufort`) | — |
+| **GAK (Gronsfeld autokey)** | Numeric + plaintext extension | \(s_i \leftarrow p_{i-m} \bmod 10\) | **Implemented** (`gak-31415`) | — |
+| **XGAK** | Numeric + ciphertext extension | \(s_i \leftarrow c_{i-m} \bmod 10\) | **Implemented** (`xgak-31415`) | — |
 | **One-time pad (manual)** | Vernam | \(c_i = p_i \oplus k_i\), \(\|K\|=\|P\|\) | Reference | P3 |
 
 ---
@@ -111,7 +113,7 @@ From external classifier taxonomies — **not implemented**:
 |-----------|---------------------|
 | Simple shift | Caesar / Atbash |
 | Repeating key | Vigenère / Beaufort / Gronsfeld |
-| Non-repeating key | Autokey / running key |
+| Non-repeating key | Autokey (4 variants), GAK, XGAK, running key |
 | Symbol substitution | Homophonic / nomenclator (partial) |
 | Digraph | Playfair / four-square |
 | Fractionation | ADFGX / bifid / trifid |

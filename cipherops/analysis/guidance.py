@@ -2,13 +2,16 @@
 
 from __future__ import annotations
 
-NON_PERIODIC_POLYALPHABETIC = frozenset({"autokey", "running_key"})
+NON_PERIODIC_POLYALPHABETIC = frozenset({"autokey", "running_key", "gak", "xgak"})
 
 
 def _seed_length(params: dict | None) -> int:
     params = params or {}
-    key = params.get("key") or params.get("numeric_key") or "KEY"
-    return len("".join(ch for ch in str(key) if ch.isalpha()) or len(str(key)))
+    if params.get("numeric_key"):
+        return len(str(params["numeric_key"]))
+    key = params.get("key") or "KEY"
+    alpha_key = "".join(ch for ch in str(key) if ch.isalpha())
+    return len(alpha_key) if alpha_key else len(str(key))
 
 
 def _autokey_regime(message_length: int, seed_len: int) -> str:
@@ -30,9 +33,18 @@ def analysis_guidance(
     family = cipher_family.replace("-", "_")
     fingerprint = fingerprint or {}
 
-    if family == "autokey":
+    if family in {"autokey", "gak", "xgak"}:
         seed_len = _seed_length(params)
         regime = _autokey_regime(message_length, seed_len)
+        extension = params.get("extension", "plaintext")
+        variant = params.get("variant", "standard")
+        label = family
+        if family == "autokey":
+            label = f"autokey ({extension}, {variant})"
+        elif family == "gak":
+            label = "GAK (Gronsfeld plaintext-autokey)"
+        elif family == "xgak":
+            label = "XGAK (Gronsfeld ciphertext-autokey)"
         return {
             "periodicity": "non_periodic",
             "coset_ic_applicable": False,
@@ -40,13 +52,21 @@ def analysis_guidance(
             "friedman_applicable": False,
             "seed_length": seed_len,
             "regime": regime,
+            "extension": extension,
+            "variant": variant if family == "autokey" else None,
+            "cipher_label": label,
             "warnings": [
                 "Do not apply Vigenère period recovery (Kasiski/Friedman/coset IC).",
                 "Long ciphertext IC approaches English (~0.067), not polyalphabetic (~0.038).",
-            ],
+            ]
+            + (
+                ["Ciphertext-autokey: keystream extends with prior ciphertext, not plaintext."]
+                if extension == "ciphertext"
+                else []
+            ),
             "recommended_workflow": [
                 "Brute-force or crib the priming key (first |K| positions) if message is short.",
-                "Known-plaintext: decrypt iteratively — each recovered plaintext char extends keystream.",
+                "Known-plaintext: decrypt iteratively — each recovered letter extends keystream.",
                 "Ciphertext-only after seed: treat as OTP-like without cribs or book/key reuse.",
             ],
         }

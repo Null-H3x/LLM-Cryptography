@@ -70,6 +70,26 @@
     "path": "/workspace/datasets/fingerprinted/autokey-beaufort/data.jsonl"
   },
   {
+    "slug": "autokey-ciphertext",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/autokey-ciphertext/data.jsonl"
+  },
+  {
+    "slug": "autokey-ciphertext-beaufort",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/autokey-ciphertext-beaufort/data.jsonl"
+  },
+  {
+    "slug": "gak-31415",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/gak-31415/data.jsonl"
+  },
+  {
+    "slug": "xgak-31415",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/xgak-31415/data.jsonl"
+  },
+  {
     "slug": "beaufort-keyword",
     "count": 10,
     "path": "/workspace/datasets/fingerprinted/beaufort-keyword/data.jsonl"

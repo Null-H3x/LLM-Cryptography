@@ -126,7 +126,9 @@ These are **documented as out-of-scope** unless a specific corpus or training ne
 | Crib-drag executor | ❌ Metadata slot | Noita depth logic not automated |
 | Hill-climb / GA solvers | ❌ Metadata slot | |
 | Cipher classifier (`classify.py`) | ❌ Roadmap | |
-| Ciphertext-autokey variant | ❌ Documented, not coded | Historical alternate |
+| Ciphertext-autokey variant | ✅ Implemented | `autokey-ciphertext`, `autokey-ciphertext-beaufort` |
+| GAK / XGAK (Gronsfeld autokey) | ✅ Implemented | `gak-31415`, `xgak-31415` |
+| Autokey seed brute helper | ✅ Implemented | `cipherops/analysis/autokey_solver.py` |
 | Homophonic scoring engine | ❌ | Copiale / Zodiac-class |
 | Book corpus for running key | ❌ External | Only fixed excerpt in dataset |
 
@@ -164,8 +166,7 @@ These are **documented as out-of-scope** unless a specific corpus or training ne
 
 6. MIC and isomorph detection documented but not coded.
 7. Running key lacks external book corpus tooling (only one embedded excerpt).
-8. Ciphertext-autokey variant documented but not implemented.
-9. Per-cipher "Cryptanalysis Notes" uneven — strong for autokey/Vigenère, thin for Porta/Playfair/compound ciphers.
+8. Per-cipher "Cryptanalysis Notes" uneven — strong for autokey/Vigenère, thin for Porta/Playfair/compound ciphers.
 10. Noita unsolved — depth attack documented in Eyes repo, not automated here.
 
 ### Still open — lower impact

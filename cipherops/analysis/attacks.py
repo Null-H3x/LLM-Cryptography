@@ -78,11 +78,18 @@ def _monoalphabetic_attacks(fingerprint: dict, patterns: dict) -> dict[str, dict
 def _autokey_attacks(fingerprint: dict, patterns: dict, params: dict | None) -> dict[str, dict]:
     params = params or {}
     seed_len = len("".join(ch for ch in str(params.get("key", "KEY")) if ch.isalpha()) or 3)
+    extension = params.get("extension", "plaintext")
+    crib_note = (
+        "Ciphertext-autokey: cribs extend keystream via prior ciphertext letters; "
+        "error propagates on single wrong char."
+        if extension == "ciphertext"
+        else "Known plaintext at any position extends keystream forward; cribs on first |K| chars recover seed."
+    )
     return {
         "crib_dragging": _entry(
             "viable",
-            confidence=0.92,
-            notes="Known plaintext at any position extends keystream forward; cribs on first |K| chars recover seed.",
+            confidence=0.92 if extension == "plaintext" else 0.88,
+            notes=crib_note,
             recommended_methods=["seed crib", "iterative plaintext extension", "multi-message cribs"],
         ),
         "brute_force": _entry(
@@ -114,6 +121,51 @@ def _autokey_attacks(fingerprint: dict, patterns: dict, params: dict | None) -> 
             "unknown",
             confidence=0.1,
             notes="Classical pen-and-paper cipher; side channels apply to implementations, not ciphertext alone.",
+        ),
+    }
+
+
+def _gak_attacks(fingerprint: dict, patterns: dict, params: dict | None, family: str) -> dict[str, dict]:
+    params = params or {}
+    m = len(str(params.get("numeric_key", "31415")))
+    extension = params.get("extension", "plaintext" if family == "gak" else "ciphertext")
+    label = "GAK" if family == "gak" else "XGAK"
+    return {
+        "crib_dragging": _entry(
+            "viable",
+            confidence=0.9 if extension == "plaintext" else 0.85,
+            notes=f"{label}: numeric seed + {'plaintext' if extension == 'plaintext' else 'ciphertext'} shift extension (mod 10).",
+            recommended_methods=["numeric seed crib", "iterative decrypt", "score prefix"],
+        ),
+        "brute_force": _entry(
+            "partial",
+            confidence=0.75,
+            notes=f"Feasible for short numeric seed |K|={m}: 10^{m} digit combinations.",
+            recommended_methods=["seed digit enumeration", "score first |K| columns"],
+            key_space_estimate=f"10^{m}",
+        ),
+        "dictionary": _entry(
+            "viable" if patterns.get("preserves_spaces") else "partial",
+            confidence=0.78,
+            notes="Dictionary scoring on recovered prefix; shifts limited to 0–9 after seed.",
+            recommended_methods=["prefix language score", "iterative decrypt"],
+        ),
+        "hill_climbing": _entry(
+            "partial",
+            confidence=0.5,
+            notes="Hill-climb seed digits only; body needs cribs or known plaintext.",
+            recommended_methods=["seed digit swaps"],
+        ),
+        "metaheuristic": _entry(
+            "partial",
+            confidence=0.48,
+            notes="GA/SA over priming digits; smaller space than alphabetic autokey.",
+            recommended_methods=["seed-only GA"],
+        ),
+        "side_channel": _entry(
+            "unknown",
+            confidence=0.1,
+            notes="Classical pen-and-paper cipher.",
         ),
     }
 
@@ -385,7 +437,7 @@ FAMILY_GROUPS = {
         "gronsfeld",
         "noita-eye",
     },
-    "non_periodic_polyalphabetic": {"autokey", "running_key"},
+    "non_periodic_polyalphabetic": {"autokey", "running_key", "gak", "xgak"},
     "transposition": {"railfence", "columnar", "scytale"},
     "polygraphic": {"playfair", "four_square", "hill"},
     "fractionated": {"adfgx", "adfgvx", "bifid", "trifid", "straddle_checkerboard", "fractionated_morse"},
@@ -427,6 +479,8 @@ def attack_surface(
     if cipher_family in FAMILY_GROUPS["non_periodic_polyalphabetic"]:
         if cipher_family == "autokey":
             return _apply_keyspace(_autokey_attacks(fingerprint, patterns, params), cipher_family, params)
+        if cipher_family in {"gak", "xgak"}:
+            return _apply_keyspace(_gak_attacks(fingerprint, patterns, params, cipher_family), cipher_family, params)
         return _apply_keyspace(_running_key_attacks(fingerprint, patterns), cipher_family, params)
     if cipher_family in FAMILY_GROUPS["polyalphabetic"]:
         return _apply_keyspace(_polyalphabetic_attacks(fingerprint, kasiski, patterns), cipher_family, params)

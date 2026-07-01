@@ -71,7 +71,7 @@ For cipher coverage see [`taxonomy-gap-map.md`](taxonomy-gap-map.md). For attack
 | Math audit KATs | None | Added |
 | `analysis_guidance` | None | Regime + warnings |
 
-**Remaining autokey gaps:** ciphertext-autokey variant not implemented; no automated seed brute-force; Friedman/Kasiski values still in profile (with warnings).
+**Remaining autokey gaps:** automated seed brute-force now available (`cipherops/analysis/autokey_solver.py`); Friedman/Kasiski values still in profile (with warnings). Ciphertext-autokey, GAK, and XGAK implemented.
 
 ---
 

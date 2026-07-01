@@ -1,14 +1,14 @@
 # Non-Periodic Polyalphabetic Ciphers
 
-Autokey and running key are polyalphabetic (multiple alphabets applied in sequence) but **not periodic**. The standard Vigenère attack pipeline in [`methods.md`](methods.md) must **not** be applied blindly.
+Autokey (including ciphertext-autokey, GAK, XGAK) and running key are polyalphabetic but **not periodic**. The standard Vigenère attack pipeline in [`methods.md`](methods.md) must **not** be applied blindly.
 
 ---
 
 ## Periodic vs non-periodic
 
-| Property | Vigenère / Beaufort / Gronsfeld | Autokey | Running key |
-|----------|----------------------------------|---------|-------------|
-| Keystream repeats | Yes, period \(m\) | No — extends with plaintext | No — external text |
+| Property | Vigenère / Beaufort / Gronsfeld | Autokey / GAK / XGAK | Running key |
+|----------|----------------------------------|----------------------|-------------|
+| Keystream repeats | Yes, period \(m\) | No — extends with plaintext or ciphertext | No — external text |
 | Kasiski useful | Yes | Misleading | No |
 | Friedman period estimate | Yes | Misleading (often ≈ 1) | No |
 | Coset IC | Confirms period | **Not applicable** | **Not applicable** |
@@ -54,7 +54,7 @@ Ciphertext
 
 ## Property profile fields
 
-When `source.cipher_family` is `autokey` or `running_key`:
+When `source.cipher_family` is `autokey`, `gak`, `xgak`, or `running_key`:
 
 | Field | Value |
 |-------|-------|

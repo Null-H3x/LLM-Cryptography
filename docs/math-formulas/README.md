@@ -27,7 +27,9 @@ Mathematical definitions, variables, and validated Python implementations for cl
 | Simple Substitution | `substitution.md` | `substitution-qwerty` |
 | Nomenclator | `nomenclator.md` | `nomenclator-basic` |
 | Columnar Transposition | `columnar.md` | `columnar-keyword` |
-| Autokey | `autokey.md` | `autokey-standard`, `autokey-beaufort` |
+| Autokey | `autokey.md` | `autokey-standard`, `autokey-beaufort`, `autokey-ciphertext`, `autokey-ciphertext-beaufort` |
+| GAK (Gronsfeld autokey) | `gak.md` | `gak-31415` |
+| XGAK (ciphertext GAK) | `xgak.md` | `xgak-31415` |
 | Beaufort | `beaufort.md` | `beaufort-keyword` |
 | Porta | `porta.md` | `porta-keyword` |
 | Running Key | `running-key.md` | `running-key-book` |

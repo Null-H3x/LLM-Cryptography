@@ -33,16 +33,35 @@ def estimate_keyspace(cipher_family: str, *, params: dict | None = None) -> dict
         m = len(alpha_key) if alpha_key else len(str(key))
         n = params.get("message_length")
         seed_space = 26**m
+        ext = params.get("extension", "plaintext")
         label = f"26^{m} (priming seed only)"
         if n and n > m:
             label = f"26^{m} seed; 26^{n} OTP-like (ciphertext-only, no cribs)"
         return {
             "exact": seed_space,
-            "formula": f"26^{m} seed; keystream extends with plaintext",
+            "formula": f"26^{m} seed; keystream extends with {ext}",
             "log2": m * math.log2(26),
             "label": label,
             "regimes": {
                 "seed_brute_force": f"26^{m}",
+                "full_message_ciphertext_only": f"26^{n}" if n else "26^n (intractable)",
+            },
+        }
+
+    if family in {"gak", "xgak"}:
+        m = len(str(params.get("numeric_key", "31415")))
+        n = params.get("message_length")
+        ext = "plaintext" if family == "gak" else "ciphertext"
+        label = f"10^{m} (numeric priming seed)"
+        if n and n > m:
+            label = f"10^{m} seed; 26^{n} OTP-like (ciphertext-only, no cribs)"
+        return {
+            "exact": 10**m,
+            "formula": f"10^{m} seed; shifts extend with {ext} mod 10",
+            "log2": m * math.log2(10),
+            "label": label,
+            "regimes": {
+                "seed_brute_force": f"10^{m}",
                 "full_message_ciphertext_only": f"26^{n}" if n else "26^n (intractable)",
             },
         }

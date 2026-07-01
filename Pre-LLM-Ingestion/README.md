@@ -20,6 +20,8 @@ Pre-LLM-Ingestion/
 Ground truth is generated from validated implementations in `cipherops/ciphers/` and cross-linked to `docs/math-formulas/`:
 
 ```bash
+PYTHONPATH=. python3 scripts/sync_repo.py              # regenerate + validate all
+PYTHONPATH=. python3 scripts/sync_repo.py --refresh-eyes
 PYTHONPATH=. python3 scripts/build_ground_truth.py
 PYTHONPATH=. python3 scripts/generate_datasets.py
 PYTHONPATH=. python3 scripts/validate_datasets.py

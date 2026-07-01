@@ -34,10 +34,24 @@ A modular toolkit for **training language models on cryptography** and building 
 git clone https://github.com/Null-H3x/LLM-Cryptography.git
 cd LLM-Cryptography
 
-pip install -r requirements.txt
+pip install -r requirements-validate.txt   # cipher + dataset validation only
+# pip install -r requirements.txt          # full stack (ML fine-tuning)
 ```
 
-### 2. Try the CipherOps CLI (basic)
+### 2. Validate datasets
+
+```bash
+PYTHONPATH=. python3 scripts/comprehensive_validate.py
+```
+
+Regenerate everything (datasets, ground truth, validation):
+
+```bash
+PYTHONPATH=. python3 scripts/sync_repo.py
+PYTHONPATH=. python3 scripts/sync_repo.py --refresh-eyes   # also refresh Eyes corpus
+```
+
+### 3. Try the CipherOps CLI (basic)
 
 ```bash
 # Classify a ciphertext file
@@ -47,7 +61,7 @@ python -m cipherops.cli classify example_cipher.txt
 echo "48656c6c6f" | python -m cipherops.cli convert --from hex --to ascii
 ```
 
-### 3. Fine-Tune Qwen3-Coder (LoRA)
+### 4. Fine-Tune Qwen3-Coder (LoRA)
 
 ```bash
 python scripts/finetune_lora_qwen3.py \
@@ -63,12 +77,8 @@ python scripts/finetune_lora_qwen3.py \
 ```
 LLM-Cryptography/
 ├── cipherops/              # CLI + crypto analysis modules
-│   ├── __init__.py
+│   ├── ciphers/            # Validated classical & modern cipher implementations
 │   ├── fingerprint.py      # entropy, IC, Kasiski
-│   ├── classify.py         # heuristic classifier
-│   ├── decode.py           # decoders (ROT, Base*, XOR)
-│   ├── convert.py          # encoding conversions
-│   ├── brute_force.py      # parallel key search
 │   └── cli.py              # click-based entrypoint
 ├── datasets/
 │   ├── fingerprinted/          # Validated plaintext/ciphertext pairs (47 cipher variants)
@@ -82,22 +92,38 @@ LLM-Cryptography/
 │   ├── generate_datasets.py    # Regenerate validated fingerprinted datasets
 │   ├── validate_datasets.py    # Roundtrip validation
 │   ├── import_eyes_corpus.py   # Import unsolved Noita eye corpus from Eyes repo
+│   ├── sync_repo.py            # Regenerate datasets + ground truth + validate
 │   ├── comprehensive_validate.py  # Full audit (solved + unsolved)
 │   └── build_ground_truth.py   # Build Pre-LLM-Ingestion/processed corpus
-├── requirements.txt
-└── README.md
+├── requirements-validate.txt   # Minimal deps for CI / dataset validation
+└── requirements.txt            # Full stack (ML fine-tuning + crypto)
 ```
+
+---
+
+## 📊 Datasets
+
+| Corpus | Path | Records | Status |
+|--------|------|---------|--------|
+| Fingerprinted ciphers | `datasets/fingerprinted/*/data.jsonl` | 470 (47 × 10) | solved, roundtrip-verified |
+| Noita eye messages | `datasets/unsolved/noita-eye-messages/data.jsonl` | 9 | unsolved (from [Eyes](https://github.com/Null-H3x/Eyes)) |
+| Ground truth registry | `Pre-LLM-Ingestion/processed/cipher-ground-truth.jsonl` | 48 | audited |
+
+Math docs for every cipher: `docs/math-formulas/`. Ground truth links ciphers → math → datasets.
 
 ---
 
 ## 🛠️ Roadmap
 
-- [ ] `cipherops/fingerprint.py` — Shannon entropy & index of coincidence
+- [x] `cipherops/fingerprint.py` — Shannon entropy & index of coincidence
+- [x] Classical cipher datasets (28 variants, math-validated)
+- [x] Modern key cipher datasets (19 variants)
+- [x] Unsolved Noita eye corpus (Eyes repo import)
+- [x] Comprehensive validation + CI
 - [ ] `cipherops/classify.py` — heuristic classifier for common ciphers
-- [ ] Starter crypto Q&A dataset (50 items)
+- [ ] Starter crypto Q&A dataset expansion
 - [ ] LoRA fine-tune script (Qwen3-Coder + PEFT)
 - [ ] LLM-guided brute-force hints (e.g., "Try key length 9")
-- [ ] CI/CD for eval benchmarking on known ciphers
 
 ---
 

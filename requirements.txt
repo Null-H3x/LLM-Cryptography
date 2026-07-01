@@ -17,9 +17,10 @@ click>=8.1.0
 rich>=13.7.0
 
 # Crypto utilities (for cipherops module)
-pycrypto>=0.4.0  # or pycryptodome as modern alternative
 cryptography>=42.0.0
-
 numpy>=1.26.0
+
+# Optional: lightweight validation only (no ML stack)
+# pip install -r requirements-validate.txt
 evaluate>=0.4.2
 scikit-learn>=1.4.0

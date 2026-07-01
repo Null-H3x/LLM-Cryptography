@@ -57,7 +57,33 @@ def estimate_keyspace(cipher_family: str, *, params: dict | None = None) -> dict
             "label": f"PRNG seed × (N+1) deck perms (N={n})",
         }
 
-    if family == "gronsfeld_autokey":
+    if family in {"porta_autokey", "xautokey"}:
+        key = params.get("key") or "KEY"
+        alpha_key = "".join(ch for ch in str(key) if ch.isalpha())
+        m = len(alpha_key) if alpha_key else len(str(key))
+        n = params.get("message_length")
+        ext = params.get("extension", params.get("mode", "plaintext"))
+        return {
+            "exact": 26**m,
+            "formula": f"26^{m} seed; keystream extends ({ext})",
+            "log2": m * math.log2(26),
+            "label": f"26^{m} (priming seed only)",
+            "regimes": {
+                "seed_brute_force": f"26^{m}",
+                "full_message_ciphertext_only": f"26^{n}" if n else "26^n (intractable)",
+            },
+        }
+
+    if family == "vernam":
+        n = params.get("message_length")
+        return {
+            "exact": None,
+            "formula": "26^n OTP key (must not repeat)",
+            "log2": n * math.log2(26) if n else None,
+            "label": f"26^{n} if unknown OTP" if n else "OTP length = |P|",
+        }
+
+    if family in {"gronsfeld_autokey", "nihilist_autokey"}:
         m = len(str(params.get("numeric_key", "31415")))
         n = params.get("message_length")
         ext = params.get("extension", "plaintext")

@@ -21,7 +21,7 @@ from cipherops.analysis.fingerprint import (
 )
 from cipherops.analysis.kasiski import kasiski_examination
 from cipherops.analysis.keyspace import estimate_keyspace
-from cipherops.ciphers import classical, encoding, gak as gak_cipher, symbolic, transposition
+from cipherops.ciphers import classical, encoding, enigma, gak as gak_cipher, symbolic, transposition, vic
 from cipherops.ciphers.registry import CIPHER_REGISTRY, PLAIN_SAMPLES, get_cipher
 from cipherops.ciphers.utils import mod_inverse
 from scripts.generate_datasets import _roundtrip_ok
@@ -139,6 +139,36 @@ def audit_classical_kats(report: AuditReport) -> None:
         (
             "nihilist roundtrip",
             classical.nihilist_decrypt(classical.nihilist("HELLO", "31415"), "31415") == "HELLO",
+        ),
+        (
+            "porta autokey roundtrip",
+            classical.porta_autokey_decrypt(classical.porta_autokey("HELLO", "KEY"), "KEY") == "HELLO",
+        ),
+        (
+            "xautokey roundtrip",
+            classical.xautokey_decrypt(classical.xautokey("HELLO", "KEY", mode="sum"), "KEY", mode="sum") == "HELLO",
+        ),
+        (
+            "gronsfeld beaufort autokey roundtrip",
+            classical.gronsfeld_autokey_decrypt(
+                classical.gronsfeld_autokey("CAT", "314", variant="beaufort"), "314", variant="beaufort"
+            )
+            == "CAT",
+        ),
+        (
+            "gak left roundtrip",
+            gak_cipher.gak_decrypt_text(
+                gak_cipher.gak_encrypt_text("HELLO", mode="ctak_left", prng_seed=42), mode="ctak_left", prng_seed=42
+            )
+            == "HELLO",
+        ),
+        (
+            "enigma roundtrip",
+            enigma.enigma_decrypt(enigma.enigma("HELLO")) == "HELLO",
+        ),
+        (
+            "vic roundtrip",
+            vic.vic_decrypt(vic.vic_encrypt("HELLO")) == "HELLO",
         ),
     ]
     for label, ok in checks:

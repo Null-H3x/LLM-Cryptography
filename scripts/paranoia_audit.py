@@ -11,7 +11,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-NON_PERIODIC_FAMILIES = frozenset({"autokey", "running_key", "gronsfeld_autokey", "gak"})
+NON_PERIODIC_FAMILIES = frozenset({
+    "autokey",
+    "running_key",
+    "gronsfeld_autokey",
+    "gak",
+    "porta_autokey",
+    "xautokey",
+    "nihilist_autokey",
+    "vernam",
+})
 
 
 @dataclass
@@ -117,6 +126,9 @@ def audit_non_periodic_properties(report: ParanoiaReport) -> None:
         "autokey-ciphertext-beaufort",
         "gronsfeld-autokey-31415",
         "gronsfeld-autokey-ct-31415",
+        "porta-autokey-standard",
+        "xautokey-sum-key",
+        "vernam-otp-demo",
         "gak-ctak-right-s42",
         "xgak-sum-right-s42",
         "running-key-book",

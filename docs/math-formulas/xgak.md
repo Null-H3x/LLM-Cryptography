@@ -29,6 +29,8 @@ The **numerical offset** \(k\) is computed per position from the current plainte
 |------|------|-----------|
 | `xgak-sum-right-s42` | xgak_sum_right | 42 |
 | `xgak-diff-right-s42` | xgak_diff_right | 42 |
+| `xgak-sum-left-s42` | xgak_sum_left | 42 |
+| `xgak-diff-left-s42` | xgak_diff_left | 42 |
 
 Implementation: `cipherops/ciphers/gak.py` with `mode=` parameter.
 

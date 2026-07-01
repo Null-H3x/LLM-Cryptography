@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable
 
-from cipherops.ciphers import classical, encoding, fractionated, gak, modern, polygraphic, symbolic, transposition
+from cipherops.ciphers import classical, encoding, enigma, fractionated, gak, modern, polygraphic, symbolic, transposition, vic
 
 
 @dataclass(frozen=True)
@@ -91,6 +91,12 @@ RUNNING_KEY_TEXT = (
     "CONFIDENTIALITY INTEGRITY AND AVAILABILITY ARE THE CORE PRINCIPLES OF MODERN "
     "INFORMATION SECURITY PRACTICE FOR ORGANIZATIONS WORLDWIDE TODAY ALWAYS"
 )
+BOOK_CIPHER_SOURCE = (
+    RUNNING_KEY_TEXT
+    + " THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG PACK MY BOX WITH FIVE DOZEN LIQUOR JUGS"
+)
+BOOK_CIPHER_WORDS = BOOK_CIPHER_SOURCE.split()
+VERNAM_OTP_KEY = RUNNING_KEY_TEXT + RUNNING_KEY_TEXT
 
 
 def _registry() -> list[CipherSpec]:
@@ -117,6 +123,22 @@ def _registry() -> list[CipherSpec]:
         CipherSpec("gak", "gak-ptak-right-s42", lambda t: gak.gak_encrypt_text(t, mode="ptak_right", prng_seed=42), lambda t: gak.gak_decrypt_text(t, mode="ptak_right", prng_seed=42), {"mode": "ptak_right", "prng_seed": 42, "alphabet_size": 26}, "docs/math-formulas/gak.md", 5),
         CipherSpec("gak", "xgak-sum-right-s42", lambda t: gak.gak_encrypt_text(t, mode="xgak_sum_right", prng_seed=42), lambda t: gak.gak_decrypt_text(t, mode="xgak_sum_right", prng_seed=42), {"mode": "xgak_sum_right", "prng_seed": 42, "alphabet_size": 26}, "docs/math-formulas/xgak.md", 5),
         CipherSpec("gak", "xgak-diff-right-s42", lambda t: gak.gak_encrypt_text(t, mode="xgak_diff_right", prng_seed=42), lambda t: gak.gak_decrypt_text(t, mode="xgak_diff_right", prng_seed=42), {"mode": "xgak_diff_right", "prng_seed": 42, "alphabet_size": 26}, "docs/math-formulas/xgak.md", 5),
+        CipherSpec("gak", "gak-ctak-left-s42", lambda t: gak.gak_encrypt_text(t, mode="ctak_left", prng_seed=42), lambda t: gak.gak_decrypt_text(t, mode="ctak_left", prng_seed=42), {"mode": "ctak_left", "prng_seed": 42, "alphabet_size": 26}, "docs/math-formulas/gak.md", 5),
+        CipherSpec("gak", "gak-ptak-left-s42", lambda t: gak.gak_encrypt_text(t, mode="ptak_left", prng_seed=42), lambda t: gak.gak_decrypt_text(t, mode="ptak_left", prng_seed=42), {"mode": "ptak_left", "prng_seed": 42, "alphabet_size": 26}, "docs/math-formulas/gak.md", 5),
+        CipherSpec("gak", "xgak-sum-left-s42", lambda t: gak.gak_encrypt_text(t, mode="xgak_sum_left", prng_seed=42), lambda t: gak.gak_decrypt_text(t, mode="xgak_sum_left", prng_seed=42), {"mode": "xgak_sum_left", "prng_seed": 42, "alphabet_size": 26}, "docs/math-formulas/xgak.md", 5),
+        CipherSpec("gak", "xgak-diff-left-s42", lambda t: gak.gak_encrypt_text(t, mode="xgak_diff_left", prng_seed=42), lambda t: gak.gak_decrypt_text(t, mode="xgak_diff_left", prng_seed=42), {"mode": "xgak_diff_left", "prng_seed": 42, "alphabet_size": 26}, "docs/math-formulas/xgak.md", 5),
+        CipherSpec("porta_autokey", "porta-autokey-standard", lambda t: classical.porta_autokey(t, "KEY"), lambda t: classical.porta_autokey_decrypt(t, "KEY"), {"key": "KEY", "extension": "plaintext"}, "docs/math-formulas/porta-autokey.md", 4),
+        CipherSpec("porta_autokey", "porta-autokey-ciphertext", lambda t: classical.porta_autokey(t, "KEY", extension="ciphertext"), lambda t: classical.porta_autokey_decrypt(t, "KEY", extension="ciphertext"), {"key": "KEY", "extension": "ciphertext"}, "docs/math-formulas/porta-autokey.md", 4),
+        CipherSpec("gronsfeld_autokey", "gronsfeld-autokey-beaufort-31415", lambda t: classical.gronsfeld_autokey(t, "31415", variant="beaufort"), lambda t: classical.gronsfeld_autokey_decrypt(t, "31415", variant="beaufort"), {"numeric_key": "31415", "extension": "plaintext", "variant": "beaufort"}, "docs/math-formulas/gronsfeld-autokey.md", 4),
+        CipherSpec("gronsfeld_autokey", "gronsfeld-autokey-beaufort-ct-31415", lambda t: classical.gronsfeld_autokey(t, "31415", variant="beaufort", extension="ciphertext"), lambda t: classical.gronsfeld_autokey_decrypt(t, "31415", variant="beaufort", extension="ciphertext"), {"numeric_key": "31415", "extension": "ciphertext", "variant": "beaufort"}, "docs/math-formulas/gronsfeld-autokey.md", 4),
+        CipherSpec("xautokey", "xautokey-sum-key", lambda t: classical.xautokey(t, "KEY", mode="sum"), lambda t: classical.xautokey_decrypt(t, "KEY", mode="sum"), {"key": "KEY", "mode": "sum"}, "docs/math-formulas/xautokey.md", 4),
+        CipherSpec("xautokey", "xautokey-diff-key", lambda t: classical.xautokey(t, "KEY", mode="diff"), lambda t: classical.xautokey_decrypt(t, "KEY", mode="diff"), {"key": "KEY", "mode": "diff"}, "docs/math-formulas/xautokey.md", 4),
+        CipherSpec("nihilist_autokey", "nihilist-autokey-31415", lambda t: classical.nihilist_autokey(t, "31415"), lambda t: classical.nihilist_autokey_decrypt(t, "31415"), {"numeric_key": "31415", "extension": "plaintext", "polybius_key": "NIHILIST"}, "docs/math-formulas/nihilist-autokey.md", 5),
+        CipherSpec("nihilist_autokey", "nihilist-autokey-ct-31415", lambda t: classical.nihilist_autokey(t, "31415", extension="ciphertext"), lambda t: classical.nihilist_autokey_decrypt(t, "31415", extension="ciphertext"), {"numeric_key": "31415", "extension": "ciphertext", "polybius_key": "NIHILIST"}, "docs/math-formulas/nihilist-autokey.md", 5),
+        CipherSpec("book_cipher", "book-cipher-coords", lambda t: classical.book_cipher(t, BOOK_CIPHER_WORDS), lambda t: classical.book_cipher_decrypt(t, BOOK_CIPHER_WORDS), {"key_source": "book-excerpt", "format": "word.char"}, "docs/math-formulas/book-cipher.md", 4),
+        CipherSpec("vernam", "vernam-otp-demo", lambda t: classical.vernam(t, VERNAM_OTP_KEY), lambda t: classical.vernam_decrypt(t, VERNAM_OTP_KEY), {"otp_key": "demo-excerpt-x2"}, "docs/math-formulas/vernam.md", 4),
+        CipherSpec("vic", "vic-standard-31415", lambda t: vic.vic_encrypt(t, chain_key="31415", transposition_key="PRIVATE"), lambda t: vic.vic_decrypt(t, chain_key="31415", transposition_key="PRIVATE"), {"chain_key": "31415", "transposition_key": "PRIVATE"}, "docs/math-formulas/vic.md", 5),
+        CipherSpec("enigma", "enigma-iii-aaa-b", lambda t: enigma.enigma(t), lambda t: enigma.enigma_decrypt(t), {"rotors": "I-II-III", "settings": "AAA", "reflector": "B"}, "docs/math-formulas/enigma.md", 5),
         CipherSpec("beaufort", "beaufort-keyword", lambda t: classical.beaufort(t, "KEY"), lambda t: classical.beaufort(t, "KEY"), {"key": "KEY"}, "docs/math-formulas/beaufort.md", 3),
         CipherSpec("porta", "porta-keyword", lambda t: classical.porta(t, "KEY"), lambda t: classical.porta(t, "KEY"), {"key": "KEY"}, "docs/math-formulas/porta.md", 4),
         CipherSpec("running_key", "running-key-book", lambda t: classical.running_key(t, RUNNING_KEY_TEXT), lambda t: classical.running_key_decrypt(t, RUNNING_KEY_TEXT), {"key_source": "book-excerpt"}, "docs/math-formulas/running-key.md", 4),

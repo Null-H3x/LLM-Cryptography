@@ -110,6 +110,86 @@
     "path": "/workspace/datasets/fingerprinted/xgak-diff-right-s42/data.jsonl"
   },
   {
+    "slug": "gak-ctak-left-s42",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/gak-ctak-left-s42/data.jsonl"
+  },
+  {
+    "slug": "gak-ptak-left-s42",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/gak-ptak-left-s42/data.jsonl"
+  },
+  {
+    "slug": "xgak-sum-left-s42",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/xgak-sum-left-s42/data.jsonl"
+  },
+  {
+    "slug": "xgak-diff-left-s42",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/xgak-diff-left-s42/data.jsonl"
+  },
+  {
+    "slug": "porta-autokey-standard",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/porta-autokey-standard/data.jsonl"
+  },
+  {
+    "slug": "porta-autokey-ciphertext",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/porta-autokey-ciphertext/data.jsonl"
+  },
+  {
+    "slug": "gronsfeld-autokey-beaufort-31415",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/gronsfeld-autokey-beaufort-31415/data.jsonl"
+  },
+  {
+    "slug": "gronsfeld-autokey-beaufort-ct-31415",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/gronsfeld-autokey-beaufort-ct-31415/data.jsonl"
+  },
+  {
+    "slug": "xautokey-sum-key",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/xautokey-sum-key/data.jsonl"
+  },
+  {
+    "slug": "xautokey-diff-key",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/xautokey-diff-key/data.jsonl"
+  },
+  {
+    "slug": "nihilist-autokey-31415",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/nihilist-autokey-31415/data.jsonl"
+  },
+  {
+    "slug": "nihilist-autokey-ct-31415",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/nihilist-autokey-ct-31415/data.jsonl"
+  },
+  {
+    "slug": "book-cipher-coords",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/book-cipher-coords/data.jsonl"
+  },
+  {
+    "slug": "vernam-otp-demo",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/vernam-otp-demo/data.jsonl"
+  },
+  {
+    "slug": "vic-standard-31415",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/vic-standard-31415/data.jsonl"
+  },
+  {
+    "slug": "enigma-iii-aaa-b",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/enigma-iii-aaa-b/data.jsonl"
+  },
+  {
     "slug": "beaufort-keyword",
     "count": 10,
     "path": "/workspace/datasets/fingerprinted/beaufort-keyword/data.jsonl"

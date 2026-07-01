@@ -35,6 +35,8 @@ PRNG seed → **\(N+1\)** permutations \(\sigma[0], \sigma[1], \ldots, \sigma[N]
 |------|------|-----------|
 | `gak-ctak-right-s42` | ctak_right | 42 |
 | `gak-ptak-right-s42` | ptak_right | 42 |
+| `gak-ctak-left-s42` | ctak_left | 42 |
+| `gak-ptak-left-s42` | ptak_left | 42 |
 
 Implementation: `cipherops/ciphers/gak.py`
 

@@ -2,7 +2,16 @@
 
 from __future__ import annotations
 
-NON_PERIODIC_POLYALPHABETIC = frozenset({"autokey", "running_key", "gronsfeld_autokey", "gak"})
+NON_PERIODIC_POLYALPHABETIC = frozenset({
+    "autokey",
+    "running_key",
+    "gronsfeld_autokey",
+    "gak",
+    "porta_autokey",
+    "xautokey",
+    "nihilist_autokey",
+    "vernam",
+})
 
 
 def _seed_length(params: dict | None) -> int:
@@ -33,14 +42,20 @@ def analysis_guidance(
     family = cipher_family.replace("-", "_")
     fingerprint = fingerprint or {}
 
-    if family in {"autokey", "gronsfeld_autokey"}:
+    if family in {"autokey", "gronsfeld_autokey", "porta_autokey", "xautokey", "nihilist_autokey"}:
         seed_len = _seed_length(params)
         regime = _autokey_regime(message_length, seed_len)
         extension = params.get("extension", "plaintext")
         variant = params.get("variant", "standard")
-        label = "autokey" if family == "autokey" else "Gronsfeld autokey"
-        if family == "autokey":
-            label = f"autokey ({extension}, {variant})"
+        mode = params.get("mode")
+        labels = {
+            "autokey": f"autokey ({extension}, {variant})",
+            "gronsfeld_autokey": f"Gronsfeld autokey ({extension}, {variant})",
+            "porta_autokey": f"Porta autokey ({extension})",
+            "xautokey": f"X-autokey ({mode})",
+            "nihilist_autokey": f"Nihilist autokey ({extension})",
+        }
+        label = labels.get(family, family)
         return {
             "periodicity": "non_periodic",
             "coset_ic_applicable": False,
@@ -48,8 +63,9 @@ def analysis_guidance(
             "friedman_applicable": False,
             "seed_length": seed_len,
             "regime": regime,
-            "extension": extension,
-            "variant": variant if family == "autokey" else None,
+            "extension": extension if family != "xautokey" else None,
+            "variant": variant if family in {"autokey", "gronsfeld_autokey"} else None,
+            "mode": mode if family == "xautokey" else None,
             "cipher_label": label,
             "warnings": [
                 "Do not apply Vigenère period recovery (Kasiski/Friedman/coset IC).",
@@ -64,6 +80,24 @@ def analysis_guidance(
                 "Brute-force or crib the priming key (first |K| positions) if message is short.",
                 "Known-plaintext: decrypt iteratively — each recovered letter extends keystream.",
                 "Ciphertext-only after seed: treat as OTP-like without cribs or book/key reuse.",
+            ],
+        }
+
+    if family == "vernam":
+        return {
+            "periodicity": "non_periodic",
+            "coset_ic_applicable": False,
+            "kasiski_applicable": False,
+            "friedman_applicable": False,
+            "regime": "otp_like",
+            "cipher_label": "Vernam OTP",
+            "warnings": [
+                "One-time pad: key must be as long as message and never reused.",
+                "Periodic polyalphabetic attacks do not apply.",
+            ],
+            "recommended_workflow": [
+                "Key reuse enables depth attack if two ciphertexts share OTP.",
+                "Without key reuse or crib, ciphertext-only recovery is information-theoretically hard.",
             ],
         }
 

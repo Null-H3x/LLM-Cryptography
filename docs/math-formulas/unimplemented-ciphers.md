@@ -50,14 +50,17 @@ Ciphers and systems **named in taxonomies** or **common in puzzles / history** b
 | Cipher | Type | Formula / model | Status | Priority |
 |--------|------|-----------------|--------|----------|
 | **Nihilist** | Polybius + numeric key | \((r,c) + k_i \mod 10\) per digit pair | **Implemented** (`nihilist-31415`) | — |
-| **VIC** | Multi-stage | Straddling checkerboard + chain addition + transposition | Reference | P2 |
+| **VIC** | Multi-stage | Straddling checkerboard + chain addition + transposition | **Implemented** (`vic-standard-31415`) | — |
+| **Enigma M3** | Rotor | 3 rotors + reflector B | **Implemented** (`enigma-iii-aaa-b`) | — |
+| **Book cipher (coords)** | Coordinate lookup | word.char into fixed corpus | **Implemented** (`book-cipher-coords`) | — |
+| **Manual OTP / Vernam** | Vernam | \(c_i = p_i + k_i \mod 26\), \(\|K\|=\|P\|\) | **Implemented** (`vernam-otp-demo`) | — |
 | **Great cipher** | Louis XIV | Homophonic + nulls + traps | Reference | P2 |
 | **Bazeries** | Cylinder + substitution | Dual disk system | Reference | P3 |
 | **Ciphertext-autokey** | Autokey variant | \(k_i \leftarrow c_{i-\|K\|}\) after seed | **Implemented** (`autokey-ciphertext`, `autokey-ciphertext-beaufort`) | — |
 | **GAK (Eyes dynamic perm)** | Deck autokey | ct=active[pt]; σ indexed by stream | **Implemented** (Eyes model) | — |
 | **XGAK (Eyes extended)** | Deck autokey | k=(p±c) mod N indexes σ | **Implemented** (Eyes model) | — |
 | **Gronsfeld autokey** | Numeric + PT/CT extension | mod-10 shifts | **Implemented** (`gronsfeld-autokey-*`) | — |
-| **One-time pad (manual)** | Vernam | \(c_i = p_i \oplus k_i\), \(\|K\|=\|P\|\) | Reference | P3 |
+| **One-time pad (manual)** | Vernam | \(c_i = p_i \oplus k_i\), \(\|K\|=\|P\|\) | **Implemented** (`vernam-otp-demo`) | — |
 
 ---
 

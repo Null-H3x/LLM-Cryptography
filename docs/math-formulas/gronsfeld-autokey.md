@@ -11,7 +11,10 @@ Numeric priming key + plaintext/ciphertext shift extension over mod-26 addition.
 | `gronsfeld-autokey-31415` | Plaintext | `31415` | \(p_{i-5} \mod 10\) |
 | `gronsfeld-autokey-ct-31415` | Ciphertext | `31415` | \(c_{i-5} \mod 10\) |
 
-Both use Gronsfeld combiner \(E(p_i) = (p_i + s_i) \mod 26\) with \(s_i \in \{0,\ldots,9\}\).
+| `gronsfeld-autokey-beaufort-31415` | Plaintext | `31415` | Beaufort, \(p_{i-5}\mod 10\) |
+| `gronsfeld-autokey-beaufort-ct-31415` | Ciphertext | `31415` | Beaufort, \(c_{i-5}\mod 10\) |
+
+Both standard variants use Gronsfeld combiner \(E(p_i) = (p_i + s_i) \mod 26\) with \(s_i \in \{0,\ldots,9\}\). Beaufort variants use \(E(p_i) = (s_i - p_i) \mod 26\).
 
 ---
 

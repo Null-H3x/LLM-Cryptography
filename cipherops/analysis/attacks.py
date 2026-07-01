@@ -444,7 +444,16 @@ FAMILY_GROUPS = {
         "gronsfeld",
         "noita-eye",
     },
-    "non_periodic_polyalphabetic": {"autokey", "running_key", "gronsfeld_autokey", "gak"},
+    "non_periodic_polyalphabetic": {
+        "autokey",
+        "running_key",
+        "gronsfeld_autokey",
+        "gak",
+        "porta_autokey",
+        "xautokey",
+        "nihilist_autokey",
+        "vernam",
+    },
     "transposition": {"railfence", "columnar", "scytale"},
     "polygraphic": {"playfair", "four_square", "hill"},
     "fractionated": {"adfgx", "adfgvx", "bifid", "trifid", "straddle_checkerboard", "fractionated_morse"},
@@ -484,12 +493,14 @@ def attack_surface(
     if cipher_family in FAMILY_GROUPS["transposition"]:
         return _apply_keyspace(_transposition_attacks(patterns), cipher_family, params)
     if cipher_family in FAMILY_GROUPS["non_periodic_polyalphabetic"]:
-        if cipher_family == "autokey":
+        if cipher_family in {"autokey", "porta_autokey", "xautokey"}:
             return _apply_keyspace(_autokey_attacks(fingerprint, patterns, params), cipher_family, params)
         if cipher_family in {"gak"}:
             return _apply_keyspace(_eyes_gak_attacks(fingerprint, patterns, params), cipher_family, params)
-        if cipher_family == "gronsfeld_autokey":
+        if cipher_family in {"gronsfeld_autokey", "nihilist_autokey"}:
             return _apply_keyspace(_gronsfeld_autokey_attacks(fingerprint, patterns, params), cipher_family, params)
+        if cipher_family == "vernam":
+            return _apply_keyspace(_running_key_attacks(fingerprint, patterns), cipher_family, params)
         return _apply_keyspace(_running_key_attacks(fingerprint, patterns), cipher_family, params)
     if cipher_family in FAMILY_GROUPS["polyalphabetic"]:
         return _apply_keyspace(_polyalphabetic_attacks(fingerprint, kasiski, patterns), cipher_family, params)

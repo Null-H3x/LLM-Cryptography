@@ -34,6 +34,10 @@ Examples:
   ./run.sh                    # local browser only
   ./run.sh --lan              # reachable at http://<machine-ip>:8765/
   ./run.sh --validate --lan   # smoke-test engine, then start UI
+
+Ubuntu/Debian prerequisites:
+  sudo apt update
+  sudo apt install -y python3 python3-pip python3-venv
 EOF
 }
 
@@ -81,30 +85,58 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 1
 fi
 
+venv_is_complete() {
+  [[ -f "$ROOT/.venv/bin/activate" && -x "$ROOT/.venv/bin/python3" ]]
+}
+
+pip_install() {
+  local py="$1"
+  local req="$2"
+  echo "==> Installing dependencies ($req)"
+  if "$py" -m pip install -U pip -q; then
+    :
+  elif "$py" -m pip install -U pip -q --user; then
+    :
+  else
+    "$py" -m pip install -U pip -q --break-system-packages
+  fi
+  if "$py" -m pip install -r "$req" -q; then
+    return 0
+  fi
+  if "$py" -m pip install -r "$req" -q --user; then
+    return 0
+  fi
+  "$py" -m pip install -r "$req" -q --break-system-packages
+}
+
 PY="python3"
 if [[ "$USE_VENV" -eq 1 ]]; then
-  if [[ -d "$ROOT/.venv" && ! -x "$ROOT/.venv/bin/python3" ]]; then
-    echo "==> Removing incomplete .venv"
+  if [[ -d "$ROOT/.venv" ]] && ! venv_is_complete; then
+    echo "==> Removing incomplete .venv (common after failed first run)"
     rm -rf "$ROOT/.venv"
   fi
-  if [[ ! -d "$ROOT/.venv" ]]; then
+  if ! venv_is_complete; then
     echo "==> Creating virtual environment (.venv)"
-    if ! python3 -m venv "$ROOT/.venv" 2>/dev/null; then
-      echo "ERROR: could not create venv. Try:" >&2
-      echo "  sudo apt install python3-venv" >&2
-      exit 1
+    if ! python3 -m venv "$ROOT/.venv"; then
+      echo "WARNING: could not create venv." >&2
+      echo "  Ubuntu/Debian: sudo apt install -y python3-venv python3-pip" >&2
+      echo "  Falling back to system python3..." >&2
+      rm -rf "$ROOT/.venv"
+      USE_VENV=0
     fi
   fi
-  # shellcheck disable=SC1091
-  source "$ROOT/.venv/bin/activate"
-  PY="$ROOT/.venv/bin/python3"
-  echo "==> Installing dependencies (requirements-validate.txt)"
-  "$PY" -m pip install -U pip -q
-  "$PY" -m pip install -r "$ROOT/requirements-validate.txt" -q
-else
-  echo "==> Using system python3 (no venv)"
-  python3 -m pip install -U pip -q --user 2>/dev/null || python3 -m pip install -U pip -q
-  python3 -m pip install -r "$ROOT/requirements-validate.txt" -q
+  if [[ "$USE_VENV" -eq 1 ]]; then
+    # shellcheck disable=SC1091
+    source "$ROOT/.venv/bin/activate"
+    PY="$ROOT/.venv/bin/python3"
+    pip_install "$PY" "$ROOT/requirements-validate.txt"
+  fi
+fi
+
+if [[ "$USE_VENV" -eq 0 ]]; then
+  echo "==> Using system python3"
+  PY="python3"
+  pip_install "$PY" "$ROOT/requirements-validate.txt"
 fi
 
 export PYTHONPATH="$ROOT"
@@ -125,12 +157,11 @@ if [[ ! -d "$ROOT/web/constraints-dash" ]]; then
   exit 1
 fi
 
-URL="http://${HOST}:${PORT}/"
 if [[ "$HOST" == "0.0.0.0" ]]; then
   LAN_IP="$(hostname -I 2>/dev/null | awk '{print $1}' || true)"
   echo ""
   echo "  H3X CipherOps solver"
-  echo "  ────────────────────"
+  echo "  --------------------"
   echo "  On this machine:  http://127.0.0.1:${PORT}/"
   if [[ -n "$LAN_IP" ]]; then
     echo "  From LAN / host:  http://${LAN_IP}:${PORT}/"
@@ -140,7 +171,7 @@ if [[ "$HOST" == "0.0.0.0" ]]; then
   echo ""
 else
   echo ""
-  echo "  H3X CipherOps → http://127.0.0.1:${PORT}/"
+  echo "  H3X CipherOps -> http://127.0.0.1:${PORT}/"
   echo "  Press Ctrl+C to stop."
   echo ""
 fi

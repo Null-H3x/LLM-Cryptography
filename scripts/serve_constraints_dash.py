@@ -167,7 +167,14 @@ class DashHandler(BaseHTTPRequestHandler):
 
         if path.startswith("/assets/"):
             rel = path[len("/assets/") :]
-            target = WEB_ROOT / rel
+            if not rel or ".." in rel.split("/"):
+                self.send_error(404)
+                return
+            assets_root = (WEB_ROOT / "assets").resolve()
+            target = (assets_root / rel).resolve()
+            if not str(target).startswith(str(assets_root)):
+                self.send_error(404)
+                return
             if target.is_file():
                 self._serve_file(target)
                 return

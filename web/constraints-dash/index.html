@@ -125,10 +125,20 @@
       </label>
 
       <button id="run-btn" class="btn btn-primary">▶ RUN VALIDATED LOOP</button>
+      <button id="classify-btn" class="btn btn-ghost">Identify cipher</button>
       <button id="load-sample-btn" class="btn btn-ghost">Load autokey sample</button>
     </aside>
 
     <main class="main">
+      <section class="panel classify-panel">
+        <div class="findings-toolbar">
+          <h2 class="panel-title">Classification</h2>
+          <span id="classify-status" class="classify-status">Paste ciphertext and identify</span>
+        </div>
+        <div id="classify-profile" class="classify-profile"></div>
+        <div id="classify-hypotheses" class="classify-hypotheses"></div>
+      </section>
+
       <section class="panel summary-panel">
         <h2 class="panel-title">Run summary</h2>
         <div id="summary-grid" class="summary-grid">

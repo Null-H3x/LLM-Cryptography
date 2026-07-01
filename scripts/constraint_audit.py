@@ -177,6 +177,31 @@ def audit_crib_hints(report: AuditReport) -> None:
         report.fail("crib_hints: merge failed")
 
 
+def audit_classifier(report: AuditReport) -> None:
+    from cipherops.analysis.classifier import classify_ciphertext
+
+    autokey_ct = "Dlc jbmse jtyxe tkk oijym akwf olv ehdj dne."
+    r = classify_ciphertext(autokey_ct)
+    top = r.get("top") or {}
+    if top.get("family") in {"autokey", "polyalphabetic_mixed"} and top.get("propagator") == "stream_extension":
+        report.ok("classifier: autokey sample → stream_extension")
+    else:
+        report.fail(f"classifier: autokey routing unexpected ({top})")
+
+    from pathlib import Path
+    import json
+
+    corpus = json.loads(
+        (Path(__file__).resolve().parents[1] / "datasets/unsolved/noita-eye-messages/corpus.json").read_text()
+    )
+    rn = classify_ciphertext(corpus["ciphertexts"], deck_size=corpus["deck_size"])
+    nt = rn.get("top") or {}
+    if nt.get("propagator") == "shared_keystream" and nt.get("dash_mode") in {"noita", "custom"}:
+        report.ok("classifier: Noita corpus → shared_keystream")
+    else:
+        report.fail(f"classifier: Noita routing unexpected ({nt})")
+
+
 def main() -> int:
     report = AuditReport()
     audit_shared_keystream(report)
@@ -185,6 +210,7 @@ def main() -> int:
     audit_merge(report)
     audit_stop_diagnosis(report)
     audit_crib_hints(report)
+    audit_classifier(report)
 
     print("=" * 72)
     print("CONSTRAINT PROPAGATOR AUDIT")

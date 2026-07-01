@@ -26,6 +26,28 @@ def fingerprint_cmd(text, method):
         click.echo(f"Index of Coincidence: {fingerprint.index_of_coincidence(text):.4f}")
 
 
+@cli.command(name="classify")
+@click.argument("text", type=click.STRING)
+@click.option("--json-out", is_flag=True, help="Emit classification JSON")
+def classify_cmd(text, json_out):
+    """Heuristic cipher-family classification from ciphertext statistics."""
+    from cipherops.analysis.classifier import classify_ciphertext
+
+    result = classify_ciphertext(text)
+    if json_out:
+        click.echo(json.dumps(result, indent=2))
+        return
+    top = result.get("top")
+    if top:
+        click.echo(f"Top: {top['label']} ({top['confidence']:.0%})")
+        click.echo(f"  propagator: {top.get('propagator')}  mode: {top.get('dash_mode')}")
+    for h in result.get("hypotheses", [])[:5]:
+        click.echo(f"  [{h['confidence']:.0%}] {h['label']}")
+    p = result.get("profile", {})
+    if p.get("index_of_coincidence") is not None:
+        click.echo(f"IC={p['index_of_coincidence']}  class={p.get('symbol_class')}")
+
+
 @cli.command(name="analyze")
 @click.argument("text", type=click.STRING)
 @click.option("--family", default="unknown", help="Cipher family hint for attack metadata")

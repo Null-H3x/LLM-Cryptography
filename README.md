@@ -157,7 +157,7 @@ Math docs: [`docs/math-formulas/`](docs/math-formulas/). Cryptanalysis reference
 - [x] Validated findings loop with graceful stop + suggestions
 - [x] HTML dashboard — paste cipher, run toolset, crib auto-fill from findings
 - [x] Noita corpus import and depth propagation
-- [ ] **Family identification** in the UI — fingerprint → suggested propagator / decoder
+- [x] **Family identification** in the UI — fingerprint → suggested propagator / decoder (classification panel)
 - [ ] **Unified attack lane** — route pasted input to decrypt, brute, or propagate automatically
 - [ ] **Noita solver session** — partial keystream map, column coverage, crib-drag helpers
 - [ ] **Crib-drag engine** — try word lists at offsets across all nine messages

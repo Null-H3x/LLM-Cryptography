@@ -70,4 +70,29 @@ payload = merged.to_dict()  # JSON-serializable
 PYTHONPATH=. python3 scripts/constraint_audit.py
 ```
 
-Future: write `payload` to `datasets/constraint-findings/{corpus}/findings.jsonl`.
+## Findings pipeline
+
+Validated findings are written under `datasets/constraint-findings/{corpus}/`:
+
+| File | Contents |
+|------|----------|
+| `findings.jsonl` | All findings per round (with `round`, `fingerprint`) |
+| `validated.jsonl` | Grounded validated subset |
+| `history.json` | Round summaries, pins, convergence |
+
+```bash
+PYTHONPATH=. python3 scripts/generate_constraint_findings.py
+PYTHONPATH=. python3 scripts/validate_constraint_findings.py
+```
+
+The generator runs propagators, **mathematically validates** each hard finding against source corpora, promotes validated pins into `ConstraintState`, and **re-propagates** until fixpoint (or max rounds). Rejected hard findings stop the loop and fail validation.
+
+Programmatic loop:
+
+```python
+from cipherops.constraints.pipeline import build_corpus_configs, run_findings_loop
+
+for config in build_corpus_configs("."):
+    result = run_findings_loop(config, max_rounds=10)
+    print(config.slug, result.converged, len(result.final_validated))
+```

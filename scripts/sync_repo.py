@@ -71,6 +71,14 @@ def main() -> int:
         label="Constraint propagator audit",
     )
     run(
+        [sys.executable, "scripts/generate_constraint_findings.py"],
+        label="Generate constraint findings (validated loop)",
+    )
+    run(
+        [sys.executable, "scripts/validate_constraint_findings.py"],
+        label="Validate constraint findings datasets",
+    )
+    run(
         [sys.executable, "scripts/paranoia_audit.py"],
         label="Paranoia audit (paths, invariants, full suite)",
     )

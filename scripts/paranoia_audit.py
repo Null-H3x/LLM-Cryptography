@@ -191,6 +191,8 @@ def audit_subprocess_suite(report: ParanoiaReport) -> None:
         ([sys.executable, "scripts/comprehensive_validate.py"], "comprehensive_validate"),
         ([sys.executable, "scripts/math_audit.py"], "math_audit"),
         ([sys.executable, "scripts/constraint_audit.py"], "constraint_audit"),
+        ([sys.executable, "scripts/generate_constraint_findings.py"], "generate_constraint_findings"),
+        ([sys.executable, "scripts/validate_constraint_findings.py"], "validate_constraint_findings"),
     ]
     for cmd, label in steps:
         result = subprocess.run(cmd, cwd=ROOT, env=env, capture_output=True, text=True)

@@ -1,0 +1,95 @@
+{
+  "corpus": "noita-eye-crib-demo",
+  "propagator": "shared_keystream",
+  "rounds": [
+    {
+      "round": 0,
+      "findings_count": 3578,
+      "validated_count": 3578,
+      "rejected_count": 0,
+      "heuristic_count": 0,
+      "conflicts": 0,
+      "new_pins": 9,
+      "converged": false
+    },
+    {
+      "round": 1,
+      "findings_count": 3586,
+      "validated_count": 3586,
+      "rejected_count": 0,
+      "heuristic_count": 0,
+      "conflicts": 0,
+      "new_pins": 81,
+      "converged": false
+    },
+    {
+      "round": 2,
+      "findings_count": 3586,
+      "validated_count": 3586,
+      "rejected_count": 0,
+      "heuristic_count": 0,
+      "conflicts": 0,
+      "new_pins": 81,
+      "converged": true
+    }
+  ],
+  "grounded_pins": [
+    {
+      "msg": 0,
+      "pos": 1,
+      "pt": 10,
+      "ct": null
+    },
+    {
+      "msg": 1,
+      "pos": 1,
+      "pt": 10,
+      "ct": null
+    },
+    {
+      "msg": 2,
+      "pos": 1,
+      "pt": 10,
+      "ct": null
+    },
+    {
+      "msg": 3,
+      "pos": 1,
+      "pt": 10,
+      "ct": null
+    },
+    {
+      "msg": 4,
+      "pos": 1,
+      "pt": 10,
+      "ct": null
+    },
+    {
+      "msg": 5,
+      "pos": 1,
+      "pt": 10,
+      "ct": null
+    },
+    {
+      "msg": 6,
+      "pos": 1,
+      "pt": 10,
+      "ct": null
+    },
+    {
+      "msg": 7,
+      "pos": 1,
+      "pt": 10,
+      "ct": null
+    },
+    {
+      "msg": 8,
+      "pos": 1,
+      "pt": 10,
+      "ct": null
+    }
+  ],
+  "final_validated_count": 3586,
+  "remaining_conflicts": 0,
+  "converged": true
+}

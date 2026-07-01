@@ -1,0 +1,30 @@
+{
+  "corpus": "autokey-demo",
+  "propagator": "stream_extension",
+  "rounds": [
+    {
+      "round": 0,
+      "findings_count": 36,
+      "validated_count": 36,
+      "rejected_count": 0,
+      "heuristic_count": 0,
+      "conflicts": 0,
+      "new_pins": 0,
+      "converged": false
+    },
+    {
+      "round": 1,
+      "findings_count": 36,
+      "validated_count": 36,
+      "rejected_count": 0,
+      "heuristic_count": 0,
+      "conflicts": 0,
+      "new_pins": 0,
+      "converged": true
+    }
+  ],
+  "grounded_pins": [],
+  "final_validated_count": 36,
+  "remaining_conflicts": 0,
+  "converged": true
+}

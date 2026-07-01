@@ -15,6 +15,15 @@ from cipherops.constraints.domain import (
 from cipherops.constraints.shared_keystream import load_noita_state, propagate_shared_keystream
 from cipherops.constraints.stream_extension import propagate_from_crib_prefix, propagate_stream_extension
 from cipherops.constraints.dynamic_perm import propagate_dynamic_perm
+from cipherops.constraints.pipeline import (
+    CorpusConfig,
+    PipelineResult,
+    build_corpus_configs,
+    run_findings_loop,
+    validate_finding,
+    validate_findings_map,
+    finding_fingerprint,
+)
 
 __all__ = [
     "AlphabetDomain",
@@ -32,4 +41,11 @@ __all__ = [
     "propagate_stream_extension",
     "propagate_from_crib_prefix",
     "propagate_dynamic_perm",
+    "CorpusConfig",
+    "PipelineResult",
+    "build_corpus_configs",
+    "run_findings_loop",
+    "validate_finding",
+    "validate_findings_map",
+    "finding_fingerprint",
 ]

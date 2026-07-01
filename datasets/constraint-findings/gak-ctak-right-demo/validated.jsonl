@@ -1,0 +1,38 @@
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 0, "p": 19, "c": 4, "k": 4}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 1, "p": 7, "c": 0, "k": 0}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 2, "p": 4, "c": 13, "k": 13}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 3, "p": 16, "c": 11, "k": 11}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 4, "p": 20, "c": 5, "k": 5}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 5, "p": 8, "c": 16, "k": 16}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 6, "p": 2, "c": 12, "k": 12}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 7, "p": 10, "c": 25, "k": 25}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 8, "p": 1, "c": 2, "k": 2}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 9, "p": 17, "c": 2, "k": 2}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 10, "p": 14, "c": 5, "k": 5}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 11, "p": 22, "c": 13, "k": 13}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 12, "p": 13, "c": 6, "k": 6}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 13, "p": 5, "c": 24, "k": 24}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 14, "p": 14, "c": 18, "k": 18}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 15, "p": 23, "c": 2, "k": 2}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 16, "p": 9, "c": 0, "k": 0}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 17, "p": 20, "c": 14, "k": 14}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 18, "p": 12, "c": 21, "k": 21}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 19, "p": 15, "c": 17, "k": 17}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 20, "p": 18, "c": 4, "k": 4}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 21, "p": 14, "c": 11, "k": 11}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 22, "p": 21, "c": 4, "k": 4}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 23, "p": 4, "c": 8, "k": 8}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 24, "p": 17, "c": 19, "k": 19}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 25, "p": 19, "c": 11, "k": 11}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 26, "p": 7, "c": 16, "k": 16}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 27, "p": 4, "c": 9, "k": 9}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 28, "p": 11, "c": 8, "k": 8}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 29, "p": 0, "c": 7, "k": 7}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 30, "p": 25, "c": 1, "k": 1}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 31, "p": 24, "c": 10, "k": 10}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 32, "p": 3, "c": 12, "k": 12}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 33, "p": 14, "c": 4, "k": 4}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "stream_pin", "source": "gak_transition", "confidence": "propagated", "data": {"prng_seed": 42, "pos": 34, "p": 6, "c": 0, "k": 0}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "assignment", "source": "encrypt_verify", "confidence": "hard", "data": {"prng_seed": 42, "field": "seed", "value": 42}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "seed_elimination", "source": "encrypt_verify", "confidence": "hard", "data": {"prng_seed": 41, "pos": 0, "expected_ct": 4, "actual_ct": 9}, "corpus": "gak-ctak-right-demo", "status": "validated"}
+{"kind": "seed_elimination", "source": "encrypt_verify", "confidence": "hard", "data": {"prng_seed": 43, "pos": 0, "expected_ct": 4, "actual_ct": 3}, "corpus": "gak-ctak-right-demo", "status": "validated"}

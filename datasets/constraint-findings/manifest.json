@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "noita-eye-messages",
+    "propagator": "shared_keystream",
+    "description": "Nine-message shared keystream depth model",
+    "findings_path": "datasets/constraint-findings/noita-eye-messages/findings.jsonl",
+    "validated_path": "datasets/constraint-findings/noita-eye-messages/validated.jsonl",
+    "history_path": "datasets/constraint-findings/noita-eye-messages/history.json",
+    "rounds": 2,
+    "validated_count": 3568,
+    "remaining_conflicts": 0,
+    "converged": true
+  },
+  {
+    "slug": "noita-eye-crib-demo",
+    "propagator": "shared_keystream",
+    "description": "Noita with crib pt=10 at msg0 pos1 \u2192 keystream propagation",
+    "findings_path": "datasets/constraint-findings/noita-eye-crib-demo/findings.jsonl",
+    "validated_path": "datasets/constraint-findings/noita-eye-crib-demo/validated.jsonl",
+    "history_path": "datasets/constraint-findings/noita-eye-crib-demo/history.json",
+    "rounds": 3,
+    "validated_count": 3586,
+    "remaining_conflicts": 0,
+    "converged": true
+  },
+  {
+    "slug": "autokey-demo",
+    "propagator": "stream_extension",
+    "description": "Autokey roundtrip validation (autokey-standard-01)",
+    "findings_path": "datasets/constraint-findings/autokey-demo/findings.jsonl",
+    "validated_path": "datasets/constraint-findings/autokey-demo/validated.jsonl",
+    "history_path": "datasets/constraint-findings/autokey-demo/history.json",
+    "rounds": 2,
+    "validated_count": 36,
+    "remaining_conflicts": 0,
+    "converged": true
+  },
+  {
+    "slug": "gak-ctak-right-demo",
+    "propagator": "dynamic_perm",
+    "description": "GAK ctak_right seed filter (gak-ctak-right-s42-01)",
+    "findings_path": "datasets/constraint-findings/gak-ctak-right-demo/findings.jsonl",
+    "validated_path": "datasets/constraint-findings/gak-ctak-right-demo/validated.jsonl",
+    "history_path": "datasets/constraint-findings/gak-ctak-right-demo/history.json",
+    "rounds": 2,
+    "validated_count": 38,
+    "remaining_conflicts": 0,
+    "converged": true
+  }
+]

@@ -219,7 +219,7 @@ class DashHandler(BaseHTTPRequestHandler):
                 decks = payload.get("ciphertexts")
                 deck_size = payload.get("deck_size")
                 if ct is None and decks is None:
-                    _json_response(self, 400, {"error": "ciphertext, ciphertexts, or source=noita required"})
+                    _json_response(self, 400, {"error": "ciphertext or ciphertexts required"})
                     return
                 result = classify_ciphertext(
                     ct,
@@ -227,6 +227,48 @@ class DashHandler(BaseHTTPRequestHandler):
                     deck_size=int(deck_size) if deck_size is not None else None,
                 )
                 _json_response(self, 200, result)
+            except Exception as exc:  # noqa: BLE001
+                _json_response(self, 400, {"error": str(exc)})
+            return
+
+        if path == "/api/route-run":
+            try:
+                payload = _read_json_body(self)
+                classification = payload.get("classification")
+                if not classification:
+                    _json_response(self, 400, {"error": "classification required"})
+                    return
+                idx = int(payload.get("hypothesis_index", 0))
+                analyze_payload = route_to_dash_payload(
+                    classification,
+                    idx,
+                    ciphertext=payload.get("ciphertext"),
+                    pins=payload.get("pins"),
+                    max_rounds=int(payload.get("max_rounds", 10)),
+                )
+                session_id = payload.get("session") or str(uuid.uuid4())
+                result = _run_analysis(analyze_payload)
+                _SESSION_CACHE[session_id] = result
+                hyp = (classification.get("hypotheses") or [{}])[idx]
+                _json_response(
+                    self,
+                    200,
+                    {
+                        "session": session_id,
+                        "config": result["config"],
+                        "summary": result["summary"],
+                        "validated_count": len(result["validated"]),
+                        "findings_count": result["findings_count"],
+                        "preview": result["findings"][:100],
+                        "actionable_kinds": sorted(ACTIONABLE_KINDS),
+                        "route": {
+                            "hypothesis_index": idx,
+                            "label": hyp.get("label"),
+                            "propagator": hyp.get("dash_propagator") or hyp.get("propagator"),
+                            "deck_size": hyp.get("deck_size") or result["config"].get("deck_size"),
+                        },
+                    },
+                )
             except Exception as exc:  # noqa: BLE001
                 _json_response(self, 400, {"error": str(exc)})
             return

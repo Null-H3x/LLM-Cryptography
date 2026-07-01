@@ -4,35 +4,61 @@ GitHub repositories and references reviewed for **ground-truth alignment** with 
 
 ---
 
+## Credits & acknowledgements
+
+The following people and projects informed the cryptanalysis reference docs and analyzer design. Thank you for publishing open, verifiable work.
+
+| Author | Repository / work | Contribution to this repo |
+|--------|-------------------|---------------------------|
+| **[@ichantzaras](https://github.com/ichantzaras)** | [polysub-cryptanalysis](https://github.com/ichantzaras/polysub-cryptanalysis) | Kasiski module structure; IC + frequency workflow for Vigenère ([`methods.md`](methods.md)) |
+| **[@LeandroSQ](https://github.com/LeandroSQ)** | [vigenere-solver](https://github.com/LeandroSQ/vigenere-solver) (MIT) | Friedman test + IC + χ² pipeline ([`methods.md`](methods.md)) |
+| **[@bbzaffari](https://github.com/bbzaffari)** | [VigenereDecryptor](https://github.com/bbzaffari/VigenereDecryptor) | Kasiski + IC + χ² (IEEE report) ([`methods.md`](methods.md)) |
+| **[@RohitPatidar123-hub](https://github.com/RohitPatidar123-hub)** | [classical-cryptanalysis-vigenere](https://github.com/RohitPatidar123-hub/classical-cryptanalysis-vigenere) | Coset IC, MIC concept, Kasiski GCD ([`methods.md`](methods.md)) |
+| **[@DominicBreuker](https://github.com/DominicBreuker)** | [cryptanalysis](https://github.com/DominicBreuker/cryptanalysis) | Caesar 26-key search, Vigenère IoC period, substitution hill-climb |
+| **[@NBiermann](https://github.com/NBiermann)** | [cryptohelper-isomorphs](https://github.com/NBiermann/cryptohelper-isomorphs) | Isomorph definition, pattern significance, sliding-window algorithm ([`isomorphs-and-complements.md`](isomorphs-and-complements.md)) |
+| **[@matthewdgreen](https://github.com/matthewdgreen)** | [decipher](https://github.com/matthewdgreen/decipher) | Automated solver taxonomy: monoalphabetic, homophonic, periodic polyalphabetic, transposition+homophonic ([`isomorphs-and-complements.md`](isomorphs-and-complements.md)) |
+| **[@systemslibrarian](https://github.com/systemslibrarian)** | [cipher-detective-ai](https://github.com/systemslibrarian/cipher-detective-ai) | 81-type cipher taxonomy for gap analysis |
+| **[@Null-H3x](https://github.com/Null-H3x)** | [Eyes](https://github.com/Null-H3x/Eyes) | Noita eye corpus, in-depth keystream analysis, depth attack (`datasets/unsolved/noita-eye-messages/`) |
+| **George Lasry** | [Friedman ring challenge](https://scienceblogs.de/klausis-krypto-kolumne/the-friedman-ring-challenge-by-george-lasry/) · [Cryptologia 2021](https://www.tandfonline.com/doi/full/10.1080/01611194.2021.1996484) | Isomorph-driven alphabet reduction example ([`isomorphs-and-complements.md`](isomorphs-and-complements.md)) |
+
+**Reviewed but not imported** (different problem domain; still credited for transparency):
+
+| Author | Repository | Reason |
+|--------|------------|--------|
+| **[@SebassCoates](https://github.com/SebassCoates)** | [Isomorph](https://github.com/SebassCoates/Isomorph) | Graph-theory encryption scheme, not classical isomorph detection |
+| **[@DanielProg39](https://github.com/DanielProg39)** | [Key-Space-Brute-Force](https://github.com/DanielProg39/Key-Space-Brute-Force) | Raw n-bit brute-force demo; not cipher-specific |
+
+---
+
 ## Validated against (statistical methods)
 
-| Source | URL | What we cross-checked | License |
-|--------|-----|----------------------|---------|
-| **polysub-cryptanalysis** | [ichantzaras/polysub-cryptanalysis](https://github.com/ichantzaras/polysub-cryptanalysis) | Kasiski module structure, IC + frequency workflow for Vigenère | Check repo |
-| **vigenere-solver** | [LeandroSQ/vigenere-solver](https://github.com/LeandroSQ/vigenere-solver) | Friedman test + IC + χ² pipeline (MIT) | MIT |
-| **VigenereDecryptor** | [bbzaffari/VigenereDecryptor](https://github.com/bbzaffari/VigenereDecryptor) | Kasiski + IC + χ² (IEEE report) | Check repo |
-| **classical-cryptanalysis-vigenere** | [RohitPatidar123-hub/classical-cryptanalysis-vigenere](https://github.com/RohitPatidar123-hub/classical-cryptanalysis-vigenere) | Coset IC, MIC concept, Kasiski GCD | Check repo |
-| **cryptanalysis** | [DominicBreuker/cryptanalysis](https://github.com/DominicBreuker/cryptanalysis) | Caesar 26-key, Vigenère IoC period, substitution hill-climb | Check repo |
+| Source | Author | URL | What we cross-checked | License |
+|--------|--------|-----|----------------------|---------|
+| **polysub-cryptanalysis** | [@ichantzaras](https://github.com/ichantzaras) | [ichantzaras/polysub-cryptanalysis](https://github.com/ichantzaras/polysub-cryptanalysis) | Kasiski module structure, IC + frequency workflow for Vigenère | Check repo |
+| **vigenere-solver** | [@LeandroSQ](https://github.com/LeandroSQ) | [LeandroSQ/vigenere-solver](https://github.com/LeandroSQ/vigenere-solver) | Friedman test + IC + χ² pipeline (MIT) | MIT |
+| **VigenereDecryptor** | [@bbzaffari](https://github.com/bbzaffari) | [bbzaffari/VigenereDecryptor](https://github.com/bbzaffari/VigenereDecryptor) | Kasiski + IC + χ² (IEEE report) | Check repo |
+| **classical-cryptanalysis-vigenere** | [@RohitPatidar123-hub](https://github.com/RohitPatidar123-hub) | [RohitPatidar123-hub/classical-cryptanalysis-vigenere](https://github.com/RohitPatidar123-hub/classical-cryptanalysis-vigenere) | Coset IC, MIC concept, Kasiski GCD | Check repo |
+| **cryptanalysis** | [@DominicBreuker](https://github.com/DominicBreuker) | [DominicBreuker/cryptanalysis](https://github.com/DominicBreuker/cryptanalysis) | Caesar 26-key, Vigenère IoC period, substitution hill-climb | Check repo |
 
 ---
 
 ## Isomorphs & historical ciphers
 
-| Source | URL | What we document |
-|--------|-----|------------------|
-| **cryptohelper-isomorphs** | [NBiermann/cryptohelper-isomorphs](https://github.com/NBiermann/cryptohelper-isomorphs) | Isomorph definition, pattern significance, sliding-window algorithm |
-| **decipher** | [matthewdgreen/decipher](https://github.com/matthewdgreen/decipher) | Automated solver taxonomy: monoalphabetic, homophonic, periodic polyalphabetic, transposition+homophonic |
-| **Lasry / Friedman ring** | [ScienceBlogs challenge](https://scienceblogs.de/klausis-krypto-kolumne/the-friedman-ring-challenge-by-george-lasry/) | Isomorph-driven alphabet reduction |
-| **Eyes / Noita** | [Null-H3x/Eyes](https://github.com/Null-H3x/Eyes) | In-depth keystream, depth attack, corpus (bundled in `datasets/unsolved/`) |
+| Source | Author | URL | What we document |
+|--------|--------|-----|------------------|
+| **cryptohelper-isomorphs** | [@NBiermann](https://github.com/NBiermann) | [NBiermann/cryptohelper-isomorphs](https://github.com/NBiermann/cryptohelper-isomorphs) | Isomorph definition, pattern significance, sliding-window algorithm |
+| **decipher** | [@matthewdgreen](https://github.com/matthewdgreen) | [matthewdgreen/decipher](https://github.com/matthewdgreen/decipher) | Automated solver taxonomy: monoalphabetic, homophonic, periodic polyalphabetic, transposition+homophonic |
+| **Lasry / Friedman ring** | George Lasry | [ScienceBlogs challenge](https://scienceblogs.de/klausis-krypto-kolumne/the-friedman-ring-challenge-by-george-lasry/) | Isomorph-driven alphabet reduction |
+| **Eyes / Noita** | [@Null-H3x](https://github.com/Null-H3x) | [Null-H3x/Eyes](https://github.com/Null-H3x/Eyes) | In-depth keystream, depth attack, corpus (bundled in `datasets/unsolved/`) |
 
 ---
 
 ## Cipher taxonomy reference (not fully implemented)
 
-| Source | URL | Use |
-|--------|-----|-----|
-| **cipher-detective-ai** | [systemslibrarian/cipher-detective-ai](https://github.com/systemslibrarian/cipher-detective-ai) | 81-type taxonomy for gap analysis; educational heuristics only |
-| **Practical Cryptography** | [practicalcryptography.com](https://www.practicalcryptography.com/cryptanalysis/) | Classical attack descriptions (web) |
+| Source | Author | URL | Use |
+|--------|--------|-----|-----|
+| **cipher-detective-ai** | [@systemslibrarian](https://github.com/systemslibrarian) | [systemslibrarian/cipher-detective-ai](https://github.com/systemslibrarian/cipher-detective-ai) | 81-type taxonomy for gap analysis; educational heuristics only |
+| **Practical Cryptography** | — | [practicalcryptography.com](https://www.practicalcryptography.com/cryptanalysis/) | Classical attack descriptions (web) |
 
 ---
 

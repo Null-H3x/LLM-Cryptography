@@ -35,7 +35,7 @@ Valid keys \((a,b)\) with \(\gcd(a,26)=1\). Only **12** choices for \(a\); each 
 
 ## Isomorphs (structural repetition)
 
-**Definition** (from [NBiermann/cryptohelper-isomorphs](https://github.com/NBiermann/cryptohelper-isomorphs)):
+**Definition** (from [@NBiermann/cryptohelper-isomorphs](https://github.com/NBiermann/cryptohelper-isomorphs)):
 
 > Fragments in the ciphertext whose **internal structure** is exactly repeated: if two positions in sequence A hold the same symbol, the corresponding positions in sequence B do as well (and vice versa).
 
@@ -49,7 +49,7 @@ Valid keys \((a,b)\) with \(\gcd(a,26)=1\). Only **12** choices for \(a\); each 
 
 Same relative-equality pattern → isomorphic substrings. Used to constrain ciphertext alphabet for disk ciphers (Wheatstone) and complex historical systems.
 
-**Significance** (NBiermann):  
+**Significance** ([@NBiermann](https://github.com/NBiermann), [cryptohelper-isomorphs](https://github.com/NBiermann/cryptohelper-isomorphs)):  
 \(\text{significance} = [\text{# repeated positions}] - [\text{# distinct repeated symbols}]\)
 
 **References:**
@@ -68,7 +68,7 @@ When ciphertext at absolute position \(t\) is identical across messages, under s
 C_i[t] - C_j[t] \equiv P_i[t] - P_j[t] \pmod{83}
 \]
 
-Keystream cancels — **plaintext difference structure** is observable without knowing \(K\). This is the "in depth" / multi-ciphertext Vigenère property documented in [`../math-formulas/noita-eye.md`](../math-formulas/noita-eye.md) and the [Eyes](https://github.com/Null-H3x/Eyes) `noita_eye_core/depth` module.
+Keystream cancels — **plaintext difference structure** is observable without knowing \(K\). This is the "in depth" / multi-ciphertext Vigenère property documented in [`../math-formulas/noita-eye.md`](../math-formulas/noita-eye.md) and [@Null-H3x/Eyes](https://github.com/Null-H3x/Eyes) `noita_eye_core/depth` module.
 
 ---
 
@@ -76,7 +76,7 @@ Keystream cancels — **plaintext difference structure** is observable without k
 
 Multiple ciphertext symbols per plaintext letter preserve **plaintext bigram statistics** in aggregate but flatten unigram IC. Zodiac 408 / Copiale-style ciphers require homophonic scoring, not simple substitution IC.
 
-**Reference:** [matthewdgreen/decipher](https://github.com/matthewdgreen/decipher) homophonic anneal path.
+**Reference:** [@matthewdgreen/decipher](https://github.com/matthewdgreen/decipher) homophonic anneal path. See [Credits](curated-sources.md#credits--acknowledgements).
 
 **Status:** Not implemented; listed in `cipher-families.md` (Copiale reference-only).
 

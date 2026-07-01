@@ -2,6 +2,8 @@
 
 Grounded reference material for statistical attacks, keyspace enumeration, structural patterns (isomorphs), and complement ciphers. Formulas cross-checked against standard sources (Friedman 1920s, Kasiski 1863, Wikipedia/academic summaries) and open implementations on GitHub.
 
+**Credits:** External contributors are listed in [`curated-sources.md`](curated-sources.md#credits--acknowledgements).
+
 ## Contents
 
 | Document | Topics |

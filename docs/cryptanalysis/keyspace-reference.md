@@ -2,6 +2,8 @@
 
 Search space \(|K|\) for classical cipher families. Formulas are exact or standard approximations; implemented in `cipherops/analysis/keyspace.py` and surfaced in `attacks.*.key_space_estimate`.
 
+**Credits:** Keyspace tables align with [@DominicBreuker/cryptanalysis](https://github.com/DominicBreuker/cryptanalysis) and standard references; see [Credits](curated-sources.md#credits--acknowledgements).
+
 **Convention:** Report log₂|K| for large spaces; exact integer when feasible.
 
 ---

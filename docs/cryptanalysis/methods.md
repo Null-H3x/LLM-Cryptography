@@ -37,7 +37,7 @@ Where \(n\) = alphabetic length, IC = ciphertext IC. Requires \(n \gtrsim 20\).
 
 Implemented: `cipherops.analysis.fingerprint.friedman_key_length_estimate`
 
-Cross-validated against: [LeandroSQ/vigenere-solver](https://github.com/LeandroSQ/vigenere-solver), [bbzaffari/VigenereDecryptor](https://github.com/bbzaffari/VigenereDecryptor) (Friedman + IC workflow).
+Cross-validated against: [@LeandroSQ/vigenere-solver](https://github.com/LeandroSQ/vigenere-solver), [@bbzaffari/VigenereDecryptor](https://github.com/bbzaffari/VigenereDecryptor) (Friedman + IC workflow). See [Credits](curated-sources.md#credits--acknowledgements).
 
 ---
 
@@ -55,7 +55,7 @@ Finds repeated ciphertext substrings; distances between repeats are often multip
 
 **Output fields:** `repeats_found`, `repeat_spacings`, `spacing_gcd`, `candidate_key_lengths`, `strongest_period`
 
-Cross-validated against: [ichantzaras/polysub-cryptanalysis](https://github.com/ichantzaras/polysub-cryptanalysis) (`kasiski.py` module).
+Cross-validated against: [@ichantzaras/polysub-cryptanalysis](https://github.com/ichantzaras/polysub-cryptanalysis) (`kasiski.py` module). See [Credits](curated-sources.md#credits--acknowledgements).
 
 ---
 
@@ -72,7 +72,7 @@ After hypothesizing period \(m\), split ciphertext into \(m\) cosets (every \(m\
 Implemented: `cipherops/analysis/coset_ic.py`  
 Stored in property profiles under `coset_ic`.
 
-Cross-validated against: [RohitPatidar123-hub/classical-cryptanalysis-vigenere](https://github.com/RohitPatidar123-hub/classical-cryptanalysis-vigenere) (IC per group confirms key length).
+Cross-validated against: [@RohitPatidar123-hub/classical-cryptanalysis-vigenere](https://github.com/RohitPatidar123-hub/classical-cryptanalysis-vigenere) (IC per group confirms key length). See [Credits](curated-sources.md#credits--acknowledgements).
 
 ---
 
@@ -80,7 +80,7 @@ Cross-validated against: [RohitPatidar123-hub/classical-cryptanalysis-vigenere](
 
 For each coset at the correct period, try all 26 Caesar shifts; score alignment with English using MIC or χ². Recovers key characters one column at a time.
 
-**Not yet implemented** as executable attack — documented for future crib/key recovery. Reference: RohitPatidar123-hub (MIC analysis step).
+**Not yet implemented** as executable attack — documented for future crib/key recovery. Reference: [@RohitPatidar123-hub/classical-cryptanalysis-vigenere](https://github.com/RohitPatidar123-hub/classical-cryptanalysis-vigenere) (MIC analysis step).
 
 ---
 

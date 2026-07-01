@@ -8,10 +8,10 @@ Cross-reference of **what this repo implements** vs **what classical/modern taxo
 
 | Layer | Count | Status |
 |-------|-------|--------|
-| Solved cipher variants (registry) | 53 | Implemented + dataset + math doc |
+| Solved cipher variants (registry) | 57 | Implemented + dataset + math doc |
 | Unsolved corpora | 1 (9 messages) | Noita eye |
-| Ciphertext property profiles | 539 | Analyzer v1.2.0 |
-| Math formula docs | 53 | One per implemented variant |
+| Ciphertext property profiles | 579 | Analyzer v1.2.0 |
+| Math formula docs | 57 | One per implemented variant |
 | `cipher-families.md` entries | ~35 named | ~12 not implemented |
 | Extended taxonomy (81-type ref.) | ~81 | ~50+ not implemented |
 | Executable cryptanalysis solvers | 0 | Metadata + stats only |

@@ -1,0 +1,10 @@
+[
+  {
+    "slug": "noita-eye-messages",
+    "count": 9,
+    "path": "datasets/unsolved/noita-eye-messages/data.jsonl",
+    "status": "unsolved",
+    "source_repo": "https://github.com/Null-H3x/Eyes",
+    "math_ref": "docs/math-formulas/noita-eye.md"
+  }
+]

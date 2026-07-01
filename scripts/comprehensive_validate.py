@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from dataclasses import dataclass, field
@@ -12,10 +13,17 @@ from cipherops.ciphers.registry import CIPHER_REGISTRY, PLAIN_SAMPLES, get_ciphe
 from cipherops.ciphers.utils import sha256_text
 from scripts.generate_datasets import _roundtrip_ok
 
+
+def sha256_json(value: object) -> str:
+    payload = json.dumps(value, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
 ROOT = Path(__file__).resolve().parents[1]
 DATASET_ROOT = ROOT / "datasets" / "fingerprinted"
+UNSOLVED_ROOT = ROOT / "datasets" / "unsolved"
 GROUND_TRUTH = ROOT / "Pre-LLM-Ingestion" / "processed" / "cipher-ground-truth.jsonl"
 MANIFEST = DATASET_ROOT / "manifest.json"
+UNSOLVED_MANIFEST = UNSOLVED_ROOT / "manifest.json"
 
 REQUIRED_FIELDS = {
     "id",
@@ -96,23 +104,36 @@ def validate_ground_truth(report: ValidationReport) -> None:
         return
 
     records = [json.loads(line) for line in GROUND_TRUTH.read_text().splitlines() if line.strip()]
-    gt_slugs = {r["variant_slug"] for r in records}
+    solved_records = [r for r in records if r.get("status", "solved") == "solved"]
+    unsolved_records = [r for r in records if r.get("status") == "unsolved"]
+    gt_solved_slugs = {r["variant_slug"] for r in solved_records}
     registry_slugs = {s.slug for s in CIPHER_REGISTRY}
 
-    if gt_slugs != registry_slugs:
+    if gt_solved_slugs != registry_slugs:
         report.fail(
-            f"Ground truth slug mismatch. missing={sorted(registry_slugs - gt_slugs)} "
-            f"extra={sorted(gt_slugs - registry_slugs)}"
+            f"Ground truth slug mismatch. missing={sorted(registry_slugs - gt_solved_slugs)} "
+            f"extra={sorted(gt_solved_slugs - registry_slugs)}"
         )
     else:
-        report.ok(f"Ground truth aligned ({len(records)} records)")
+        report.ok(f"Ground truth aligned ({len(solved_records)} solved records)")
 
-    for record in records:
+    if unsolved_records:
+        report.ok(f"Ground truth unsolved corpora: {len(unsolved_records)}")
+
+    for record in solved_records:
         spec = get_cipher(record["variant_slug"])
         if record["math_ref"] != spec.math_ref:
             report.fail(f"Ground truth math_ref mismatch for {record['variant_slug']}")
         if record["cipher_family"] != spec.family:
             report.fail(f"Ground truth family mismatch for {record['variant_slug']}")
+
+    for record in unsolved_records:
+        math_path = ROOT / record["math_ref"]
+        if not math_path.is_file():
+            report.fail(f"Missing unsolved math doc: {record['math_ref']}")
+        dataset_path = ROOT / record["dataset_path"]
+        if not dataset_path.is_file():
+            report.fail(f"Missing unsolved dataset: {record['dataset_path']}")
 
 
 def validate_dataset_file(path: Path, report: ValidationReport) -> int:
@@ -238,6 +259,89 @@ def validate_plaintext_corpus(report: ValidationReport) -> None:
     report.ok(f"Plaintext corpus: {len(PLAIN_SAMPLES)} canonical samples verified across datasets")
 
 
+UNSOLVED_REQUIRED_FIELDS = {
+    "id",
+    "plaintext",
+    "ciphertext",
+    "cipher_family",
+    "params",
+    "math_ref",
+    "validation",
+    "era",
+    "source",
+}
+
+
+def validate_unsolved_datasets(report: ValidationReport) -> None:
+    if not UNSOLVED_MANIFEST.is_file():
+        report.warn(f"No unsolved manifest at {UNSOLVED_MANIFEST}")
+        return
+
+    manifest = json.loads(UNSOLVED_MANIFEST.read_text())
+    for entry in manifest:
+        slug = entry["slug"]
+        path = ROOT / entry["path"]
+        if not path.is_file():
+            report.fail(f"Unsolved dataset missing: {path}")
+            continue
+
+        lines = [line for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+        if len(lines) != entry["count"]:
+            report.fail(f"{slug}: expected {entry['count']} records, found {len(lines)}")
+
+        corpus_path = path.parent / "corpus.json"
+        if not corpus_path.is_file():
+            report.fail(f"{slug}: missing bundled corpus.json")
+            continue
+
+        corpus = json.loads(corpus_path.read_text(encoding="utf-8"))
+        deck_size = int(corpus["deck_size"])
+
+        for line_no, line in enumerate(lines, start=1):
+            prefix = f"unsolved:{slug}:{line_no}"
+            record = json.loads(line)
+
+            missing = UNSOLVED_REQUIRED_FIELDS - set(record)
+            if missing:
+                report.fail(f"{prefix}: missing fields {sorted(missing)}")
+                continue
+
+            if record["plaintext"] is not None:
+                report.fail(f"{prefix}: plaintext must be null for unsolved corpus")
+            if record.get("era") != "unsolved":
+                report.fail(f"{prefix}: era must be 'unsolved'")
+            if record["validation"].get("status") != "unsolved":
+                report.fail(f"{prefix}: validation.status must be 'unsolved'")
+            if record["validation"].get("roundtrip_verified") is not False:
+                report.fail(f"{prefix}: roundtrip_verified must be false")
+
+            ct = record["ciphertext"]
+            if not isinstance(ct, list) or not ct:
+                report.fail(f"{prefix}: ciphertext must be a non-empty integer list")
+                continue
+
+            for symbol in ct:
+                if not isinstance(symbol, int) or not 0 <= symbol < deck_size:
+                    report.fail(f"{prefix}: symbol {symbol!r} out of [0,{deck_size})")
+                    break
+
+            expected_hash = sha256_json(ct)
+            if record["validation"].get("ciphertext_sha256") != expected_hash:
+                report.fail(f"{prefix}: ciphertext_sha256 mismatch")
+
+            idx = record["params"].get("message_index")
+            if idx is not None:
+                corpus_ct = corpus["ciphertexts"][idx]
+                if ct != corpus_ct:
+                    report.fail(f"{prefix}: ciphertext diverges from corpus.json message {idx}")
+                if ct[1] != 66 or ct[2] != 5:
+                    report.fail(f"{prefix}: expected header anomaly CT[1]=66, CT[2]=5")
+
+            report.inc("unsolved_records_checked")
+
+    report.ok(f"Unsolved datasets validated ({len(manifest)} corpora)")
+
+
 def validate_live_registry_roundtrip(report: ValidationReport) -> None:
     """Fresh encrypt/decrypt from registry (independent of stored ciphertext)."""
     for spec in CIPHER_REGISTRY:
@@ -294,6 +398,7 @@ def main() -> int:
     validate_ground_truth(report)
     validate_plaintext_corpus(report)
     validate_datasets(report)
+    validate_unsolved_datasets(report)
     validate_live_registry_roundtrip(report)
     print_report(report)
     return 1 if report.errors else 0

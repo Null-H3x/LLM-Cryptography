@@ -64,6 +64,18 @@ def audit_classical_kats(report: AuditReport) -> None:
             classical.vigenere_decrypt(classical.vigenere("ATTACKATDAWN", "LEMON"), "LEMON") == "ATTACKATDAWN",
         ),
         ("beaufort self-inverse", classical.beaufort(classical.beaufort("HELLO", "KEY"), "KEY") == "HELLO"),
+        ("autokey HELLO+KEY", classical.autokey("HELLO", "KEY") == "RIJSS"),
+        (
+            "autokey roundtrip",
+            classical.autokey_decrypt(classical.autokey("ATTACKATDAWN", "KEY"), "KEY") == "ATTACKATDAWN",
+        ),
+        (
+            "autokey-beaufort roundtrip",
+            classical.autokey_decrypt(
+                classical.autokey("ATTACKATDAWN", "KEY", variant="beaufort"), "KEY", variant="beaufort"
+            )
+            == "ATTACKATDAWN",
+        ),
         ("base64 Hello", encoding.base64_encode("Hello") == "SGVsbG8="),
         ("base64 roundtrip", encoding.base64_decode(encoding.base64_encode("Test123")) == "Test123"),
     ]
@@ -250,6 +262,7 @@ def audit_analysis_kats(report: AuditReport) -> None:
         ("affine", 312, "312"),
         ("atbash", 1, "1"),
         ("vigenere", None, "26^3"),
+        ("autokey", None, "26^3 (priming seed only)"),
     ]
     for family, exact, label in ks_checks:
         params = {"key": "KEY"} if family == "vigenere" else {}
@@ -260,6 +273,27 @@ def audit_analysis_kats(report: AuditReport) -> None:
             report.fail(f"Keyspace KAT {family}: expected exact {exact}, got {ks.get('exact')}")
         else:
             report.ok(f"Keyspace: {family} → {ks['label']}")
+
+    from cipherops.analysis.guidance import analysis_guidance
+    from cipherops.analysis.profile import analyze_ciphertext
+
+    g = analysis_guidance("autokey", message_length=100, params={"key": "KEY"})
+    if not g or g.get("periodicity") != "non_periodic" or g.get("coset_ic_applicable"):
+        report.fail("Autokey guidance KAT: expected non_periodic with coset_ic_applicable=False")
+    else:
+        report.ok(f"Autokey guidance: regime={g.get('regime')} warnings={len(g.get('warnings', []))}")
+
+    pt_long = "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG " * 10
+    alpha = "".join(ch for ch in pt_long if ch.isalpha())
+    ct = classical.autokey(alpha, "KEY")
+    prof = analyze_ciphertext(ct, cipher_family="autokey", params={"key": "KEY"})
+    if prof.get("coset_ic") is not None:
+        report.fail("Autokey profile KAT: coset_ic should be null")
+    elif prof.get("analysis_guidance", {}).get("periodicity") != "non_periodic":
+        report.fail("Autokey profile KAT: missing non_periodic guidance")
+    else:
+        ic = prof["fingerprint"]["index_of_coincidence"]
+        report.ok(f"Autokey profile: coset_ic omitted, IC={ic:.4f}, bf={prof['attacks']['brute_force']['notes'][:40]}...")
 
 
 def audit_unsolved_corpus(report: AuditReport) -> None:

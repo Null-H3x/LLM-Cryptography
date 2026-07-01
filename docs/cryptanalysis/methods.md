@@ -123,6 +123,8 @@ Ciphertext
 
 For **transposition**: IC preserved (~English) but n-grams broken; anagram/dictionary scoring instead.
 
+For **autokey / running key**: **non-periodic** — do not use this pipeline. See [`non-periodic-polyalphabetic.md`](non-periodic-polyalphabetic.md).
+
 For **homophonic**: IC preserved, flat symbol distribution; homophone count analysis.
 
 ---

@@ -75,6 +75,89 @@ def _monoalphabetic_attacks(fingerprint: dict, patterns: dict) -> dict[str, dict
     }
 
 
+def _autokey_attacks(fingerprint: dict, patterns: dict, params: dict | None) -> dict[str, dict]:
+    params = params or {}
+    seed_len = len("".join(ch for ch in str(params.get("key", "KEY")) if ch.isalpha()) or 3)
+    return {
+        "crib_dragging": _entry(
+            "viable",
+            confidence=0.92,
+            notes="Known plaintext at any position extends keystream forward; cribs on first |K| chars recover seed.",
+            recommended_methods=["seed crib", "iterative plaintext extension", "multi-message cribs"],
+        ),
+        "brute_force": _entry(
+            "partial",
+            confidence=0.65,
+            notes="Feasible only for short priming key |K|; score first |K| decryption columns. "
+            "Full message search is OTP-like without cribs.",
+            recommended_methods=["seed enumeration", "score first |K| positions"],
+        ),
+        "dictionary": _entry(
+            "viable" if patterns.get("preserves_spaces") else "partial",
+            confidence=0.8,
+            notes="Dictionary scoring on recovered prefix validates seed guesses; not per-column periodic split.",
+            recommended_methods=["prefix language score", "iterative decrypt"],
+        ),
+        "hill_climbing": _entry(
+            "partial",
+            confidence=0.55,
+            notes="Hill-climb seed letters only; not periodic shift vectors. Long-body recovery needs cribs.",
+            recommended_methods=["seed letter swaps", "language score on prefix"],
+        ),
+        "metaheuristic": _entry(
+            "partial",
+            confidence=0.5,
+            notes="GA/SA over priming key alphabet; ineffective for full message without known-plaintext.",
+            recommended_methods=["seed-only GA", "simulated annealing on |K|"],
+        ),
+        "side_channel": _entry(
+            "unknown",
+            confidence=0.1,
+            notes="Classical pen-and-paper cipher; side channels apply to implementations, not ciphertext alone.",
+        ),
+    }
+
+
+def _running_key_attacks(fingerprint: dict, patterns: dict) -> dict[str, dict]:
+    return {
+        "crib_dragging": _entry(
+            "viable",
+            confidence=0.9,
+            notes="Long crib matching book text reveals keystream offset and source.",
+            recommended_methods=["book crib alignment", "stylistic source ID"],
+        ),
+        "brute_force": _entry(
+            "not_viable",
+            confidence=0.85,
+            notes="Keystream is external text; brute force requires book corpus search, not 26^m shifts.",
+            recommended_methods=["corpus scan", "offset search given source"],
+        ),
+        "dictionary": _entry(
+            "viable",
+            confidence=0.75,
+            notes="Match ciphertext against candidate book texts at all offsets.",
+            recommended_methods=["book word index", "n-gram source match"],
+        ),
+        "hill_climbing": _entry(
+            "partial",
+            confidence=0.45,
+            notes="Refine offset and source once candidate book is identified.",
+            recommended_methods=["offset refinement", "keystream alignment"],
+        ),
+        "metaheuristic": _entry(
+            "partial",
+            confidence=0.4,
+            notes="Search over corpus indices when book identity unknown.",
+            recommended_methods=["corpus GA", "source ranking"],
+        ),
+        "side_channel": _entry(
+            "unknown",
+            confidence=0.1,
+            notes="Classical pen-and-paper cipher; side channels apply to implementations, not ciphertext alone.",
+        ),
+    }
+
+
 def _polyalphabetic_attacks(fingerprint: dict, kasiski: dict, patterns: dict) -> dict[str, dict]:
     periods = kasiski.get("candidate_key_lengths") or []
     friedman = fingerprint.get("friedman_key_length_estimate")
@@ -300,10 +383,9 @@ FAMILY_GROUPS = {
         "beaufort",
         "porta",
         "gronsfeld",
-        "autokey",
-        "running_key",
         "noita-eye",
     },
+    "non_periodic_polyalphabetic": {"autokey", "running_key"},
     "transposition": {"railfence", "columnar"},
     "polygraphic": {"playfair", "four_square", "hill"},
     "fractionated": {"adfgx", "adfgvx", "bifid", "trifid", "straddle_checkerboard", "fractionated_morse"},
@@ -342,6 +424,10 @@ def attack_surface(
         return _apply_keyspace(_encoding_attacks(), cipher_family, params)
     if cipher_family in FAMILY_GROUPS["transposition"]:
         return _apply_keyspace(_transposition_attacks(patterns), cipher_family, params)
+    if cipher_family in FAMILY_GROUPS["non_periodic_polyalphabetic"]:
+        if cipher_family == "autokey":
+            return _apply_keyspace(_autokey_attacks(fingerprint, patterns, params), cipher_family, params)
+        return _apply_keyspace(_running_key_attacks(fingerprint, patterns), cipher_family, params)
     if cipher_family in FAMILY_GROUPS["polyalphabetic"]:
         return _apply_keyspace(_polyalphabetic_attacks(fingerprint, kasiski, patterns), cipher_family, params)
     if cipher_family in FAMILY_GROUPS["polygraphic"] or cipher_family in FAMILY_GROUPS["fractionated"]:

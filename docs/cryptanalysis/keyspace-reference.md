@@ -26,13 +26,13 @@ Search space \(|K|\) for classical cipher families. Formulas are exact or standa
 |--------|-------|---------|
 | Vigenère | \(26^m\) | Key letters |
 | Beaufort | \(26^m\) | Same key space, different combiner |
-| Autokey | \(26^m\) seed + plaintext extension | Effective key grows |
-| Running key | Book-dependent | Key = external text |
+| Autokey | \(26^{|K|}\) seed + plaintext extension | Priming key only; body OTP-like without cribs |
+| Running key | Book-dependent | Corpus search, not \(26^m\) |
 | Gronsfeld | \(10^m\) | Decimal digit shifts |
 | Porta | \(13^m\) | Key pairs half-alphabet |
 | One-time pad | \(26^n\) | Key length = message; intractable |
 
-**Brute force:** Enumerate \(m\) (Kasiski/Friedman), then \(26^m\) or \(10^m\) per column.
+**Brute force:** Enumerate \(m\) (Kasiski/Friedman), then \(26^m\) or \(10^m\) per column — **periodic ciphers only**. For autokey and running key see [`non-periodic-polyalphabetic.md`](non-periodic-polyalphabetic.md).
 
 ---
 

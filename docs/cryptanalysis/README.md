@@ -11,6 +11,9 @@ Grounded reference material for statistical attacks, keyspace enumeration, struc
 | [`methods.md`](methods.md) | Index of coincidence, Friedman test, Kasiski examination, coset IC, χ², Shannon entropy |
 | [`keyspace-reference.md`](keyspace-reference.md) | Brute-force search space \|K\| per cipher family |
 | [`isomorphs-and-complements.md`](isomorphs-and-complements.md) | Isomorph patterns, complement/reciprocal ciphers, equivalence classes |
+| [`non-periodic-polyalphabetic.md`](non-periodic-polyalphabetic.md) | Autokey & running key — when periodic tools fail |
+| [`taxonomy-gap-map.md`](taxonomy-gap-map.md) | Implemented vs taxonomy vs 81-type reference gaps |
+| [`knowledge-gaps.md`](knowledge-gaps.md) | Living maturity assessment |
 | [`curated-sources.md`](curated-sources.md) | Vetted GitHub repos and papers used for validation |
 
 ## Implementation mapping
@@ -21,6 +24,7 @@ Grounded reference material for statistical attacks, keyspace enumeration, struc
 | Kasiski | `cipherops/analysis/kasiski.py` |
 | Coset IC | `cipherops/analysis/coset_ic.py` |
 | Keyspace estimates | `cipherops/analysis/keyspace.py` |
+| Non-periodic guidance | `cipherops/analysis/guidance.py` |
 | Attack viability metadata | `cipherops/analysis/attacks.py` |
 | Full profiles | `cipherops/analysis/profile.py` → `datasets/ciphertext-properties/` |
 

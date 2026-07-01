@@ -27,12 +27,42 @@ def estimate_keyspace(cipher_family: str, *, params: dict | None = None) -> dict
     if family == "affine":
         return {"exact": 312, "formula": "φ(26)×26 = 12×26", "log2": math.log2(312), "label": "312"}
 
-    if family in {"vigenere", "beaufort", "autokey", "running_key", "porta"}:
+    if family == "autokey":
+        key = params.get("key") or "KEY"
+        alpha_key = "".join(ch for ch in str(key) if ch.isalpha())
+        m = len(alpha_key) if alpha_key else len(str(key))
+        n = params.get("message_length")
+        seed_space = 26**m
+        label = f"26^{m} (priming seed only)"
+        if n and n > m:
+            label = f"26^{m} seed; 26^{n} OTP-like (ciphertext-only, no cribs)"
+        return {
+            "exact": seed_space,
+            "formula": f"26^{m} seed; keystream extends with plaintext",
+            "log2": m * math.log2(26),
+            "label": label,
+            "regimes": {
+                "seed_brute_force": f"26^{m}",
+                "full_message_ciphertext_only": f"26^{n}" if n else "26^n (intractable)",
+            },
+        }
+
+    if family == "running_key":
+        n = params.get("message_length")
+        return {
+            "exact": None,
+            "formula": "book/page search; |K| ≥ |P|",
+            "log2": n * math.log2(26) if n else None,
+            "label": f"book corpus search; 26^{n} if unknown source" if n else "book corpus search",
+            "regimes": {
+                "known_book": "offset alignment only",
+                "unknown_book": "corpus-dependent",
+            },
+        }
+
+    if family in {"vigenere", "beaufort", "porta"}:
         key = params.get("key") or params.get("numeric_key") or ""
         m = len(str(key)) if key else params.get("period", 3)
-        if family == "gronsfeld" or params.get("numeric_key"):
-            space = 10 ** m
-            return {"exact": space, "formula": f"10^{m}", "log2": m * math.log2(10), "label": f"10^{m}"}
         if family == "porta":
             space = 13 ** m
             return {"exact": None, "formula": f"13^{m}", "log2": m * math.log2(13), "label": f"13^{m}"}

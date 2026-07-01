@@ -224,7 +224,7 @@ Each row mirrors a fingerprinted or unsolved record by `id` and adds cryptanalyt
 
 ### `coset_ic` — column-wise IC for period confirmation
 
-Present when `stream.symbol_class == "alpha"`. Computes mean index of coincidence across cosets at each candidate period (2–20). See [`docs/cryptanalysis/methods.md`](cryptanalysis/methods.md).
+Present when `stream.symbol_class == "alpha"` **and** cipher is periodic polyalphabetic. **Omitted (`null`)** for `autokey` and `running_key` — see [`docs/cryptanalysis/non-periodic-polyalphabetic.md`](cryptanalysis/non-periodic-polyalphabetic.md).
 
 | Field | Description |
 |-------|-------------|
@@ -233,6 +233,21 @@ Present when `stream.symbol_class == "alpha"`. Computes mean index of coincidenc
 | `best_mean_ic` | Mean IC at `best_period` |
 | `english_ic_reference` | English baseline (~0.067) |
 | `by_period` | `{period: mean_ic}` map (string keys) |
+
+### `analysis_guidance` — family-specific metric interpretation
+
+Present for **non-periodic polyalphabetic** ciphers (`autokey`, `running_key`). Analyzer v1.2.0+.
+
+| Field | Description |
+|-------|-------------|
+| `periodicity` | `non_periodic` |
+| `coset_ic_applicable` | `false` when coset IC would mislead |
+| `kasiski_applicable` | `false` |
+| `friedman_applicable` | `false` |
+| `seed_length` | Priming key length (autokey only) |
+| `regime` | `seed_dominated` \| `mixed` \| `otp_like` (autokey) or `book_keystream` (running key) |
+| `warnings` | Human-readable anti-patterns (e.g. do not use Kasiski) |
+| `recommended_workflow` | Correct attack sequence for this family |
 
 ### `ngrams` — n-gram structure
 
@@ -274,7 +289,7 @@ These slots reserve structure for future crib-drag, brute-force, dictionary, hil
 | Field | Description |
 |-------|-------------|
 | `properties_sha256` | Hash of all computed properties (excludes id/source/validation) |
-| `analyzer_version` | Schema version (currently `1.1.0`) |
+| `analyzer_version` | Schema version (currently `1.2.0`) |
 
 ---
 
@@ -393,7 +408,7 @@ Parameters stored on every dataset record and ground-truth row.
 | Cipher registry | 47 variants | family, slug, params, era, encrypt_only |
 | Fingerprinted datasets | 470 | plaintext, ciphertext, validation hashes |
 | Unsolved datasets | 9 | integer ciphertext, header anomaly, σ₀ targets |
-| Ciphertext properties | 479 | fingerprint, frequency, kasiski, coset_ic, ngrams, patterns, attacks |
+| Ciphertext properties | 479 | fingerprint, frequency, kasiski, coset_ic, analysis_guidance, ngrams, patterns, attacks |
 | Ground truth | 48 | cross-links math ↔ data ↔ properties |
 
 ---

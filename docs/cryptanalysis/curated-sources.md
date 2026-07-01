@@ -85,10 +85,10 @@ The following people and projects informed the cryptanalysis reference docs and 
 
 ## Not imported (different problem domain)
 
-| Source | Reason |
-|--------|--------|
-| [SebassCoates/Isomorph](https://github.com/SebassCoates/Isomorph) | Graph-theory encryption scheme, not classical isomorph detection |
-| [DanielProg39/Key-Space-Brute-Force](https://github.com/DanielProg39/Key-Space-Brute-Force) | Raw n-bit brute force demo; not cipher-specific |
+| Source | Author | Reason |
+|--------|--------|--------|
+| [Isomorph](https://github.com/SebassCoates/Isomorph) | [@SebassCoates](https://github.com/SebassCoates) | Graph-theory encryption scheme, not classical isomorph detection |
+| [Key-Space-Brute-Force](https://github.com/DanielProg39/Key-Space-Brute-Force) | [@DanielProg39](https://github.com/DanielProg39) | Raw n-bit brute force demo; not cipher-specific |
 
 ---
 

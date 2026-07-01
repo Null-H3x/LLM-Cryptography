@@ -8,6 +8,7 @@ from typing import Any
 
 from cipherops.analysis.attacks import ATTACK_VECTORS, attack_surface
 from cipherops.analysis.coset_ic import coset_ic_profile
+from cipherops.analysis.guidance import NON_PERIODIC_POLYALPHABETIC, analysis_guidance
 from cipherops.analysis.fingerprint import fingerprint_metrics
 from cipherops.analysis.frequency import frequency_profile
 from cipherops.analysis.kasiski import kasiski_examination
@@ -15,7 +16,7 @@ from cipherops.analysis.ngrams import ngram_profile
 from cipherops.analysis.patterns import word_pattern_profile
 from cipherops.analysis.stream import normalize_stream
 
-ANALYZER_VERSION = "1.1.0"
+ANALYZER_VERSION = "1.2.0"
 
 
 def analyze_ciphertext(
@@ -32,8 +33,14 @@ def analyze_ciphertext(
     fingerprint["symbol_class"] = stream.symbol_class
 
     kasiski = kasiski_examination(stream.text)
-    coset_ic = coset_ic_profile(stream.text) if stream.symbol_class == "alpha" else None
+    family_norm = cipher_family.replace("-", "_")
+    periodic_tools = (
+        stream.symbol_class == "alpha" and family_norm not in NON_PERIODIC_POLYALPHABETIC
+    )
+    coset_ic = coset_ic_profile(stream.text) if periodic_tools else None
     patterns = word_pattern_profile(stream.raw, stream.text, symbol_class=stream.symbol_class)
+    ks_params = dict(params or {})
+    ks_params.setdefault("message_length", len(stream.text))
     attacks = attack_surface(
         cipher_family=cipher_family,
         era=era,
@@ -41,7 +48,13 @@ def analyze_ciphertext(
         fingerprint=fingerprint,
         kasiski=kasiski,
         patterns=patterns,
-        params=params,
+        params=ks_params,
+    )
+    guidance = analysis_guidance(
+        cipher_family,
+        message_length=len(stream.text),
+        params=ks_params,
+        fingerprint=fingerprint,
     )
 
     return {
@@ -57,6 +70,7 @@ def analyze_ciphertext(
         "coset_ic": coset_ic,
         "ngrams": ngram_profile(stream.text),
         "patterns": patterns,
+        "analysis_guidance": guidance,
         "attacks": {name: attacks[name] for name in ATTACK_VECTORS},
     }
 

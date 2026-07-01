@@ -62,6 +62,12 @@ Mathematical definitions, variables, and validated Python implementations for cl
 | BLAKE2b | `blake2b.md` | `blake2b` |
 | HMAC-SHA256 | `hmac-sha256.md` | `hmac-sha256` |
 
+## Unsolved Corpora
+
+| Corpus | File | Dataset Path |
+|--------|------|--------------|
+| Noita Eye Messages | `noita-eye.md` | `datasets/unsolved/noita-eye-messages/data.jsonl` |
+
 ## Implementation Source
 
 All formulas map to validated code in `cipherops/ciphers/` and reproducible datasets under `datasets/fingerprinted/`.

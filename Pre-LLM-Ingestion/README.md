@@ -23,20 +23,24 @@ Ground truth is generated from validated implementations in `cipherops/ciphers/`
 PYTHONPATH=. python3 scripts/build_ground_truth.py
 PYTHONPATH=. python3 scripts/generate_datasets.py
 PYTHONPATH=. python3 scripts/validate_datasets.py
+PYTHONPATH=. python3 scripts/import_eyes_corpus.py --clone   # refresh unsolved corpus
+PYTHONPATH=. python3 scripts/comprehensive_validate.py
 ```
 
 Each record in `processed/cipher-ground-truth.jsonl` includes:
 - `cipher_family`, `variant_slug`, `params`
 - `math_ref` (formula documentation path)
-- `dataset_path` (validated plaintext/ciphertext pairs)
-- `audit_status: math_implementation_verified`
+- `dataset_path` (validated plaintext/ciphertext pairs, or unsolved ciphertext)
+- `audit_status`: `math_implementation_verified` (solved) or `unsolved_corpus_imported`
+- `status`: `solved` or `unsolved`
 
 ## 📊 Datasets Overview
 
 | Dataset | Use Case | Format | Size |
 |---------|----------|--------|------|
-| `processed/cipher-ground-truth.jsonl` | Pre-LLM cipher registry | JSONL | 29 variants |
-| `datasets/fingerprinted/*/data.jsonl` | Plaintext/ciphertext pairs | JSONL | 10 samples × 29 ciphers |
+| `processed/cipher-ground-truth.jsonl` | Pre-LLM cipher registry | JSONL | 47 solved + 1 unsolved |
+| `datasets/fingerprinted/*/data.jsonl` | Plaintext/ciphertext pairs | JSONL | 10 samples × 47 ciphers |
+| `datasets/unsolved/noita-eye-messages/data.jsonl` | Unsolved Noita eye puzzle | JSONL | 9 messages (no plaintext) |
 | `instruction-tuning/qwen-crypto-*.jsonl` | General crypto Q&A (legacy) | JSONL | 8 items |
 
 ## 📜 License Notes

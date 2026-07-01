@@ -71,14 +71,18 @@ LLM-Cryptography/
 │   ├── brute_force.py      # parallel key search
 │   └── cli.py              # click-based entrypoint
 ├── datasets/
-│   └── fingerprinted/          # Validated plaintext/ciphertext pairs (28 cipher variants)
-│       └── manifest.json
+│   ├── fingerprinted/          # Validated plaintext/ciphertext pairs (47 cipher variants)
+│   │   └── manifest.json
+│   └── unsolved/               # Real-world unsolved ciphertext corpora
+│       └── noita-eye-messages/ # Noita eye puzzle (from Eyes repo)
 ├── docs/math-formulas/         # Math definitions linked to cipher implementations
 ├── Pre-LLM-Ingestion/
 │   └── processed/              # Audited ground-truth registry for pre-LLM ingestion
 ├── scripts/
 │   ├── generate_datasets.py    # Regenerate validated fingerprinted datasets
 │   ├── validate_datasets.py    # Roundtrip validation
+│   ├── import_eyes_corpus.py   # Import unsolved Noita eye corpus from Eyes repo
+│   ├── comprehensive_validate.py  # Full audit (solved + unsolved)
 │   └── build_ground_truth.py   # Build Pre-LLM-Ingestion/processed corpus
 ├── requirements.txt
 └── README.md

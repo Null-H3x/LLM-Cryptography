@@ -8,6 +8,25 @@ from pathlib import Path
 
 from cipherops.ciphers.registry import CIPHER_REGISTRY
 
+UNSOLVED_CORPORA = [
+    {
+        "cipher_family": "noita-eye",
+        "variant_slug": "noita-eye-messages",
+        "params": {
+            "deck_size": 83,
+            "num_messages": 9,
+            "hypothesis": "polyalphabetic_shared_keystream",
+        },
+        "math_ref": "docs/math-formulas/noita-eye.md",
+        "difficulty": None,
+        "variants": ["noita-eye-messages"],
+        "dataset_path": "datasets/unsolved/noita-eye-messages/data.jsonl",
+        "audit_status": "unsolved_corpus_imported",
+        "status": "unsolved",
+        "source_repo": "https://github.com/Null-H3x/Eyes",
+    },
+]
+
 
 def main() -> None:
     out_dir = Path("Pre-LLM-Ingestion/processed")
@@ -25,8 +44,12 @@ def main() -> None:
                 "variants": list(spec.variants),
                 "dataset_path": f"datasets/fingerprinted/{spec.slug}/data.jsonl",
                 "audit_status": "math_implementation_verified",
+                "status": "solved",
             }
         )
+
+    for corpus in UNSOLVED_CORPORA:
+        records.append(dict(corpus))
 
     ground_truth = out_dir / "cipher-ground-truth.jsonl"
     with ground_truth.open("w", encoding="utf-8") as fh:
@@ -54,7 +77,34 @@ def main() -> None:
                 + "\n"
             )
 
-    print(f"wrote {ground_truth} ({len(records)} records)")
+        for corpus in UNSOLVED_CORPORA:
+            fh.write(
+                json.dumps(
+                    {
+                        "instruction": (
+                            "Describe the unsolved Noita eye-message corpus and the leading "
+                            "cryptanalytic hypothesis."
+                        ),
+                        "input": "",
+                        "output": (
+                            f"The Noita eye messages ({corpus['variant_slug']}) are documented in "
+                            f"{corpus['math_ref']}. Nine ciphertexts over a deck of size 83; plaintext "
+                            f"is unknown. Leading model: polyalphabetic cipher with a shared "
+                            f"position-indexed keystream (in depth). Records live in "
+                            f"{corpus['dataset_path']}."
+                        ),
+                        "math_ref": corpus["math_ref"],
+                        "cipher_family": corpus["cipher_family"],
+                        "status": "unsolved",
+                    },
+                    ensure_ascii=False,
+                )
+                + "\n"
+            )
+
+    solved = sum(1 for r in records if r.get("status") == "solved")
+    unsolved = sum(1 for r in records if r.get("status") == "unsolved")
+    print(f"wrote {ground_truth} ({len(records)} records: {solved} solved, {unsolved} unsolved)")
     print(f"wrote {instruct_path} ({len(records)} records)")
 
 

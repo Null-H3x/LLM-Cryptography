@@ -1,29 +1,52 @@
 # Math Formulas Documentation
 
-This folder contains mathematical definitions and implementations for cryptographic ciphers.
+Mathematical definitions, variables, and validated Python implementations for classical ciphers used in LLM pre-training.
 
-## 📚 Files
+## Core Reference
 
 | File | Description |
 |------|-------------|
-| `definitions.md` | Variable conventions (P, C, K, x, k) and universal notation reference |
-| `caesar.md` | Caesar/ROT cipher: E_k(x) = (x + k) mod 26 |
-| `affine.md` | Affine cipher: E_{a,b}(x) = (a*x + b) mod 26 |
-| `vigenere.md` | Polyalphabetic cipher with repeating key |
-| `playfair.md` | Digraph substitution using 5x5 matrix |
-| `hill.md` | Matrix-based polygraphic cipher |
+| `definitions.md` | Universal notation (P, C, K, x, k) |
+| `cipher-families.md` | Cipher taxonomy and quick reference |
 
-## 🔍 Variable Conventions
+## Cipher Formula Files
 
-| Symbol | Meaning |
-|--------|---------|
-| **P** | Plaintext |
-| **C** | Ciphertext |
-| **K** | Key |
-| **x**, **y** | Character indices (A=0, B=1, ..., Z=25) |
-| **k** | Shift amount / key value |
-| **a**, **b** | Affine cipher parameters |
+| Cipher | File | Dataset Slug |
+|--------|------|--------------|
+| Atbash | `atbash.md` | `atbash` |
+| Caesar / ROT13 | `caesar.md` | `caesar-rot3`, `caesar-rot13` |
+| Affine | `affine.md` | `affine-a2b5` |
+| Rail Fence | `railfence.md` | `railfence-3` |
+| Baconian | `baconian.md` | `baconian-ab` |
+| Polybius Square | `polybius.md` | `polybius-square` |
+| Simple Substitution | `substitution.md` | `substitution-qwerty` |
+| Nomenclator | `nomenclator.md` | `nomenclator-basic` |
+| Columnar Transposition | `columnar.md` | `columnar-keyword` |
+| Autokey | `autokey.md` | `autokey-standard`, `autokey-beaufort` |
+| Beaufort | `beaufort.md` | `beaufort-keyword` |
+| Porta | `porta.md` | `porta-keyword` |
+| Running Key | `running-key.md` | `running-key-book` |
+| Vigenère | `vigenere.md` | `vigenere-keyword` |
+| Gronsfeld | `gronsfeld.md` | `gronsfeld-31415` |
+| Homophonic | `homophonic.md` | `homophonic-basic` |
+| Four-Square | `four-square.md` | `four-square-keys` |
+| Hill | `hill.md` | `hill-2x2` |
+| Playfair | `playfair.md` | `playfair-keyword` |
+| ADFGVX | `adfgvx.md` | `adfgvx-keys` |
+| ADFGX | `adfgx.md` | `adfgx-keys` |
+| Bifid | `bifid.md` | `bifid-keyword` |
+| Straddle Checkerboard | `straddle-checkerboard.md` | `straddle-default` |
+| Trifid | `trifid.md` | `trifid-keyword` |
+| Base64 | `base64.md` | `b64` |
+| Fractionated Morse | `fractionated-morse.md` | `fractionated-morse` |
 
-## 💻 Python Implementations
+## Implementation Source
 
-Each formula file includes working Python code for encryption/decryption.
+All formulas map to validated code in `cipherops/ciphers/` and reproducible datasets under `datasets/fingerprinted/`.
+
+Regenerate datasets:
+
+```bash
+PYTHONPATH=. python3 scripts/generate_datasets.py
+PYTHONPATH=. python3 scripts/validate_datasets.py
+```

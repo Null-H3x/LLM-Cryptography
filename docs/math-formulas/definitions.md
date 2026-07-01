@@ -48,10 +48,13 @@
 - $E_{a,b}(x) = (a \cdot x + b) \mod 26$
 - $D_{a,b}(y) = a^{-1} \cdot (y - b) \mod 26$
 
-### Vigenère Cipher
-- **K = (k_1, k_2, ..., k_m)**: Key vector of length m
-- $E_K(x_i) = (x_i + k_{i \mod m}) \mod 26$
-- Decryption uses subtraction mod 26
+### Vigenère / Gronsfeld / Autokey / Beaufort / Porta / Running Key
+- **v**: repeating or extended keystream vector
+- $E_i(x) = (x + k_i) \mod 26$ (Vigenère, Autokey-standard, Running Key)
+- $E_i(x) = (k_i - x) \mod 26$ (Beaufort, Autokey-beaufort)
+- Gronsfeld uses decimal key digits as shifts
+
+See also: `autokey.md`, `beaufort.md`, `porta.md`, `running-key.md`, `gronsfeld.md`
 
 ### Playfair Cipher
 - **M**: 5×5 matrix (I/J combined)

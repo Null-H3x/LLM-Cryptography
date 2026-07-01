@@ -6,26 +6,38 @@ This folder contains cryptographic training data, organized by ingestion stage a
 
 ```
 Pre-LLM-Ingestion/
-├── raw/                          # Original sources (LICENSED!)
-│   ├── rfc_cryptospecs/         # RFCs on cryptography
-│   ├── textbook_excerpts/       # Public domain excerpts
-│   └── ctf_writeups/            # Community write-ups
-├── processed/                    # Cleaned, tokenizable text
-│   ├── crypto-text-corpus.txt   # 100K+ token corpus
-│   └── cipher-qna.jsonl         # 250+ Q&A pairs
-├── instruction-tuning/
-│   ├── qwen-crypto-250.jsonl    # LLM-ready format
-│   └── README.md                # Preprocessing notes
+├── processed/                    # Audited, tokenizable ground truth
+│   ├── cipher-ground-truth.jsonl # Cipher registry + math refs + dataset paths
+│   └── cipher-qna-ground-truth.jsonl
+├── instruction-tuning/           # Legacy starter instruction rows
+│   ├── qwen-crypto-4.jsonl
+│   └── qwen-crypto-additional.jsonl
 └── README.md
 ```
+
+## 📊 Ground Truth Audit
+
+Ground truth is generated from validated implementations in `cipherops/ciphers/` and cross-linked to `docs/math-formulas/`:
+
+```bash
+PYTHONPATH=. python3 scripts/build_ground_truth.py
+PYTHONPATH=. python3 scripts/generate_datasets.py
+PYTHONPATH=. python3 scripts/validate_datasets.py
+```
+
+Each record in `processed/cipher-ground-truth.jsonl` includes:
+- `cipher_family`, `variant_slug`, `params`
+- `math_ref` (formula documentation path)
+- `dataset_path` (validated plaintext/ciphertext pairs)
+- `audit_status: math_implementation_verified`
 
 ## 📊 Datasets Overview
 
 | Dataset | Use Case | Format | Size |
 |---------|----------|--------|------|
-| `crypto-text-corpus.txt` | Continued pretraining | Raw text | ~150K tokens |
-| `cipher-qna.jsonl` | Instruction tuning | JSONL | 250+ Q&A pairs |
-| `rfc_cryptospecs/` | Protocol understanding | Raw RFCs | ~50 docs |
+| `processed/cipher-ground-truth.jsonl` | Pre-LLM cipher registry | JSONL | 29 variants |
+| `datasets/fingerprinted/*/data.jsonl` | Plaintext/ciphertext pairs | JSONL | 10 samples × 29 ciphers |
+| `instruction-tuning/qwen-crypto-*.jsonl` | General crypto Q&A (legacy) | JSONL | 8 items |
 
 ## 📜 License Notes
 

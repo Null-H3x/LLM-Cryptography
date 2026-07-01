@@ -1,0 +1,142 @@
+[
+  {
+    "slug": "atbash",
+    "count": 10,
+    "path": "datasets/fingerprinted/atbash/data.jsonl"
+  },
+  {
+    "slug": "caesar-rot13",
+    "count": 10,
+    "path": "datasets/fingerprinted/caesar-rot13/data.jsonl"
+  },
+  {
+    "slug": "caesar-rot3",
+    "count": 10,
+    "path": "datasets/fingerprinted/caesar-rot3/data.jsonl"
+  },
+  {
+    "slug": "affine-a2b5",
+    "count": 10,
+    "path": "datasets/fingerprinted/affine-a2b5/data.jsonl"
+  },
+  {
+    "slug": "railfence-3",
+    "count": 10,
+    "path": "datasets/fingerprinted/railfence-3/data.jsonl"
+  },
+  {
+    "slug": "baconian-ab",
+    "count": 10,
+    "path": "datasets/fingerprinted/baconian-ab/data.jsonl"
+  },
+  {
+    "slug": "polybius-square",
+    "count": 10,
+    "path": "datasets/fingerprinted/polybius-square/data.jsonl"
+  },
+  {
+    "slug": "substitution-qwerty",
+    "count": 10,
+    "path": "datasets/fingerprinted/substitution-qwerty/data.jsonl"
+  },
+  {
+    "slug": "nomenclator-basic",
+    "count": 10,
+    "path": "datasets/fingerprinted/nomenclator-basic/data.jsonl"
+  },
+  {
+    "slug": "columnar-keyword",
+    "count": 10,
+    "path": "datasets/fingerprinted/columnar-keyword/data.jsonl"
+  },
+  {
+    "slug": "autokey-standard",
+    "count": 10,
+    "path": "datasets/fingerprinted/autokey-standard/data.jsonl"
+  },
+  {
+    "slug": "autokey-beaufort",
+    "count": 10,
+    "path": "datasets/fingerprinted/autokey-beaufort/data.jsonl"
+  },
+  {
+    "slug": "beaufort-keyword",
+    "count": 10,
+    "path": "datasets/fingerprinted/beaufort-keyword/data.jsonl"
+  },
+  {
+    "slug": "porta-keyword",
+    "count": 10,
+    "path": "datasets/fingerprinted/porta-keyword/data.jsonl"
+  },
+  {
+    "slug": "running-key-book",
+    "count": 10,
+    "path": "datasets/fingerprinted/running-key-book/data.jsonl"
+  },
+  {
+    "slug": "vigenere-keyword",
+    "count": 10,
+    "path": "datasets/fingerprinted/vigenere-keyword/data.jsonl"
+  },
+  {
+    "slug": "gronsfeld-31415",
+    "count": 10,
+    "path": "datasets/fingerprinted/gronsfeld-31415/data.jsonl"
+  },
+  {
+    "slug": "homophonic-basic",
+    "count": 10,
+    "path": "datasets/fingerprinted/homophonic-basic/data.jsonl"
+  },
+  {
+    "slug": "four-square-keys",
+    "count": 10,
+    "path": "datasets/fingerprinted/four-square-keys/data.jsonl"
+  },
+  {
+    "slug": "hill-2x2",
+    "count": 10,
+    "path": "datasets/fingerprinted/hill-2x2/data.jsonl"
+  },
+  {
+    "slug": "playfair-keyword",
+    "count": 10,
+    "path": "datasets/fingerprinted/playfair-keyword/data.jsonl"
+  },
+  {
+    "slug": "adfgvx-keys",
+    "count": 10,
+    "path": "datasets/fingerprinted/adfgvx-keys/data.jsonl"
+  },
+  {
+    "slug": "adfgx-keys",
+    "count": 10,
+    "path": "datasets/fingerprinted/adfgx-keys/data.jsonl"
+  },
+  {
+    "slug": "bifid-keyword",
+    "count": 10,
+    "path": "datasets/fingerprinted/bifid-keyword/data.jsonl"
+  },
+  {
+    "slug": "straddle-default",
+    "count": 10,
+    "path": "datasets/fingerprinted/straddle-default/data.jsonl"
+  },
+  {
+    "slug": "trifid-keyword",
+    "count": 10,
+    "path": "datasets/fingerprinted/trifid-keyword/data.jsonl"
+  },
+  {
+    "slug": "b64",
+    "count": 10,
+    "path": "datasets/fingerprinted/b64/data.jsonl"
+  },
+  {
+    "slug": "fractionated-morse",
+    "count": 10,
+    "path": "datasets/fingerprinted/fractionated-morse/data.jsonl"
+  }
+]

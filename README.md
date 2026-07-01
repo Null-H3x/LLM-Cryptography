@@ -71,11 +71,15 @@ LLM-Cryptography/
 │   ├── brute_force.py      # parallel key search
 │   └── cli.py              # click-based entrypoint
 ├── datasets/
-│   └── crypto-instruct-50.jsonl  # starter Q&A dataset
+│   └── fingerprinted/          # Validated plaintext/ciphertext pairs (28 cipher variants)
+│       └── manifest.json
+├── docs/math-formulas/         # Math definitions linked to cipher implementations
+├── Pre-LLM-Ingestion/
+│   └── processed/              # Audited ground-truth registry for pre-LLM ingestion
 ├── scripts/
-│   ├── finetune_lora_qwen3.py  # SFTTrainer script
-│   └── evaluate_cipher_decoder.py
-├── docs/                   # fine-tuning guides, model cards
+│   ├── generate_datasets.py    # Regenerate validated fingerprinted datasets
+│   ├── validate_datasets.py    # Roundtrip validation
+│   └── build_ground_truth.py   # Build Pre-LLM-Ingestion/processed corpus
 ├── requirements.txt
 └── README.md
 ```

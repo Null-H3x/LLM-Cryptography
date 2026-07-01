@@ -469,6 +469,12 @@ def print_report(report: ValidationReport) -> None:
 
 
 def main() -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--deep", action="store_true", help="Also run scripts/math_audit.py")
+    args = parser.parse_args()
+
     report = ValidationReport()
     validate_registry(report)
     validate_manifest(report)
@@ -479,7 +485,23 @@ def main() -> int:
     validate_ciphertext_properties(report)
     validate_live_registry_roundtrip(report)
     print_report(report)
-    return 1 if report.errors else 0
+
+    if report.errors:
+        return 1
+    if args.deep:
+        print("\nRunning deep math audit...\n")
+        run_math_audit_subprocess()
+    return 0
+
+
+def run_math_audit_subprocess() -> None:
+    """Optional deep audit — invoked via --deep flag."""
+    import subprocess
+
+    script = ROOT / "scripts" / "math_audit.py"
+    result = subprocess.run([sys.executable, str(script)], cwd=ROOT, env={**dict(__import__("os").environ), "PYTHONPATH": str(ROOT)})
+    if result.returncode != 0:
+        raise SystemExit(result.returncode)
 
 
 if __name__ == "__main__":

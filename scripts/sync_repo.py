@@ -62,6 +62,10 @@ def main() -> int:
         [sys.executable, "scripts/comprehensive_validate.py"],
         label="Comprehensive validation",
     )
+    run(
+        [sys.executable, "scripts/math_audit.py"],
+        label="Math & implementation audit",
+    )
 
     print("\nSync complete.")
     return 0

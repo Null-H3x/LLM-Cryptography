@@ -27,3 +27,6 @@ jobs:
 
       - name: Ciphertext properties validation
         run: PYTHONPATH=. python3 scripts/validate_ciphertext_properties.py
+
+      - name: Math and implementation audit
+        run: PYTHONPATH=. python3 scripts/math_audit.py

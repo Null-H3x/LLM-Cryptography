@@ -1,0 +1,26 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: pip install -r requirements-validate.txt
+
+      - name: Comprehensive validation
+        run: PYTHONPATH=. python3 scripts/comprehensive_validate.py
+
+      - name: Dataset roundtrip validation
+        run: PYTHONPATH=. python3 scripts/validate_datasets.py

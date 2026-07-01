@@ -75,6 +75,7 @@ Search space \(|K|\) for classical cipher families. Formulas are exact or standa
 |--------|-------|
 | Base64 | 1 (deterministic encode) |
 | Baconian | 1 mapping + stego channel |
+| PAM-5 dibit | 1 (deterministic quinary line code) |
 
 ---
 

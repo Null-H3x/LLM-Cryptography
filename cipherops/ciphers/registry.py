@@ -122,6 +122,7 @@ def _registry() -> list[CipherSpec]:
         CipherSpec("straddle_checkerboard", "straddle-default", fractionated.straddle_checkerboard, fractionated.straddle_checkerboard_decrypt, {"layout": "default"}, "docs/math-formulas/straddle-checkerboard.md", 5),
         CipherSpec("trifid", "trifid-keyword", lambda t: fractionated.trifid(t, "KEYWORD"), lambda t: fractionated.trifid_decrypt(t, "KEYWORD"), {"key": "KEYWORD"}, "docs/math-formulas/trifid.md", 5),
         CipherSpec("base64", "b64", encoding.base64_encode, encoding.base64_decode, {}, "docs/math-formulas/base64.md", 1),
+        CipherSpec("pam5", "pam5-dibit", encoding.pam5_encode, encoding.pam5_decode, {"mapping": "dibit", "levels": 5}, "docs/math-formulas/pam5.md", 2),
         CipherSpec("fractionated_morse", "fractionated-morse", lambda t: fractionated.fractionated_morse(t, "CIPHER"), lambda t: fractionated.fractionated_morse_decrypt(t, "CIPHER"), {"substitution_key": "CIPHER"}, "docs/math-formulas/fractionated-morse.md", 5, encrypt_only=True),
         # Modern symmetric / AEAD
         CipherSpec("aes_gcm", "aes-128-gcm", modern.aes_128_gcm_encrypt, modern.aes_128_gcm_decrypt, {"key_bits": 128, "mode": "GCM"}, "docs/math-formulas/aes-gcm.md", 6, era="modern"),

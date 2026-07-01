@@ -8,7 +8,7 @@ Cross-reference of **what this repo implements** vs **what classical/modern taxo
 
 | Layer | Count | Status |
 |-------|-------|--------|
-| Solved cipher variants (registry) | 47 | Implemented + dataset + math doc |
+| Solved cipher variants (registry) | 48 | Implemented + dataset + math doc |
 | Unsolved corpora | 1 (9 messages) | Noita eye |
 | Ciphertext property profiles | 479 | Analyzer v1.2.0 |
 | Math formula docs | 47 | One per implemented family |
@@ -29,6 +29,7 @@ These have `cipherops` implementation, fingerprinted dataset, math doc, ground t
 | Affine | 1 | 3 | Good |
 | Base64 | 1 | 1 | Encoding |
 | Baconian | 1 | 2 | Encoding |
+| **PAM-5 dibit** | 1 | 2 | **Encoding (line code)** |
 | Vigenère | 1 | 3 | Good (periodic pipeline) |
 | Beaufort | 1 | 3 | Good |
 | Porta | 1 | 4 | Partial |
@@ -59,7 +60,7 @@ These have `cipherops` implementation, fingerprinted dataset, math doc, ground t
 
 ## Tier P1 — Named in repo taxonomy, not implemented
 
-Listed in [`../math-formulas/cipher-families.md`](../math-formulas/cipher-families.md) but **no** `CipherSpec`, dataset, or math doc.
+Listed in [`../math-formulas/unimplemented-ciphers.md`](../math-formulas/unimplemented-ciphers.md) and [`../math-formulas/cipher-families.md`](../math-formulas/cipher-families.md) — **no** `CipherSpec` yet.
 
 | Cipher | Type | Why it matters | Suggested next step |
 |--------|------|----------------|---------------------|
@@ -77,6 +78,13 @@ Listed in [`../math-formulas/cipher-families.md`](../math-formulas/cipher-famili
 **Priority recommendation:** Pigpen, Scytale, Nihilist (high puzzle frequency, moderate effort). Copiale/VIC as corpus or multi-stage projects.
 
 ---
+
+## Tier P1b — Encodings reference (partial implementation)
+
+| Scheme | Status | Doc |
+|--------|--------|-----|
+| Base64, Baconian, **PAM-5 dibit** | Implemented | [`encodings-catalog.md`](../math-formulas/encodings-catalog.md) |
+| 4D-PAM5, NRZ, Manchester, 8b/10b, Base32/58, Hex | Reference only | same |
 
 ## Tier P2 — Extended taxonomy gaps (81-type reference)
 

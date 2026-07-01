@@ -142,3 +142,40 @@
 - **ChaCha20**: Stream, 256 bits
 - **RSA**: Integer factorization
 - **ECC**: Elliptic curves
+
+---
+
+## Implemented in this repo (quick index)
+
+See [`README.md`](README.md) for the full 48-variant list with dataset slugs.
+
+---
+
+## Line encodings & radix schemes
+
+| Scheme | Type | Status | Reference |
+|--------|------|--------|-----------|
+| **Base64** | Radix-64 text | Implemented (`b64`) | [`base64.md`](base64.md) |
+| **Baconian A/B** | Biliteral stego | Implemented | [`baconian.md`](baconian.md) |
+| **PAM-5 dibit** | 5-level amplitude / quinary | Implemented (`pam5-dibit`) | [`pam5.md`](pam5.md) |
+| **4D-PAM5** | Gigabit Ethernet PHY | Reference | [`encodings-catalog.md`](encodings-catalog.md) |
+| **NRZ / Manchester / 8b/10b** | Line codes | Reference | [`encodings-catalog.md`](encodings-catalog.md) |
+| **Hex / Base32 / Base58** | Radix encodings | Reference | [`encodings-catalog.md`](encodings-catalog.md) |
+
+Full encoding catalog: [`encodings-catalog.md`](encodings-catalog.md).
+
+---
+
+## Not yet implemented (cipher reference)
+
+| Cipher | Type | Priority | Catalog |
+|--------|------|----------|---------|
+| Pigpen | Symbol substitution | P1 | [`unimplemented-ciphers.md`](unimplemented-ciphers.md) |
+| Scytale | Cylinder transposition | P1 | same |
+| Nihilist | Polybius + numeric | P1 | same |
+| Copiale | Homophonic manuscript | Corpus | same |
+| VIC | Soviet compound | P2 | same |
+| Enigma | Rotor machine | P2 | same |
+| Grille, M-94, DRYAD, Wahlwort | Various | P2 | same |
+
+Full unimplemented catalog (40+ entries): [`unimplemented-ciphers.md`](unimplemented-ciphers.md).

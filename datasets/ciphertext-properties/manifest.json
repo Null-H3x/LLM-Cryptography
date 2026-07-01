@@ -189,6 +189,13 @@
     "source_path": "datasets/fingerprinted/b64/data.jsonl"
   },
   {
+    "slug": "pam5-dibit",
+    "count": 10,
+    "path": "datasets/ciphertext-properties/pam5-dibit/properties.jsonl",
+    "corpus_type": "fingerprinted",
+    "source_path": "datasets/fingerprinted/pam5-dibit/data.jsonl"
+  },
+  {
     "slug": "fractionated-morse",
     "count": 10,
     "path": "datasets/ciphertext-properties/fractionated-morse/properties.jsonl",

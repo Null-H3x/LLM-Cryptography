@@ -80,6 +80,8 @@ def audit_classical_kats(report: AuditReport) -> None:
         ),
         ("base64 Hello", encoding.base64_encode("Hello") == "SGVsbG8="),
         ("base64 roundtrip", encoding.base64_decode(encoding.base64_encode("Test123")) == "Test123"),
+        ("pam5 Hello", encoding.pam5_decode(encoding.pam5_encode("Hello")) == "Hello"),
+        ("pam5 roundtrip unicode", encoding.pam5_decode(encoding.pam5_encode("Cryptography π")) == "Cryptography π"),
     ]
     for label, ok in checks:
         if ok:

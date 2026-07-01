@@ -2,7 +2,7 @@
 
 Complete reference of symbols, fields, and parameters tracked across LLM-Cryptography — from mathematical notation through datasets, property profiles, and ground truth.
 
-**Scope:** 47 solved cipher variants (470 fingerprinted records) + 1 unsolved corpus (9 Noita eye messages) + 479 ciphertext property profiles.
+**Scope:** 48 solved cipher variants (480 fingerprinted records) + 1 unsolved corpus (9 Noita eye messages) + 489 ciphertext property profiles.
 
 ---
 
@@ -80,7 +80,7 @@ Defined in [`docs/math-formulas/definitions.md`](math-formulas/definitions.md).
 
 ## 2. Cipher registry (`CipherSpec`)
 
-Source: `cipherops/ciphers/registry.py` — **47 variants**.
+Source: `cipherops/ciphers/registry.py` — **48 variants**.
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -97,7 +97,7 @@ Source: `cipherops/ciphers/registry.py` — **47 variants**.
 
 ## 3. Fingerprinted dataset records
 
-Path: `datasets/fingerprinted/{slug}/data.jsonl` — **470 records** (10 × 47 ciphers).
+Path: `datasets/fingerprinted/{slug}/data.jsonl` — **480 records** (10 × 48 ciphers).
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -116,7 +116,7 @@ Path: `datasets/fingerprinted/{slug}/data.jsonl` — **470 records** (10 × 47 c
 
 ### Canonical plaintext corpus (`PLAIN_SAMPLES`)
 
-Ten fixed English sentences shared identically across all 47 fingerprinted variants — ensures cross-cipher comparability.
+Ten fixed English sentences shared identically across all 48 fingerprinted variants — ensures cross-cipher comparability.
 
 ---
 
@@ -167,7 +167,7 @@ Path: `datasets/unsolved/noita-eye-messages/data.jsonl` — **9 records**.
 
 ## 5. Ciphertext property records
 
-Path: `datasets/ciphertext-properties/{slug}/properties.jsonl` — **479 records** (470 solved + 9 unsolved).
+Path: `datasets/ciphertext-properties/{slug}/properties.jsonl` — **489 records** (480 solved + 9 unsolved).
 
 Each row mirrors a fingerprinted or unsolved record by `id` and adds cryptanalytic metadata from `cipherops/analysis/`.
 
@@ -404,12 +404,12 @@ Parameters stored on every dataset record and ground-truth row.
 
 | Layer | Records | Primary variables |
 |-------|---------|-----------------|
-| Math notation | 47 formula docs | P, C, K, E, D, IC, H, family-specific keys |
-| Cipher registry | 47 variants | family, slug, params, era, encrypt_only |
-| Fingerprinted datasets | 470 | plaintext, ciphertext, validation hashes |
+| Math notation | 48 formula docs | P, C, K, E, D, IC, H, family-specific keys |
+| Cipher registry | 48 variants | family, slug, params, era, encrypt_only |
+| Fingerprinted datasets | 480 | plaintext, ciphertext, validation hashes |
 | Unsolved datasets | 9 | integer ciphertext, header anomaly, σ₀ targets |
-| Ciphertext properties | 479 | fingerprint, frequency, kasiski, coset_ic, analysis_guidance, ngrams, patterns, attacks |
-| Ground truth | 48 | cross-links math ↔ data ↔ properties |
+| Ciphertext properties | 489 | fingerprint, frequency, kasiski, coset_ic, analysis_guidance, ngrams, patterns, attacks |
+| Ground truth | 49 | cross-links math ↔ data ↔ properties |
 
 ---
 

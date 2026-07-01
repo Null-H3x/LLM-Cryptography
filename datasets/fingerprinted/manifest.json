@@ -2,236 +2,241 @@
   {
     "slug": "atbash",
     "count": 10,
-    "path": "datasets/fingerprinted/atbash/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/atbash/data.jsonl"
   },
   {
     "slug": "caesar-rot13",
     "count": 10,
-    "path": "datasets/fingerprinted/caesar-rot13/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/caesar-rot13/data.jsonl"
   },
   {
     "slug": "caesar-rot3",
     "count": 10,
-    "path": "datasets/fingerprinted/caesar-rot3/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/caesar-rot3/data.jsonl"
   },
   {
     "slug": "affine-a2b5",
     "count": 10,
-    "path": "datasets/fingerprinted/affine-a2b5/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/affine-a2b5/data.jsonl"
   },
   {
     "slug": "railfence-3",
     "count": 10,
-    "path": "datasets/fingerprinted/railfence-3/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/railfence-3/data.jsonl"
   },
   {
     "slug": "baconian-ab",
     "count": 10,
-    "path": "datasets/fingerprinted/baconian-ab/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/baconian-ab/data.jsonl"
   },
   {
     "slug": "polybius-square",
     "count": 10,
-    "path": "datasets/fingerprinted/polybius-square/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/polybius-square/data.jsonl"
   },
   {
     "slug": "substitution-qwerty",
     "count": 10,
-    "path": "datasets/fingerprinted/substitution-qwerty/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/substitution-qwerty/data.jsonl"
   },
   {
     "slug": "nomenclator-basic",
     "count": 10,
-    "path": "datasets/fingerprinted/nomenclator-basic/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/nomenclator-basic/data.jsonl"
   },
   {
     "slug": "columnar-keyword",
     "count": 10,
-    "path": "datasets/fingerprinted/columnar-keyword/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/columnar-keyword/data.jsonl"
   },
   {
     "slug": "autokey-standard",
     "count": 10,
-    "path": "datasets/fingerprinted/autokey-standard/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/autokey-standard/data.jsonl"
   },
   {
     "slug": "autokey-beaufort",
     "count": 10,
-    "path": "datasets/fingerprinted/autokey-beaufort/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/autokey-beaufort/data.jsonl"
   },
   {
     "slug": "beaufort-keyword",
     "count": 10,
-    "path": "datasets/fingerprinted/beaufort-keyword/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/beaufort-keyword/data.jsonl"
   },
   {
     "slug": "porta-keyword",
     "count": 10,
-    "path": "datasets/fingerprinted/porta-keyword/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/porta-keyword/data.jsonl"
   },
   {
     "slug": "running-key-book",
     "count": 10,
-    "path": "datasets/fingerprinted/running-key-book/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/running-key-book/data.jsonl"
   },
   {
     "slug": "vigenere-keyword",
     "count": 10,
-    "path": "datasets/fingerprinted/vigenere-keyword/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/vigenere-keyword/data.jsonl"
   },
   {
     "slug": "gronsfeld-31415",
     "count": 10,
-    "path": "datasets/fingerprinted/gronsfeld-31415/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/gronsfeld-31415/data.jsonl"
   },
   {
     "slug": "homophonic-basic",
     "count": 10,
-    "path": "datasets/fingerprinted/homophonic-basic/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/homophonic-basic/data.jsonl"
   },
   {
     "slug": "four-square-keys",
     "count": 10,
-    "path": "datasets/fingerprinted/four-square-keys/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/four-square-keys/data.jsonl"
   },
   {
     "slug": "hill-2x2",
     "count": 10,
-    "path": "datasets/fingerprinted/hill-2x2/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/hill-2x2/data.jsonl"
   },
   {
     "slug": "playfair-keyword",
     "count": 10,
-    "path": "datasets/fingerprinted/playfair-keyword/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/playfair-keyword/data.jsonl"
   },
   {
     "slug": "adfgvx-keys",
     "count": 10,
-    "path": "datasets/fingerprinted/adfgvx-keys/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/adfgvx-keys/data.jsonl"
   },
   {
     "slug": "adfgx-keys",
     "count": 10,
-    "path": "datasets/fingerprinted/adfgx-keys/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/adfgx-keys/data.jsonl"
   },
   {
     "slug": "bifid-keyword",
     "count": 10,
-    "path": "datasets/fingerprinted/bifid-keyword/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/bifid-keyword/data.jsonl"
   },
   {
     "slug": "straddle-default",
     "count": 10,
-    "path": "datasets/fingerprinted/straddle-default/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/straddle-default/data.jsonl"
   },
   {
     "slug": "trifid-keyword",
     "count": 10,
-    "path": "datasets/fingerprinted/trifid-keyword/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/trifid-keyword/data.jsonl"
   },
   {
     "slug": "b64",
     "count": 10,
-    "path": "datasets/fingerprinted/b64/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/b64/data.jsonl"
+  },
+  {
+    "slug": "pam5-dibit",
+    "count": 10,
+    "path": "/workspace/datasets/fingerprinted/pam5-dibit/data.jsonl"
   },
   {
     "slug": "fractionated-morse",
     "count": 10,
-    "path": "datasets/fingerprinted/fractionated-morse/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/fractionated-morse/data.jsonl"
   },
   {
     "slug": "aes-128-gcm",
     "count": 10,
-    "path": "datasets/fingerprinted/aes-128-gcm/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/aes-128-gcm/data.jsonl"
   },
   {
     "slug": "aes-256-gcm",
     "count": 10,
-    "path": "datasets/fingerprinted/aes-256-gcm/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/aes-256-gcm/data.jsonl"
   },
   {
     "slug": "aes-128-cbc",
     "count": 10,
-    "path": "datasets/fingerprinted/aes-128-cbc/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/aes-128-cbc/data.jsonl"
   },
   {
     "slug": "aes-256-cbc",
     "count": 10,
-    "path": "datasets/fingerprinted/aes-256-cbc/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/aes-256-cbc/data.jsonl"
   },
   {
     "slug": "aes-128-ctr",
     "count": 10,
-    "path": "datasets/fingerprinted/aes-128-ctr/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/aes-128-ctr/data.jsonl"
   },
   {
     "slug": "chacha20-poly1305",
     "count": 10,
-    "path": "datasets/fingerprinted/chacha20-poly1305/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/chacha20-poly1305/data.jsonl"
   },
   {
     "slug": "tripledes-cbc",
     "count": 10,
-    "path": "datasets/fingerprinted/tripledes-cbc/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/tripledes-cbc/data.jsonl"
   },
   {
     "slug": "fernet",
     "count": 10,
-    "path": "datasets/fingerprinted/fernet/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/fernet/data.jsonl"
   },
   {
     "slug": "xor-sha256-stream",
     "count": 10,
-    "path": "datasets/fingerprinted/xor-sha256-stream/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/xor-sha256-stream/data.jsonl"
   },
   {
     "slug": "pbkdf2-aes-gcm",
     "count": 10,
-    "path": "datasets/fingerprinted/pbkdf2-aes-gcm/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/pbkdf2-aes-gcm/data.jsonl"
   },
   {
     "slug": "hkdf-aes-gcm",
     "count": 10,
-    "path": "datasets/fingerprinted/hkdf-aes-gcm/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/hkdf-aes-gcm/data.jsonl"
   },
   {
     "slug": "rsa-oaep-hybrid",
     "count": 10,
-    "path": "datasets/fingerprinted/rsa-oaep-hybrid/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/rsa-oaep-hybrid/data.jsonl"
   },
   {
     "slug": "ed25519-sign",
     "count": 10,
-    "path": "datasets/fingerprinted/ed25519-sign/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/ed25519-sign/data.jsonl"
   },
   {
     "slug": "x25519-ecdh",
     "count": 10,
-    "path": "datasets/fingerprinted/x25519-ecdh/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/x25519-ecdh/data.jsonl"
   },
   {
     "slug": "sha256",
     "count": 10,
-    "path": "datasets/fingerprinted/sha256/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/sha256/data.jsonl"
   },
   {
     "slug": "sha512",
     "count": 10,
-    "path": "datasets/fingerprinted/sha512/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/sha512/data.jsonl"
   },
   {
     "slug": "sha3-256",
     "count": 10,
-    "path": "datasets/fingerprinted/sha3-256/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/sha3-256/data.jsonl"
   },
   {
     "slug": "blake2b",
     "count": 10,
-    "path": "datasets/fingerprinted/blake2b/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/blake2b/data.jsonl"
   },
   {
     "slug": "hmac-sha256",
     "count": 10,
-    "path": "datasets/fingerprinted/hmac-sha256/data.jsonl"
+    "path": "/workspace/datasets/fingerprinted/hmac-sha256/data.jsonl"
   }
 ]

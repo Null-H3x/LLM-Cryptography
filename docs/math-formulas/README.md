@@ -9,6 +9,8 @@ Mathematical definitions, variables, and validated Python implementations for cl
 | [`../variable-inventory.md`](../variable-inventory.md) | **Full variable & field inventory** (datasets, properties, ground truth) |
 | `definitions.md` | Universal notation (P, C, K, x, k) |
 | `cipher-families.md` | Cipher taxonomy and quick reference |
+| `encodings-catalog.md` | Line codes & radix encodings (PAM-5, NRZ, Manchester, …) |
+| `unimplemented-ciphers.md` | Reference catalog for ciphers not yet in registry |
 
 ## Cipher Formula Files
 
@@ -39,6 +41,7 @@ Mathematical definitions, variables, and validated Python implementations for cl
 | Straddle Checkerboard | `straddle-checkerboard.md` | `straddle-default` |
 | Trifid | `trifid.md` | `trifid-keyword` |
 | Base64 | `base64.md` | `b64` |
+| PAM-5 dibit | `pam5.md` | `pam5-dibit` |
 | Fractionated Morse | `fractionated-morse.md` | `fractionated-morse` |
 
 ## Modern Key Ciphers

@@ -389,7 +389,7 @@ FAMILY_GROUPS = {
     "transposition": {"railfence", "columnar"},
     "polygraphic": {"playfair", "four_square", "hill"},
     "fractionated": {"adfgx", "adfgvx", "bifid", "trifid", "straddle_checkerboard", "fractionated_morse"},
-    "encoding": {"base64", "baconian"},
+    "encoding": {"base64", "baconian", "pam5"},
 }
 
 

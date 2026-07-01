@@ -99,7 +99,7 @@ def estimate_keyspace(cipher_family: str, *, params: dict | None = None) -> dict
     if family in {"adfgx", "adfgvx", "bifid", "trifid", "straddle_checkerboard", "fractionated_morse"}:
         return {"exact": None, "formula": "compound (polybius × transposition)", "log2": None, "label": "compound stages"}
 
-    if family in {"base64", "baconian"}:
+    if family in {"base64", "baconian", "pam5"}:
         return {"exact": 1, "formula": "encoding", "log2": 0.0, "label": "1 (decode)"}
 
     if family == "noita_eye":

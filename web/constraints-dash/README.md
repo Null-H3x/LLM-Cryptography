@@ -25,6 +25,7 @@ Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/)
 |--------|------|---------|
 | GET | `/api/health` | Liveness |
 | GET | `/api/sources` | Presets + fingerprinted slugs |
+| POST | `/api/classify` | Heuristic family hypotheses + dash routing |
 | POST | `/api/analyze` | Run validated loop; returns session id |
 | POST | `/api/crib-from-finding` | Crib pin suggestion from a finding row |
 | GET | `/api/findings?session=…` | Paginated / filtered findings |

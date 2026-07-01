@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 WEB_ROOT = ROOT / "web" / "constraints-dash"
 sys.path.insert(0, str(ROOT))
 
+from cipherops.analysis.classifier import classify_ciphertext, route_to_dash_payload
 from cipherops.constraints.adhoc import build_custom_config, list_dashboard_sources
 from cipherops.constraints.crib_hints import ACTIONABLE_KINDS, crib_pins_from_finding, merge_crib_pins
 from cipherops.constraints.pipeline import finding_fingerprint, run_findings_loop
@@ -191,6 +192,34 @@ class DashHandler(BaseHTTPRequestHandler):
                 if hint.get("pins"):
                     hint["merged_pins"] = merge_crib_pins(existing, hint["pins"])
                 _json_response(self, 200, hint)
+            except Exception as exc:  # noqa: BLE001
+                _json_response(self, 400, {"error": str(exc)})
+            return
+
+        if path == "/api/classify":
+            try:
+                payload = _read_json_body(self)
+                if payload.get("source") == "noita":
+                    import json as _json
+
+                    corpus = _json.loads(
+                        (ROOT / "datasets/unsolved/noita-eye-messages/corpus.json").read_text(encoding="utf-8")
+                    )
+                    result = classify_ciphertext(corpus["ciphertexts"], deck_size=int(corpus["deck_size"]))
+                    _json_response(self, 200, result)
+                    return
+                ct = payload.get("ciphertext")
+                decks = payload.get("ciphertexts")
+                deck_size = payload.get("deck_size")
+                if ct is None and decks is None:
+                    _json_response(self, 400, {"error": "ciphertext, ciphertexts, or source=noita required"})
+                    return
+                result = classify_ciphertext(
+                    ct,
+                    ciphertexts=decks,
+                    deck_size=int(deck_size) if deck_size is not None else None,
+                )
+                _json_response(self, 200, result)
             except Exception as exc:  # noqa: BLE001
                 _json_response(self, 400, {"error": str(exc)})
             return

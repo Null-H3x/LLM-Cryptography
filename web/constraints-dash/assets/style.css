@@ -203,8 +203,81 @@ textarea {
   min-width: 0;
 }
 
-.summary-panel, .detail-panel {
+.summary-panel, .detail-panel, .classify-panel {
   padding: 1rem;
+}
+
+.classify-status {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.classify-profile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.classify-chip {
+  padding: 0.25rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-panel-2);
+}
+
+.classify-hypotheses {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.hyp-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.75rem;
+  background: var(--bg-panel-2);
+}
+
+.hyp-card.top {
+  border-color: var(--accent);
+}
+
+.hyp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.hyp-label {
+  font-weight: 600;
+  color: var(--accent-2);
+  font-size: 13px;
+}
+
+.hyp-conf {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+}
+
+.hyp-reason, .hyp-actions {
+  margin: 0.25rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.45;
+}
+
+.hyp-card .btn {
+  margin-top: 0.5rem;
+  width: auto;
 }
 
 .summary-grid {

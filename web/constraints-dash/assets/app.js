@@ -9,6 +9,7 @@ const state = {
   kinds: new Set(),
   lastConfig: null,
   selectedFinding: null,
+  classification: null,
   actionableKinds: new Set(["pt_difference", "equality", "keystream_pin", "assignment", "stream_pin"]),
 };
 
@@ -441,6 +442,127 @@ async function loadSources() {
   log(`Loaded ${data.presets?.length || 0} presets, ${data.fingerprinted?.length || 0} fingerprinted datasets.`);
 }
 
+function getClassifyInput() {
+  const mode = $("source-mode").value;
+  if (mode === "noita") {
+    return { source: "noita" };
+  }
+  const ct = $("ciphertext")?.value?.trim() || "";
+  if (ct) return { ciphertext: ct };
+  return null;
+}
+
+function renderClassification(data) {
+  state.classification = data;
+  const profileEl = $("classify-profile");
+  const hypsEl = $("classify-hypotheses");
+  const statusEl = $("classify-status");
+
+  if (!data || !data.hypotheses?.length) {
+    profileEl.innerHTML = "";
+    hypsEl.innerHTML = '<p class="classify-status">No hypotheses — add ciphertext or choose Noita.</p>';
+    statusEl.textContent = "No signal";
+    return;
+  }
+
+  const p = data.profile || {};
+  const chips = [];
+  if (p.symbol_class) chips.push(`class: ${p.symbol_class}`);
+  if (p.index_of_coincidence != null) chips.push(`IC: ${p.index_of_coincidence}`);
+  if (p.shannon_entropy_bits != null) chips.push(`H: ${p.shannon_entropy_bits}`);
+  if (p.ic_band) chips.push(`band: ${p.ic_band}`);
+  if (p.deck_size) chips.push(`deck: ${p.deck_size}`);
+  if (p.num_messages) chips.push(`msgs: ${p.num_messages}`);
+  if (p.kasiski_periods?.length) chips.push(`kasiski: ${p.kasiski_periods.join(",")}`);
+
+  profileEl.innerHTML = chips.map((c) => `<span class="classify-chip">${c}</span>`).join("");
+  statusEl.textContent = data.top ? `Top: ${data.top.label} (${Math.round(data.top.confidence * 100)}%)` : "Classified";
+
+  hypsEl.innerHTML = "";
+  data.hypotheses.forEach((h, idx) => {
+    const card = document.createElement("div");
+    card.className = `hyp-card${idx === 0 ? " top" : ""}`;
+    const reasons = (h.reasoning || []).map((r) => `<li>${r}</li>`).join("");
+    const actions = (h.actions || []).map((a) => `<li>${a}</li>`).join("");
+    card.innerHTML = `
+      <div class="hyp-card-header">
+        <span class="hyp-label">${h.label}</span>
+        <span class="hyp-conf">${Math.round(h.confidence * 100)}%</span>
+      </div>
+      <ul class="hyp-reason">${reasons}</ul>
+      <ul class="hyp-actions">${actions}</ul>
+      ${h.propagator && h.propagator !== "none" ? `<button type="button" class="btn btn-ghost hyp-apply" data-idx="${idx}">Apply route → run</button>` : `<button type="button" class="btn btn-ghost hyp-apply" data-idx="${idx}">Apply route</button>`}
+    `;
+    card.querySelector(".hyp-apply").addEventListener("click", () => applyHypothesis(idx));
+    hypsEl.appendChild(card);
+  });
+}
+
+function applyHypothesis(index) {
+  const data = state.classification;
+  if (!data?.hypotheses?.[index]) return;
+  const h = data.hypotheses[index];
+
+  if (h.dash_mode === "noita") {
+    $("source-mode").value = "noita";
+    showSourcePanel("noita");
+    log(`Route: Noita eyes (${h.label})`);
+    runAnalysis();
+    return;
+  }
+
+  if (h.dash_mode === "fingerprinted" && h.dataset_slug) {
+    $("source-mode").value = "fingerprinted";
+    showSourcePanel("fingerprinted");
+    $("fp-slug").value = h.dataset_slug;
+    log(`Route: fingerprinted ${h.dataset_slug}`);
+    if (h.propagator && h.propagator !== "none") runAnalysis();
+    return;
+  }
+
+  $("source-mode").value = "custom";
+  showSourcePanel("custom");
+  if (h.dash_propagator || (h.propagator && h.propagator !== "none")) {
+    $("propagator").value = h.dash_propagator || h.propagator;
+    updatePropagatorFields();
+  }
+  if (h.deck_size) $("deck-size").value = String(h.deck_size);
+  const hyp = h.hypothesis || {};
+  if (hyp.seed_length) $("seed-length").value = String(hyp.seed_length);
+  if (hyp.seed) $("seed").value = hyp.seed;
+  if (hyp.extension) $("extension").value = hyp.extension;
+  if (hyp.mode) $("gak-mode").value = hyp.mode;
+  log(`Route: custom ${h.label}`);
+  if (h.propagator && h.propagator !== "none") runAnalysis();
+}
+
+async function runClassification() {
+  const input = getClassifyInput();
+  if (!input) {
+    log("Classification: paste ciphertext or select Noita eyes");
+    return;
+  }
+  $("classify-status").textContent = "Classifying…";
+  try {
+    let body = input;
+    if (input.source === "noita") {
+      body = { source: "noita" };
+    }
+    const res = await fetch("/api/classify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Classify failed");
+    renderClassification(data);
+    log(`Classification: ${data.top?.label || "done"} (${data.hypotheses?.length || 0} hypotheses)`);
+  } catch (err) {
+    $("classify-status").textContent = "Error";
+    log(`Classification error: ${err.message}`);
+  }
+}
+
 function loadAutokeySample() {
   $("source-mode").value = "custom";
   showSourcePanel("custom");
@@ -451,6 +573,7 @@ function loadAutokeySample() {
   $("seed").value = "KEY";
   $("seed-length").value = "3";
   log("Loaded autokey-standard-01 sample ciphertext.");
+  runClassification();
 }
 
 function bindEvents() {
@@ -462,12 +585,23 @@ function bindEvents() {
 
   $("propagator").addEventListener("change", updatePropagatorFields);
   $("run-btn").addEventListener("click", runAnalysis);
+  $("classify-btn").addEventListener("click", runClassification);
   $("load-sample-btn").addEventListener("click", loadAutokeySample);
   $("apply-crib-btn").addEventListener("click", () => {
     applyCribFromSelected(true).catch((e) => log(`Crib error: ${e.message}`));
   });
   $("crib-anchor-pt").addEventListener("change", () => {
     if (state.selectedFinding) showFindingDetail(state.selectedFinding);
+  });
+
+  let classifyTimer;
+  $("ciphertext")?.addEventListener("input", () => {
+    clearTimeout(classifyTimer);
+    classifyTimer = setTimeout(() => {
+      if ($("source-mode").value === "custom" && $("ciphertext").value.trim().length >= 8) {
+        runClassification();
+      }
+    }, 600);
   });
 
   ["filter-kind", "filter-confidence", "filter-round"].forEach((id) => {

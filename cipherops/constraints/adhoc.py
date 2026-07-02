@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from cipherops.analysis.keystream_lanes import default_hypothesis
+from cipherops.analysis.deck_parse import parse_integer_decks
 from cipherops.analysis.stream_cipher import hypothesis_from_slug
 from cipherops.constraints.domain import AlphabetDomain, ConstraintState, Pin
 from cipherops.constraints.pipeline import CorpusConfig, PropagatorName, build_corpus_configs
@@ -80,21 +81,9 @@ def _parse_int_list(text: str) -> list[int]:
 
 
 def _parse_ciphertexts(raw: str | list | None) -> list[list[int]] | None:
-    if raw is None:
-        return None
-    if isinstance(raw, list):
-        return [[int(x) for x in row] for row in raw]
-    text = raw.strip()
-    if not text:
-        return None
-    if text.startswith("["):
-        parsed = json.loads(text)
-        if parsed and isinstance(parsed[0], list):
-            return [[int(x) for x in row] for row in parsed]
-        return [parsed]
-    if re.search(r"[\s,;]", text):
-        return [_parse_int_list(text)]
-    return None
+    """Parse multi-message integer decks (same rules as classify / full_scan)."""
+    parsed = parse_integer_decks(raw)
+    return parsed[0] if parsed else None
 
 
 def _stream_hypothesis_from_params(params: dict[str, Any]) -> dict[str, Any]:

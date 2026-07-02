@@ -76,8 +76,15 @@ def classify_ciphertext(
         raw: str | list | None = ciphertexts if ciphertexts is not None else ciphertext
         result = full_scan(raw, deck_size=deck_size)
         parsed = parse_integer_decks(raw if isinstance(raw, (str, list)) else None)
-        result["has_decks"] = parsed is not None
-        result["num_messages"] = len(parsed[0]) if parsed else 0
+        if parsed:
+            decks, inferred_size = parsed
+            result["has_decks"] = True
+            result["num_messages"] = len(decks)
+            result["ciphertexts"] = decks
+            result["deck_size"] = deck_size or inferred_size
+        else:
+            result["has_decks"] = False
+            result["num_messages"] = 0
         return result
 
     return _classify_legacy(ciphertext, ciphertexts=ciphertexts, deck_size=deck_size)

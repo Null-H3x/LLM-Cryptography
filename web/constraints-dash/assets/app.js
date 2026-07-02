@@ -93,6 +93,24 @@ function getCiphertext() {
   return $("ciphertext").value.trim();
 }
 
+function buildRunPayload(hypothesisIndex, pins) {
+  const body = {
+    session: state.session,
+    classification: state.classification,
+    hypothesis_index: hypothesisIndex,
+    ciphertext: getCiphertext(),
+    pins,
+    max_rounds: Number($("max-rounds").value) || 10,
+  };
+  if (state.classification?.has_decks && state.classification.ciphertexts) {
+    body.ciphertexts = state.classification.ciphertexts;
+    if (state.classification.deck_size != null) {
+      body.deck_size = state.classification.deck_size;
+    }
+  }
+  return body;
+}
+
 function resetInferred() {
   $("inferred-propagator").textContent = "unknown";
   $("inferred-propagator").classList.add("unknown");
@@ -701,14 +719,7 @@ async function applyBruteCandidate(index) {
   setStatus("run", "RUNNING");
   let pins = [];
   try { pins = parsePins(); } catch { pins = []; }
-  const body = {
-    session: state.session,
-    classification: state.classification,
-    hypothesis_index: state.routedIndex,
-    ciphertext: getCiphertext(),
-    pins,
-    max_rounds: Number($("max-rounds").value) || 10,
-  };
+  const body = buildRunPayload(state.routedIndex, pins);
   if (c.hypothesis_patch) body.hypothesis_override = c.hypothesis_patch;
   if (c.plaintext) body.plaintext_trial = c.plaintext;
   try {
@@ -761,14 +772,7 @@ async function routeAndRun(hypothesisIndex) {
     const data = await apiFetch("/api/route-run", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        session: state.session,
-        classification: state.classification,
-        hypothesis_index: hypothesisIndex,
-        ciphertext: getCiphertext(),
-        pins,
-        max_rounds: Number($("max-rounds").value) || 10,
-      }),
+      body: JSON.stringify(buildRunPayload(hypothesisIndex, pins)),
     });
     await handleRunResponse(data);
   } catch (err) {

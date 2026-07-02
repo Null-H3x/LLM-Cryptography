@@ -22,7 +22,7 @@ from cipherops.analysis.classifier import classify_ciphertext, route_to_dash_pay
 from cipherops.constraints.adhoc import build_custom_config, list_dashboard_sources
 from cipherops.constraints.crib_hints import ACTIONABLE_KINDS, crib_pins_from_finding, merge_crib_pins
 from cipherops.constraints.pipeline import finding_fingerprint, run_findings_loop
-from cipherops.constraints.plaintext_view import assemble_plaintext_view
+from cipherops.constraints.prepare_run import merge_prepare_into_payload, prepare_run
 
 # In-memory cache of last analysis per client session (uuid).
 _SESSION_CACHE: dict[str, dict[str, Any]] = {}
@@ -271,6 +271,26 @@ class DashHandler(BaseHTTPRequestHandler):
                 _json_response(self, 400, {"error": str(exc)})
             return
 
+        if path == "/api/prepare-run":
+            try:
+                payload = _read_json_body(self)
+                classification = payload.get("classification")
+                if not classification:
+                    _json_response(self, 400, {"error": "classification required"})
+                    return
+                idx = int(payload.get("hypothesis_index", 0))
+                prepared = prepare_run(
+                    classification,
+                    idx,
+                    ciphertext=payload.get("ciphertext"),
+                    ciphertexts=payload.get("ciphertexts"),
+                    pins=payload.get("pins"),
+                )
+                _json_response(self, 200, prepared)
+            except Exception as exc:  # noqa: BLE001
+                _json_response(self, 400, {"error": str(exc)})
+            return
+
         if path == "/api/route-run":
             try:
                 payload = _read_json_body(self)
@@ -286,6 +306,18 @@ class DashHandler(BaseHTTPRequestHandler):
                     pins=payload.get("pins"),
                     max_rounds=int(payload.get("max_rounds", 10)),
                 )
+                prepared = None
+                if not payload.get("skip_prepare"):
+                    prepared = prepare_run(
+                        classification,
+                        idx,
+                        ciphertext=payload.get("ciphertext"),
+                        ciphertexts=payload.get("ciphertexts"),
+                        pins=payload.get("pins"),
+                    )
+                    analyze_payload = merge_prepare_into_payload(analyze_payload, prepared)
+                    if prepared.get("ciphertext"):
+                        payload = {**payload, "ciphertext": prepared["ciphertext"]}
                 hyp_override = payload.get("hypothesis_override")
                 if hyp_override:
                     base = dict(analyze_payload.get("hypothesis") or {})
@@ -296,32 +328,35 @@ class DashHandler(BaseHTTPRequestHandler):
                         analyze_payload["seed_candidates"] = [center - 1, center, center + 1]
                 if payload.get("plaintext_trial"):
                     analyze_payload["plaintext"] = payload["plaintext_trial"]
+                elif prepared and prepared.get("plaintext_trial"):
+                    analyze_payload["plaintext"] = prepared["plaintext_trial"]
                 session_id = payload.get("session") or str(uuid.uuid4())
                 result = _run_analysis(analyze_payload)
                 result["classification"] = classification
                 result["last_payload"] = analyze_payload
+                if prepared:
+                    result["prepare"] = prepared
                 _SESSION_CACHE[session_id] = result
                 hyp = (classification.get("hypotheses") or [{}])[idx]
-                _json_response(
-                    self,
-                    200,
-                    {
-                        "session": session_id,
-                        "config": result["config"],
-                        "summary": result["summary"],
-                        "validated_count": len(result["validated"]),
-                        "findings_count": result["findings_count"],
-                        "preview": result["findings"][:100],
-                        "plaintext_view": result["plaintext_view"],
-                        "actionable_kinds": sorted(ACTIONABLE_KINDS),
-                        "route": {
-                            "hypothesis_index": idx,
-                            "label": hyp.get("label"),
-                            "propagator": hyp.get("dash_propagator") or hyp.get("propagator"),
-                            "deck_size": hyp.get("deck_size") or result["config"].get("deck_size"),
-                        },
+                response: dict[str, Any] = {
+                    "session": session_id,
+                    "config": result["config"],
+                    "summary": result["summary"],
+                    "validated_count": len(result["validated"]),
+                    "findings_count": result["findings_count"],
+                    "preview": result["findings"][:100],
+                    "plaintext_view": result["plaintext_view"],
+                    "actionable_kinds": sorted(ACTIONABLE_KINDS),
+                    "route": {
+                        "hypothesis_index": idx,
+                        "label": hyp.get("label"),
+                        "propagator": hyp.get("dash_propagator") or hyp.get("propagator"),
+                        "deck_size": hyp.get("deck_size") or result["config"].get("deck_size"),
                     },
-                )
+                }
+                if prepared:
+                    response["prepare"] = prepared
+                _json_response(self, 200, response)
             except Exception as exc:  # noqa: BLE001
                 _json_response(self, 400, {"error": str(exc)})
             return

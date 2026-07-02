@@ -865,6 +865,82 @@ tbody tr.actionable:hover .kind {
   width: 4.5rem;
 }
 
+.prepare-panel {
+  border-color: var(--border-bright);
+}
+
+.prepare-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.prepare-step {
+  display: grid;
+  grid-template-columns: 1.5rem 8rem 1fr;
+  gap: 0.5rem;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius);
+  background: var(--bg-panel-2);
+  border: 1px solid var(--border);
+}
+
+.prepare-step.prepare-ok { border-color: var(--accent); }
+.prepare-step.prepare-skipped { opacity: 0.55; }
+.prepare-step.prepare-error { border-color: var(--danger); }
+
+.prepare-step-num {
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+.prepare-step-name {
+  color: var(--text);
+  text-transform: capitalize;
+}
+
+.prepare-step-detail {
+  color: var(--text-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.prepare-notes {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+}
+
+.prepare-subhead {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+  margin: 0.5rem 0 0.25rem;
+}
+
+.prepare-meta {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.prepare-cribs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.prepare-crib-btn {
+  font-size: 11px;
+  padding: 0.2rem 0.45rem;
+}
+
 @media (max-width: 1100px) {
   .recovery-grid {
     grid-template-columns: 1fr;

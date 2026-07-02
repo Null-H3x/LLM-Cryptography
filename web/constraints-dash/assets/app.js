@@ -1,4 +1,4 @@
-/* H3X Constraints Dash — identify → route → run */
+/* H3X Constraints Dash — identify → route → prepare → run */
 
 const state = {
   session: null,
@@ -9,6 +9,7 @@ const state = {
   routedIndex: null,
   lastConfig: null,
   selectedFinding: null,
+  lastPrepare: null,
   actionableKinds: new Set(["pt_difference", "equality", "keystream_pin", "assignment", "stream_pin"]),
 };
 
@@ -346,10 +347,92 @@ function populateFiltersFromRun(data) {
   });
 }
 
+function renderPrepare(prepare) {
+  state.lastPrepare = prepare;
+  const stepsEl = $("prepare-steps");
+  const notesEl = $("prepare-notes");
+  const depthEl = $("prepare-depth");
+  const cribsEl = $("prepare-cribs");
+  const statusEl = $("prepare-status");
+
+  if (!prepare) {
+    stepsEl.innerHTML = '<p class="classify-status">Route a hypothesis to run prepare.</p>';
+    notesEl.textContent = "";
+    depthEl.classList.add("hidden");
+    cribsEl.classList.add("hidden");
+    statusEl.textContent = "Waiting for route";
+    return;
+  }
+
+  statusEl.textContent = prepare.peeled
+    ? "Preflight complete · encoding peeled"
+    : `Preflight complete · ${prepare.pins?.length ?? 0} pin(s)`;
+
+  stepsEl.innerHTML = "";
+  (prepare.steps || []).forEach((step) => {
+    const card = document.createElement("div");
+    card.className = "prepare-step";
+    const skipped = step.skipped ? "skipped" : step.error ? "error" : step.applied ? "ok" : "info";
+    card.classList.add(`prepare-${skipped}`);
+    const detail = step.applied || step.reason || step.notes || step.error || step.encoding || "";
+    card.innerHTML = `
+      <span class="prepare-step-num">${step.step}</span>
+      <span class="prepare-step-name">${step.name.replace(/_/g, " ")}</span>
+      <span class="prepare-step-detail">${detail}</span>
+    `;
+    stepsEl.appendChild(card);
+  });
+
+  notesEl.textContent = (prepare.notes || []).join(" · ");
+
+  const depth = prepare.depth_preview;
+  if (depth && depth.top_crib_drag_depths?.length) {
+    depthEl.classList.remove("hidden");
+    depthEl.innerHTML = `
+      <p class="prepare-subhead">Depth map · ${depth.num_messages} msgs · header ${depth.header_detected ? "✓" : "—"}</p>
+      <p class="prepare-meta">Crib-drag depths: ${depth.top_crib_drag_depths.slice(0, 10).join(", ")}</p>
+    `;
+  } else {
+    depthEl.classList.add("hidden");
+  }
+
+  const cribs = prepare.crib_candidates || [];
+  if (cribs.length) {
+    cribsEl.classList.remove("hidden");
+    cribsEl.innerHTML = '<p class="prepare-subhead">Dictionary cribs</p>';
+    cribs.slice(0, 5).forEach((c, idx) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "btn btn-ghost prepare-crib-btn";
+      btn.textContent = `${c.word}@${c.offset} (${c.score})`;
+      btn.addEventListener("click", () => {
+        let merged = c.pins;
+        try { merged = mergePins(parsePins(), c.pins); } catch { /* use c.pins */ }
+        setPinsJson(merged, c.detail);
+        log(`Prepare: applied crib ${c.word}@${c.offset}`);
+      });
+      cribsEl.appendChild(btn);
+    });
+  } else {
+    cribsEl.classList.add("hidden");
+  }
+
+  if (prepare.pins?.length) {
+    let merged = prepare.pins;
+    try { merged = mergePins(parsePins(), prepare.pins); } catch { /* use prepare pins */ }
+    setPinsJson(merged, "Preflight pins merged into crib JSON");
+  }
+}
+
 async function handleRunResponse(data) {
   state.session = data.session;
   state.offset = 0;
   state.lastConfig = data.config;
+
+  if (data.prepare) {
+    renderPrepare(data.prepare);
+    log(`Prepare: ${data.prepare.notes?.join("; ") || "done"}`);
+  }
 
   if (data.actionable_kinds) {
     state.actionableKinds = new Set(data.actionable_kinds);
@@ -567,8 +650,8 @@ async function routeAndRun(hypothesisIndex) {
     return;
   }
 
-  setStatus("run", "RUNNING");
-  log(`Route → run: ${h.label}`);
+  setStatus("run", "PREPARING");
+  log(`Route → prepare → run: ${h.label}`);
 
   let pins = [];
   try { pins = parsePins(); } catch (err) {
@@ -657,10 +740,9 @@ function renderClassification(data) {
       .join(" · ");
 
     let btnHtml = "";
-    if (h.needs_conversion) {
-      btnHtml = `<span class="hyp-no-run">Encoding layer — decode before route → run</span>`;
-    } else if (canRouteRun(h)) {
-      btnHtml = `<button type="button" class="btn btn-primary hyp-route" data-idx="${idx}">Route → run</button>`;
+    if (canRouteRun(h)) {
+      const peelNote = h.needs_conversion ? " · prepare will peel encoding" : "";
+      btnHtml = `<button type="button" class="btn btn-primary hyp-route" data-idx="${idx}">Route → prepare → run</button>${peelNote ? `<span class="hyp-no-run">${peelNote.trim()}</span>` : ""}`;
     } else {
       btnHtml = `<span class="hyp-no-run">No propagator — manual decode / corpus only</span>`;
     }
@@ -704,7 +786,7 @@ async function runClassification() {
     if (!res.ok) throw new Error(data.error || "Classify failed");
     renderClassification(data);
     log(`Classification: ${data.top?.label || "done"} (${data.hypotheses?.length || 0} hypotheses)`);
-    log("Pick a hypothesis in Classification and click Route → run.");
+    log("Pick a hypothesis in Classification and click Route → prepare → run.");
     setStatus("idle", "IDENTIFIED");
   } catch (err) {
     $("classify-status").textContent = "Error";

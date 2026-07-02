@@ -325,6 +325,11 @@ textarea {
   letter-spacing: 0.03em;
 }
 
+.hyp-metrics {
+  color: var(--accent-2);
+  font-size: 9px;
+}
+
 .hyp-no-run {
   display: inline-block;
   margin-top: 0.35rem;

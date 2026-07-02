@@ -7,7 +7,9 @@ import re
 from dataclasses import dataclass, field
 from typing import Any, Literal
 
+from cipherops.analysis.deck_parse import parse_integer_decks
 from cipherops.analysis.fingerprint import ENGLISH_IC, RANDOM_IC_26, fingerprint_metrics
+from cipherops.analysis.full_scan import full_scan
 from cipherops.analysis.kasiski import kasiski_examination
 from cipherops.analysis.profile import analyze_ciphertext
 from cipherops.analysis.stream import normalize_stream
@@ -47,52 +49,8 @@ class ClassHypothesis:
 
 
 def _parse_decks(raw: str | list | None) -> list[list[int]] | None:
-    if raw is None:
-        return None
-    if isinstance(raw, list):
-        if raw and isinstance(raw[0], list):
-            return [[int(x) for x in row] for row in raw]
-        return [[int(x) for x in raw]]
-    text = str(raw).strip()
-    if not text:
-        return None
-    if text.startswith("["):
-        parsed = json.loads(text)
-        if parsed and isinstance(parsed[0], list):
-            return [[int(x) for x in row] for row in parsed]
-        return [[int(x) for x in parsed]]
-    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
-    if len(lines) > 1 and all(re.match(r"^[\d\s,;]+$", ln) for ln in lines):
-        return [_parse_int_line(ln) for ln in lines]
-    if re.search(r"[\s,;]", text) and re.match(r"^[\d\s,;]+$", text):
-        return [_parse_int_line(text)]
-    return None
-
-
-def _parse_int_line(text: str) -> list[int]:
-    text = text.strip()
-    if text.startswith("["):
-        return [int(x) for x in json.loads(text)]
-    parts = re.split(r"[\s,;]+", text)
-    return [int(p) for p in parts if p]
-
-
-def _ic_band(ic: float, *, alphabet_size: int = 26) -> str:
-    random_ic = 1.0 / alphabet_size if alphabet_size > 1 else RANDOM_IC_26
-    if ic >= ENGLISH_IC - 0.008:
-        return "language_like"
-    if ic <= random_ic + 0.012:
-        return "flat_polyalphabetic"
-    return "intermediate"
-
-
-def _add(hypotheses: list[ClassHypothesis], h: ClassHypothesis) -> None:
-    for i, existing in enumerate(hypotheses):
-        if existing.family == h.family:
-            if h.confidence > existing.confidence:
-                hypotheses[i] = h
-            return
-    hypotheses.append(h)
+    parsed = parse_integer_decks(raw)
+    return parsed[0] if parsed else None
 
 
 def classify_ciphertext(
@@ -100,12 +58,31 @@ def classify_ciphertext(
     *,
     ciphertexts: list[list[int]] | None = None,
     deck_size: int | None = None,
+    full: bool = True,
 ) -> dict[str, Any]:
     """
     Rank cipher-family hypotheses and suggest dash routing (propagator / mode).
 
-    Accepts alphabetic text, integer deck JSON, or multi-line integer decks.
+    When ``full=True`` (default), runs encoding validation + multi-metric family scan.
     """
+    if full:
+        raw: str | list | None = ciphertexts if ciphertexts is not None else ciphertext
+        result = full_scan(raw, deck_size=deck_size)
+        parsed = parse_integer_decks(raw if isinstance(raw, (str, list)) else None)
+        result["has_decks"] = parsed is not None
+        result["num_messages"] = len(parsed[0]) if parsed else 0
+        return result
+
+    return _classify_legacy(ciphertext, ciphertexts=ciphertexts, deck_size=deck_size)
+
+
+def _classify_legacy(
+    ciphertext: str | list | list[list[int]] | None = None,
+    *,
+    ciphertexts: list[list[int]] | None = None,
+    deck_size: int | None = None,
+) -> dict[str, Any]:
+    """Legacy IC + Kasiski rules (``full=False``)."""
     decks = ciphertexts
     if decks is None and ciphertext is not None:
         if isinstance(ciphertext, list) and ciphertext and isinstance(ciphertext[0], list):
@@ -378,6 +355,24 @@ def classify_ciphertext(
 
     hypotheses.sort(key=lambda h: h.confidence, reverse=True)
     return _package(hypotheses, profile_summary, decks=None)
+
+
+def _ic_band(ic: float, *, alphabet_size: int = 26) -> str:
+    random_ic = 1.0 / alphabet_size if alphabet_size > 1 else RANDOM_IC_26
+    if ic >= ENGLISH_IC - 0.008:
+        return "language_like"
+    if ic <= random_ic + 0.012:
+        return "flat_polyalphabetic"
+    return "intermediate"
+
+
+def _add(hypotheses: list[ClassHypothesis], h: ClassHypothesis) -> None:
+    for i, existing in enumerate(hypotheses):
+        if existing.family == h.family:
+            if h.confidence > existing.confidence:
+                hypotheses[i] = h
+            return
+    hypotheses.append(h)
 
 
 def _package(

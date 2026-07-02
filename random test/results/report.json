@@ -1,0 +1,6344 @@
+{
+  "started_at": "2026-07-02T02:50:59.650114+00:00",
+  "finished_at": "2026-07-02T02:57:02.770848+00:00",
+  "seed": 7689,
+  "corpus_root": "random test/corpus",
+  "total_records": 231,
+  "total_breaks": 0,
+  "total_soft_fails": 127,
+  "break_summary": {},
+  "soft_fail_summary": {
+    "adfgvx-keys:classifier_family_hit": 3,
+    "adfgx-keys:classifier_family_hit": 3,
+    "aes-128-cbc:classifier_family_hit": 3,
+    "aes-128-ctr:classifier_family_hit": 3,
+    "aes-128-gcm:classifier_family_hit": 3,
+    "aes-256-cbc:classifier_family_hit": 3,
+    "aes-256-gcm:classifier_family_hit": 3,
+    "affine-a2b5:classifier_family_hit": 3,
+    "atbash:classifier_family_hit": 3,
+    "autokey-ciphertext:classifier_family_hit": 1,
+    "baconian-ab:classifier_family_hit": 3,
+    "beaufort-keyword:classifier_family_hit": 3,
+    "bifid-keyword:classifier_family_hit": 3,
+    "blake2b:classifier_family_hit": 3,
+    "chacha20-poly1305:classifier_family_hit": 3,
+    "columnar-keyword:classifier_family_hit": 3,
+    "enigma-iii-aaa-b:classifier_family_hit": 3,
+    "fernet:classifier_family_hit": 3,
+    "four-square-keys:classifier_family_hit": 3,
+    "gronsfeld-31415:classifier_family_hit": 3,
+    "hill-2x2:classifier_family_hit": 3,
+    "hkdf-aes-gcm:classifier_family_hit": 3,
+    "hmac-sha256:classifier_family_hit": 3,
+    "nihilist-31415:classifier_family_hit": 3,
+    "nomenclator-basic:classifier_family_hit": 3,
+    "pbkdf2-aes-gcm:classifier_family_hit": 3,
+    "pigpen-standard:classifier_family_hit": 3,
+    "playfair-keyword:classifier_family_hit": 3,
+    "polybius-square:classifier_family_hit": 3,
+    "porta-keyword:classifier_family_hit": 3,
+    "railfence-3:classifier_family_hit": 3,
+    "running-key-book:classifier_family_hit": 3,
+    "scytale-d5:classifier_family_hit": 3,
+    "sha256:classifier_family_hit": 3,
+    "sha3-256:classifier_family_hit": 3,
+    "sha512:classifier_family_hit": 3,
+    "straddle-default:classifier_family_hit": 3,
+    "substitution-qwerty:classifier_family_hit": 3,
+    "trifid-keyword:classifier_family_hit": 3,
+    "tripledes-cbc:classifier_family_hit": 3,
+    "vernam-otp-demo:classifier_family_hit": 3,
+    "vic-standard-31415:classifier_family_hit": 3,
+    "xor-sha256-stream:classifier_family_hit": 3
+  },
+  "passed_all": [
+    "adfgvx-keys-r01",
+    "adfgvx-keys-r02",
+    "adfgvx-keys-r03",
+    "adfgx-keys-r01",
+    "adfgx-keys-r02",
+    "adfgx-keys-r03",
+    "aes-128-cbc-r01",
+    "aes-128-cbc-r02",
+    "aes-128-cbc-r03",
+    "aes-128-ctr-r01",
+    "aes-128-ctr-r02",
+    "aes-128-ctr-r03",
+    "aes-128-gcm-r01",
+    "aes-128-gcm-r02",
+    "aes-128-gcm-r03",
+    "aes-256-cbc-r01",
+    "aes-256-cbc-r02",
+    "aes-256-cbc-r03",
+    "aes-256-gcm-r01",
+    "aes-256-gcm-r02",
+    "aes-256-gcm-r03",
+    "affine-a2b5-r01",
+    "affine-a2b5-r02",
+    "affine-a2b5-r03",
+    "atbash-r01",
+    "atbash-r02",
+    "atbash-r03",
+    "autokey-beaufort-r01",
+    "autokey-beaufort-r02",
+    "autokey-beaufort-r03",
+    "autokey-ciphertext-r01",
+    "autokey-ciphertext-r02",
+    "autokey-ciphertext-r03",
+    "autokey-ciphertext-beaufort-r01",
+    "autokey-ciphertext-beaufort-r02",
+    "autokey-ciphertext-beaufort-r03",
+    "autokey-standard-r01",
+    "autokey-standard-r02",
+    "autokey-standard-r03",
+    "b64-r01",
+    "b64-r02",
+    "b64-r03",
+    "baconian-ab-r01",
+    "baconian-ab-r02",
+    "baconian-ab-r03",
+    "beaufort-keyword-r01",
+    "beaufort-keyword-r02",
+    "beaufort-keyword-r03",
+    "bifid-keyword-r01",
+    "bifid-keyword-r02",
+    "bifid-keyword-r03",
+    "blake2b-r01",
+    "blake2b-r02",
+    "blake2b-r03",
+    "book-cipher-coords-r01",
+    "book-cipher-coords-r02",
+    "book-cipher-coords-r03",
+    "caesar-rot13-r01",
+    "caesar-rot13-r02",
+    "caesar-rot13-r03",
+    "caesar-rot3-r01",
+    "caesar-rot3-r02",
+    "caesar-rot3-r03",
+    "chacha20-poly1305-r01",
+    "chacha20-poly1305-r02",
+    "chacha20-poly1305-r03",
+    "columnar-keyword-r01",
+    "columnar-keyword-r02",
+    "columnar-keyword-r03",
+    "ed25519-sign-r01",
+    "ed25519-sign-r02",
+    "ed25519-sign-r03",
+    "enigma-iii-aaa-b-r01",
+    "enigma-iii-aaa-b-r02",
+    "enigma-iii-aaa-b-r03",
+    "fernet-r01",
+    "fernet-r02",
+    "fernet-r03",
+    "four-square-keys-r01",
+    "four-square-keys-r02",
+    "four-square-keys-r03",
+    "fractionated-morse-r01",
+    "fractionated-morse-r02",
+    "fractionated-morse-r03",
+    "gak-ctak-left-s42-r01",
+    "gak-ctak-left-s42-r02",
+    "gak-ctak-left-s42-r03",
+    "gak-ctak-right-s42-r01",
+    "gak-ctak-right-s42-r02",
+    "gak-ctak-right-s42-r03",
+    "gak-ptak-left-s42-r01",
+    "gak-ptak-left-s42-r02",
+    "gak-ptak-left-s42-r03",
+    "gak-ptak-right-s42-r01",
+    "gak-ptak-right-s42-r02",
+    "gak-ptak-right-s42-r03",
+    "gronsfeld-31415-r01",
+    "gronsfeld-31415-r02",
+    "gronsfeld-31415-r03",
+    "gronsfeld-autokey-31415-r01",
+    "gronsfeld-autokey-31415-r02",
+    "gronsfeld-autokey-31415-r03",
+    "gronsfeld-autokey-beaufort-31415-r01",
+    "gronsfeld-autokey-beaufort-31415-r02",
+    "gronsfeld-autokey-beaufort-31415-r03",
+    "gronsfeld-autokey-beaufort-ct-31415-r01",
+    "gronsfeld-autokey-beaufort-ct-31415-r02",
+    "gronsfeld-autokey-beaufort-ct-31415-r03",
+    "gronsfeld-autokey-ct-31415-r01",
+    "gronsfeld-autokey-ct-31415-r02",
+    "gronsfeld-autokey-ct-31415-r03",
+    "hex-utf8-r01",
+    "hex-utf8-r02",
+    "hex-utf8-r03",
+    "hill-2x2-r01",
+    "hill-2x2-r02",
+    "hill-2x2-r03",
+    "hkdf-aes-gcm-r01",
+    "hkdf-aes-gcm-r02",
+    "hkdf-aes-gcm-r03",
+    "hmac-sha256-r01",
+    "hmac-sha256-r02",
+    "hmac-sha256-r03",
+    "homophonic-basic-r01",
+    "homophonic-basic-r02",
+    "homophonic-basic-r03",
+    "manchester-ieee-r01",
+    "manchester-ieee-r02",
+    "manchester-ieee-r03",
+    "nihilist-31415-r01",
+    "nihilist-31415-r02",
+    "nihilist-31415-r03",
+    "nihilist-autokey-31415-r01",
+    "nihilist-autokey-31415-r02",
+    "nihilist-autokey-31415-r03",
+    "nihilist-autokey-ct-31415-r01",
+    "nihilist-autokey-ct-31415-r02",
+    "nihilist-autokey-ct-31415-r03",
+    "nomenclator-basic-r01",
+    "nomenclator-basic-r02",
+    "nomenclator-basic-r03",
+    "pam5-dibit-r01",
+    "pam5-dibit-r02",
+    "pam5-dibit-r03",
+    "pbkdf2-aes-gcm-r01",
+    "pbkdf2-aes-gcm-r02",
+    "pbkdf2-aes-gcm-r03",
+    "pigpen-standard-r01",
+    "pigpen-standard-r02",
+    "pigpen-standard-r03",
+    "playfair-keyword-r01",
+    "playfair-keyword-r02",
+    "playfair-keyword-r03",
+    "polybius-square-r01",
+    "polybius-square-r02",
+    "polybius-square-r03",
+    "porta-autokey-ciphertext-r01",
+    "porta-autokey-ciphertext-r02",
+    "porta-autokey-ciphertext-r03",
+    "porta-autokey-standard-r01",
+    "porta-autokey-standard-r02",
+    "porta-autokey-standard-r03",
+    "porta-keyword-r01",
+    "porta-keyword-r02",
+    "porta-keyword-r03",
+    "railfence-3-r01",
+    "railfence-3-r02",
+    "railfence-3-r03",
+    "rsa-oaep-hybrid-r01",
+    "rsa-oaep-hybrid-r02",
+    "rsa-oaep-hybrid-r03",
+    "running-key-book-r01",
+    "running-key-book-r02",
+    "running-key-book-r03",
+    "scytale-d5-r01",
+    "scytale-d5-r02",
+    "scytale-d5-r03",
+    "sha256-r01",
+    "sha256-r02",
+    "sha256-r03",
+    "sha3-256-r01",
+    "sha3-256-r02",
+    "sha3-256-r03",
+    "sha512-r01",
+    "sha512-r02",
+    "sha512-r03",
+    "straddle-default-r01",
+    "straddle-default-r02",
+    "straddle-default-r03",
+    "substitution-qwerty-r01",
+    "substitution-qwerty-r02",
+    "substitution-qwerty-r03",
+    "trifid-keyword-r01",
+    "trifid-keyword-r02",
+    "trifid-keyword-r03",
+    "tripledes-cbc-r01",
+    "tripledes-cbc-r02",
+    "tripledes-cbc-r03",
+    "vernam-otp-demo-r01",
+    "vernam-otp-demo-r02",
+    "vernam-otp-demo-r03",
+    "vic-standard-31415-r01",
+    "vic-standard-31415-r02",
+    "vic-standard-31415-r03",
+    "vigenere-keyword-r01",
+    "vigenere-keyword-r02",
+    "vigenere-keyword-r03",
+    "x25519-ecdh-r01",
+    "x25519-ecdh-r02",
+    "x25519-ecdh-r03",
+    "xautokey-diff-key-r01",
+    "xautokey-diff-key-r02",
+    "xautokey-diff-key-r03",
+    "xautokey-sum-key-r01",
+    "xautokey-sum-key-r02",
+    "xautokey-sum-key-r03",
+    "xgak-diff-left-s42-r01",
+    "xgak-diff-left-s42-r02",
+    "xgak-diff-left-s42-r03",
+    "xgak-diff-right-s42-r01",
+    "xgak-diff-right-s42-r02",
+    "xgak-diff-right-s42-r03",
+    "xgak-sum-left-s42-r01",
+    "xgak-sum-left-s42-r02",
+    "xgak-sum-left-s42-r03",
+    "xgak-sum-right-s42-r01",
+    "xgak-sum-right-s42-r02",
+    "xgak-sum-right-s42-r03",
+    "xor-sha256-stream-r01",
+    "xor-sha256-stream-r02",
+    "xor-sha256-stream-r03"
+  ],
+  "cases": [
+    {
+      "slug": "adfgvx-keys",
+      "record_id": "adfgvx-keys-r01",
+      "cipher_family": "adfgvx",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected adfgvx, top-3=['monoalphabetic', 'caesar']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 12)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "adfgvx-keys",
+      "record_id": "adfgvx-keys-r02",
+      "cipher_family": "adfgvx",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected adfgvx, top-3=['monoalphabetic', 'caesar']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 12)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "adfgvx-keys",
+      "record_id": "adfgvx-keys-r03",
+      "cipher_family": "adfgvx",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected adfgvx, top-3=['monoalphabetic', 'caesar']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 12)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "adfgx-keys",
+      "record_id": "adfgx-keys-r01",
+      "cipher_family": "adfgx",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected adfgx, top-3=['monoalphabetic', 'caesar']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 12)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "adfgx-keys",
+      "record_id": "adfgx-keys-r02",
+      "cipher_family": "adfgx",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected adfgx, top-3=['monoalphabetic', 'caesar']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 12)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "adfgx-keys",
+      "record_id": "adfgx-keys-r03",
+      "cipher_family": "adfgx",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected adfgx, top-3=['monoalphabetic', 'caesar']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 12)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-128-cbc",
+      "record_id": "aes-128-cbc-r01",
+      "cipher_family": "aes_cbc",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_cbc, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-128-cbc",
+      "record_id": "aes-128-cbc-r02",
+      "cipher_family": "aes_cbc",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_cbc, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-128-cbc",
+      "record_id": "aes-128-cbc-r03",
+      "cipher_family": "aes_cbc",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_cbc, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 2, coset lift 0.83)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-128-ctr",
+      "record_id": "aes-128-ctr-r01",
+      "cipher_family": "aes_ctr",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_ctr, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-128-ctr",
+      "record_id": "aes-128-ctr-r02",
+      "cipher_family": "aes_ctr",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_ctr, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-128-ctr",
+      "record_id": "aes-128-ctr-r03",
+      "cipher_family": "aes_ctr",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_ctr, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-128-gcm",
+      "record_id": "aes-128-gcm-r01",
+      "cipher_family": "aes_gcm",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_gcm, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-128-gcm",
+      "record_id": "aes-128-gcm-r02",
+      "cipher_family": "aes_gcm",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_gcm, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-128-gcm",
+      "record_id": "aes-128-gcm-r03",
+      "cipher_family": "aes_gcm",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_gcm, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 2, coset lift 0.48)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-256-cbc",
+      "record_id": "aes-256-cbc-r01",
+      "cipher_family": "aes_cbc",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_cbc, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-256-cbc",
+      "record_id": "aes-256-cbc-r02",
+      "cipher_family": "aes_cbc",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_cbc, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-256-cbc",
+      "record_id": "aes-256-cbc-r03",
+      "cipher_family": "aes_cbc",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_cbc, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-256-gcm",
+      "record_id": "aes-256-gcm-r01",
+      "cipher_family": "aes_gcm",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_gcm, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-256-gcm",
+      "record_id": "aes-256-gcm-r02",
+      "cipher_family": "aes_gcm",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_gcm, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "aes-256-gcm",
+      "record_id": "aes-256-gcm-r03",
+      "cipher_family": "aes_gcm",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected aes_gcm, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "affine-a2b5",
+      "record_id": "affine-a2b5-r01",
+      "cipher_family": "affine",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected affine, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 21)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "affine-a2b5",
+      "record_id": "affine-a2b5-r02",
+      "cipher_family": "affine",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected affine, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 21)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "affine-a2b5",
+      "record_id": "affine-a2b5-r03",
+      "cipher_family": "affine",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected affine, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 21)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "atbash",
+      "record_id": "atbash-r01",
+      "cipher_family": "atbash",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected atbash, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 21)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "atbash",
+      "record_id": "atbash-r02",
+      "cipher_family": "atbash",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected atbash, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 14)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "atbash",
+      "record_id": "atbash-r03",
+      "cipher_family": "atbash",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected atbash, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 21)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "autokey-beaufort",
+      "record_id": "autokey-beaufort-r01",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "autokey-beaufort",
+      "record_id": "autokey-beaufort-r02",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "autokey-beaufort",
+      "record_id": "autokey-beaufort-r03",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "autokey-ciphertext",
+      "record_id": "autokey-ciphertext-r01",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "autokey-ciphertext",
+      "record_id": "autokey-ciphertext-r02",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected autokey, top-3=['polyalphabetic_mixed']",
+          "top_hypotheses": [
+            "Polyalphabetic (intermediate IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "autokey-ciphertext",
+      "record_id": "autokey-ciphertext-r03",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "autokey-ciphertext-beaufort",
+      "record_id": "autokey-ciphertext-beaufort-r01",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "autokey-ciphertext-beaufort",
+      "record_id": "autokey-ciphertext-beaufort-r02",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "autokey-ciphertext-beaufort",
+      "record_id": "autokey-ciphertext-beaufort-r03",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "autokey-standard",
+      "record_id": "autokey-standard-r01",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "autokey-standard",
+      "record_id": "autokey-standard-r02",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "autokey-standard",
+      "record_id": "autokey-standard-r03",
+      "cipher_family": "autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "b64",
+      "record_id": "b64-r01",
+      "cipher_family": "base64",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "b64",
+      "record_id": "b64-r02",
+      "cipher_family": "base64",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "b64",
+      "record_id": "b64-r03",
+      "cipher_family": "base64",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "baconian-ab",
+      "record_id": "baconian-ab-r01",
+      "cipher_family": "baconian",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected baconian, top-3=['monoalphabetic', 'caesar']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 22)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "baconian-ab",
+      "record_id": "baconian-ab-r02",
+      "cipher_family": "baconian",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected baconian, top-3=['monoalphabetic', 'caesar']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 22)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "baconian-ab",
+      "record_id": "baconian-ab-r03",
+      "cipher_family": "baconian",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected baconian, top-3=['base64', 'monoalphabetic', 'caesar']",
+          "top_hypotheses": [
+            "Base64 encoding (validated decode)",
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 22)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "beaufort-keyword",
+      "record_id": "beaufort-keyword-r01",
+      "cipher_family": "beaufort",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected beaufort, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 3, coset lift 1.00)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "beaufort-keyword",
+      "record_id": "beaufort-keyword-r02",
+      "cipher_family": "beaufort",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected beaufort, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 3, coset lift 1.00)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "beaufort-keyword",
+      "record_id": "beaufort-keyword-r03",
+      "cipher_family": "beaufort",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected beaufort, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 3, coset lift 1.00)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "bifid-keyword",
+      "record_id": "bifid-keyword-r01",
+      "cipher_family": "bifid",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected bifid, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "bifid-keyword",
+      "record_id": "bifid-keyword-r02",
+      "cipher_family": "bifid",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected bifid, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "bifid-keyword",
+      "record_id": "bifid-keyword-r03",
+      "cipher_family": "bifid",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected bifid, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "blake2b",
+      "record_id": "blake2b-r01",
+      "cipher_family": "blake2b",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected blake2b, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 23)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "blake2b",
+      "record_id": "blake2b-r02",
+      "cipher_family": "blake2b",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected blake2b, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 0)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "blake2b",
+      "record_id": "blake2b-r03",
+      "cipher_family": "blake2b",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected blake2b, top-3=['unknown', 'hex_rejected']",
+          "top_hypotheses": [
+            "Unclassified (printable)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "book-cipher-coords",
+      "record_id": "book-cipher-coords-r01",
+      "cipher_family": "book_cipher",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "book-cipher-coords",
+      "record_id": "book-cipher-coords-r02",
+      "cipher_family": "book_cipher",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "book-cipher-coords",
+      "record_id": "book-cipher-coords-r03",
+      "cipher_family": "book_cipher",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "caesar-rot13",
+      "record_id": "caesar-rot13-r01",
+      "cipher_family": "caesar",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "caesar-rot13",
+      "record_id": "caesar-rot13-r02",
+      "cipher_family": "caesar",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "caesar-rot13",
+      "record_id": "caesar-rot13-r03",
+      "cipher_family": "caesar",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "caesar-rot3",
+      "record_id": "caesar-rot3-r01",
+      "cipher_family": "caesar",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "caesar-rot3",
+      "record_id": "caesar-rot3-r02",
+      "cipher_family": "caesar",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "caesar-rot3",
+      "record_id": "caesar-rot3-r03",
+      "cipher_family": "caesar",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "chacha20-poly1305",
+      "record_id": "chacha20-poly1305-r01",
+      "cipher_family": "chacha20_poly1305",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected chacha20_poly1305, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 2, coset lift 0.51)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "chacha20-poly1305",
+      "record_id": "chacha20-poly1305-r02",
+      "cipher_family": "chacha20_poly1305",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected chacha20_poly1305, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "chacha20-poly1305",
+      "record_id": "chacha20-poly1305-r03",
+      "cipher_family": "chacha20_poly1305",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected chacha20_poly1305, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "columnar-keyword",
+      "record_id": "columnar-keyword-r01",
+      "cipher_family": "columnar",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected columnar, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "columnar-keyword",
+      "record_id": "columnar-keyword-r02",
+      "cipher_family": "columnar",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected columnar, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "columnar-keyword",
+      "record_id": "columnar-keyword-r03",
+      "cipher_family": "columnar",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected columnar, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "ed25519-sign",
+      "record_id": "ed25519-sign-r01",
+      "cipher_family": "ed25519",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "ed25519-sign",
+      "record_id": "ed25519-sign-r02",
+      "cipher_family": "ed25519",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "ed25519-sign",
+      "record_id": "ed25519-sign-r03",
+      "cipher_family": "ed25519",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "enigma-iii-aaa-b",
+      "record_id": "enigma-iii-aaa-b-r01",
+      "cipher_family": "enigma",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected enigma, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "enigma-iii-aaa-b",
+      "record_id": "enigma-iii-aaa-b-r02",
+      "cipher_family": "enigma",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected enigma, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "enigma-iii-aaa-b",
+      "record_id": "enigma-iii-aaa-b-r03",
+      "cipher_family": "enigma",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected enigma, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "fernet",
+      "record_id": "fernet-r01",
+      "cipher_family": "fernet",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected fernet, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "fernet",
+      "record_id": "fernet-r02",
+      "cipher_family": "fernet",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected fernet, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 3, coset lift 0.59)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "fernet",
+      "record_id": "fernet-r03",
+      "cipher_family": "fernet",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected fernet, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "four-square-keys",
+      "record_id": "four-square-keys-r01",
+      "cipher_family": "four_square",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected four_square, top-3=['polyalphabetic_mixed']",
+          "top_hypotheses": [
+            "Polyalphabetic (intermediate IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "four-square-keys",
+      "record_id": "four-square-keys-r02",
+      "cipher_family": "four_square",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected four_square, top-3=['polyalphabetic_mixed']",
+          "top_hypotheses": [
+            "Polyalphabetic (intermediate IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "four-square-keys",
+      "record_id": "four-square-keys-r03",
+      "cipher_family": "four_square",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected four_square, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 2, coset lift 1.00)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "fractionated-morse",
+      "record_id": "fractionated-morse-r01",
+      "cipher_family": "fractionated_morse",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "fractionated-morse",
+      "record_id": "fractionated-morse-r02",
+      "cipher_family": "fractionated_morse",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "fractionated-morse",
+      "record_id": "fractionated-morse-r03",
+      "cipher_family": "fractionated_morse",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "gak-ctak-left-s42",
+      "record_id": "gak-ctak-left-s42-r01",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gak-ctak-left-s42",
+      "record_id": "gak-ctak-left-s42-r02",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gak-ctak-left-s42",
+      "record_id": "gak-ctak-left-s42-r03",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gak-ctak-right-s42",
+      "record_id": "gak-ctak-right-s42-r01",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gak-ctak-right-s42",
+      "record_id": "gak-ctak-right-s42-r02",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gak-ctak-right-s42",
+      "record_id": "gak-ctak-right-s42-r03",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gak-ptak-left-s42",
+      "record_id": "gak-ptak-left-s42-r01",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gak-ptak-left-s42",
+      "record_id": "gak-ptak-left-s42-r02",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gak-ptak-left-s42",
+      "record_id": "gak-ptak-left-s42-r03",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gak-ptak-right-s42",
+      "record_id": "gak-ptak-right-s42-r01",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gak-ptak-right-s42",
+      "record_id": "gak-ptak-right-s42-r02",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gak-ptak-right-s42",
+      "record_id": "gak-ptak-right-s42-r03",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "gronsfeld-31415",
+      "record_id": "gronsfeld-31415-r01",
+      "cipher_family": "gronsfeld",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected gronsfeld, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 4)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "gronsfeld-31415",
+      "record_id": "gronsfeld-31415-r02",
+      "cipher_family": "gronsfeld",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected gronsfeld, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "gronsfeld-31415",
+      "record_id": "gronsfeld-31415-r03",
+      "cipher_family": "gronsfeld",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected gronsfeld, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-31415",
+      "record_id": "gronsfeld-autokey-31415-r01",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-31415",
+      "record_id": "gronsfeld-autokey-31415-r02",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-31415",
+      "record_id": "gronsfeld-autokey-31415-r03",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-beaufort-31415",
+      "record_id": "gronsfeld-autokey-beaufort-31415-r01",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-beaufort-31415",
+      "record_id": "gronsfeld-autokey-beaufort-31415-r02",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-beaufort-31415",
+      "record_id": "gronsfeld-autokey-beaufort-31415-r03",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-beaufort-ct-31415",
+      "record_id": "gronsfeld-autokey-beaufort-ct-31415-r01",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-beaufort-ct-31415",
+      "record_id": "gronsfeld-autokey-beaufort-ct-31415-r02",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-beaufort-ct-31415",
+      "record_id": "gronsfeld-autokey-beaufort-ct-31415-r03",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-ct-31415",
+      "record_id": "gronsfeld-autokey-ct-31415-r01",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-ct-31415",
+      "record_id": "gronsfeld-autokey-ct-31415-r02",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "gronsfeld-autokey-ct-31415",
+      "record_id": "gronsfeld-autokey-ct-31415-r03",
+      "cipher_family": "gronsfeld_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "hex-utf8",
+      "record_id": "hex-utf8-r01",
+      "cipher_family": "hex",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "hex-utf8",
+      "record_id": "hex-utf8-r02",
+      "cipher_family": "hex",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "hex-utf8",
+      "record_id": "hex-utf8-r03",
+      "cipher_family": "hex",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "hill-2x2",
+      "record_id": "hill-2x2-r01",
+      "cipher_family": "hill",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected hill, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 2)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "hill-2x2",
+      "record_id": "hill-2x2-r02",
+      "cipher_family": "hill",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected hill, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 2, coset lift 1.00)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "hill-2x2",
+      "record_id": "hill-2x2-r03",
+      "cipher_family": "hill",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected hill, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 3, coset lift 1.00)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "hkdf-aes-gcm",
+      "record_id": "hkdf-aes-gcm-r01",
+      "cipher_family": "hkdf",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected hkdf, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "hkdf-aes-gcm",
+      "record_id": "hkdf-aes-gcm-r02",
+      "cipher_family": "hkdf",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected hkdf, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "hkdf-aes-gcm",
+      "record_id": "hkdf-aes-gcm-r03",
+      "cipher_family": "hkdf",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected hkdf, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 3, coset lift 0.51)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "hmac-sha256",
+      "record_id": "hmac-sha256-r01",
+      "cipher_family": "hmac",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected hmac, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 23)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "hmac-sha256",
+      "record_id": "hmac-sha256-r02",
+      "cipher_family": "hmac",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected hmac, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 23)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "hmac-sha256",
+      "record_id": "hmac-sha256-r03",
+      "cipher_family": "hmac",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected hmac, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 24)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "homophonic-basic",
+      "record_id": "homophonic-basic-r01",
+      "cipher_family": "homophonic",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "homophonic-basic",
+      "record_id": "homophonic-basic-r02",
+      "cipher_family": "homophonic",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "homophonic-basic",
+      "record_id": "homophonic-basic-r03",
+      "cipher_family": "homophonic",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "manchester-ieee",
+      "record_id": "manchester-ieee-r01",
+      "cipher_family": "manchester",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "manchester-ieee",
+      "record_id": "manchester-ieee-r02",
+      "cipher_family": "manchester",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "manchester-ieee",
+      "record_id": "manchester-ieee-r03",
+      "cipher_family": "manchester",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "nihilist-31415",
+      "record_id": "nihilist-31415-r01",
+      "cipher_family": "nihilist",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected nihilist, top-3=['unknown']",
+          "top_hypotheses": [
+            "Unclassified (printable)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "nihilist-31415",
+      "record_id": "nihilist-31415-r02",
+      "cipher_family": "nihilist",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected nihilist, top-3=['unknown']",
+          "top_hypotheses": [
+            "Unclassified (printable)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "nihilist-31415",
+      "record_id": "nihilist-31415-r03",
+      "cipher_family": "nihilist",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected nihilist, top-3=['unknown']",
+          "top_hypotheses": [
+            "Unclassified (printable)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "nihilist-autokey-31415",
+      "record_id": "nihilist-autokey-31415-r01",
+      "cipher_family": "nihilist_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:non_alpha_stream_ciphertext"
+      ]
+    },
+    {
+      "slug": "nihilist-autokey-31415",
+      "record_id": "nihilist-autokey-31415-r02",
+      "cipher_family": "nihilist_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:non_alpha_stream_ciphertext"
+      ]
+    },
+    {
+      "slug": "nihilist-autokey-31415",
+      "record_id": "nihilist-autokey-31415-r03",
+      "cipher_family": "nihilist_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:non_alpha_stream_ciphertext"
+      ]
+    },
+    {
+      "slug": "nihilist-autokey-ct-31415",
+      "record_id": "nihilist-autokey-ct-31415-r01",
+      "cipher_family": "nihilist_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:non_alpha_stream_ciphertext"
+      ]
+    },
+    {
+      "slug": "nihilist-autokey-ct-31415",
+      "record_id": "nihilist-autokey-ct-31415-r02",
+      "cipher_family": "nihilist_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:non_alpha_stream_ciphertext"
+      ]
+    },
+    {
+      "slug": "nihilist-autokey-ct-31415",
+      "record_id": "nihilist-autokey-ct-31415-r03",
+      "cipher_family": "nihilist_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:non_alpha_stream_ciphertext"
+      ]
+    },
+    {
+      "slug": "nomenclator-basic",
+      "record_id": "nomenclator-basic-r01",
+      "cipher_family": "nomenclator",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected nomenclator, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 143)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "nomenclator-basic",
+      "record_id": "nomenclator-basic-r02",
+      "cipher_family": "nomenclator",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected nomenclator, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 10)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "nomenclator-basic",
+      "record_id": "nomenclator-basic-r03",
+      "cipher_family": "nomenclator",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected nomenclator, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 89)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "pam5-dibit",
+      "record_id": "pam5-dibit-r01",
+      "cipher_family": "pam5",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "pam5-dibit",
+      "record_id": "pam5-dibit-r02",
+      "cipher_family": "pam5",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "pam5-dibit",
+      "record_id": "pam5-dibit-r03",
+      "cipher_family": "pam5",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "pbkdf2-aes-gcm",
+      "record_id": "pbkdf2-aes-gcm-r01",
+      "cipher_family": "pbkdf2",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected pbkdf2, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "pbkdf2-aes-gcm",
+      "record_id": "pbkdf2-aes-gcm-r02",
+      "cipher_family": "pbkdf2",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected pbkdf2, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "pbkdf2-aes-gcm",
+      "record_id": "pbkdf2-aes-gcm-r03",
+      "cipher_family": "pbkdf2",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected pbkdf2, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "pigpen-standard",
+      "record_id": "pigpen-standard-r01",
+      "cipher_family": "pigpen",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected pigpen, top-3=['unknown']",
+          "top_hypotheses": [
+            "Unclassified (printable)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "pigpen-standard",
+      "record_id": "pigpen-standard-r02",
+      "cipher_family": "pigpen",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected pigpen, top-3=['unknown']",
+          "top_hypotheses": [
+            "Unclassified (printable)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "pigpen-standard",
+      "record_id": "pigpen-standard-r03",
+      "cipher_family": "pigpen",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected pigpen, top-3=['unknown']",
+          "top_hypotheses": [
+            "Unclassified (printable)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "playfair-keyword",
+      "record_id": "playfair-keyword-r01",
+      "cipher_family": "playfair",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected playfair, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "playfair-keyword",
+      "record_id": "playfair-keyword-r02",
+      "cipher_family": "playfair",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected playfair, top-3=['polyalphabetic_mixed']",
+          "top_hypotheses": [
+            "Polyalphabetic (intermediate IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "playfair-keyword",
+      "record_id": "playfair-keyword-r03",
+      "cipher_family": "playfair",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected playfair, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 25)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "polybius-square",
+      "record_id": "polybius-square-r01",
+      "cipher_family": "polybius",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected polybius, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 54)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "polybius-square",
+      "record_id": "polybius-square-r02",
+      "cipher_family": "polybius",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected polybius, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 54)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "polybius-square",
+      "record_id": "polybius-square-r03",
+      "cipher_family": "polybius",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected polybius, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 54)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "porta-autokey-ciphertext",
+      "record_id": "porta-autokey-ciphertext-r01",
+      "cipher_family": "porta_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "porta-autokey-ciphertext",
+      "record_id": "porta-autokey-ciphertext-r02",
+      "cipher_family": "porta_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "porta-autokey-ciphertext",
+      "record_id": "porta-autokey-ciphertext-r03",
+      "cipher_family": "porta_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "porta-autokey-standard",
+      "record_id": "porta-autokey-standard-r01",
+      "cipher_family": "porta_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "porta-autokey-standard",
+      "record_id": "porta-autokey-standard-r02",
+      "cipher_family": "porta_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "porta-autokey-standard",
+      "record_id": "porta-autokey-standard-r03",
+      "cipher_family": "porta_autokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "porta-keyword",
+      "record_id": "porta-keyword-r01",
+      "cipher_family": "porta",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected porta, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 3, coset lift 1.00)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "porta-keyword",
+      "record_id": "porta-keyword-r02",
+      "cipher_family": "porta",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected porta, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 3, coset lift 1.00)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "porta-keyword",
+      "record_id": "porta-keyword-r03",
+      "cipher_family": "porta",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected porta, top-3=['vigenere', 'autokey', 'gak']",
+          "top_hypotheses": [
+            "Vigen\u00e8re / periodic (period \u2248 3, coset lift 1.00)",
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "railfence-3",
+      "record_id": "railfence-3-r01",
+      "cipher_family": "railfence",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected railfence, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "railfence-3",
+      "record_id": "railfence-3-r02",
+      "cipher_family": "railfence",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected railfence, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "railfence-3",
+      "record_id": "railfence-3-r03",
+      "cipher_family": "railfence",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected railfence, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "rsa-oaep-hybrid",
+      "record_id": "rsa-oaep-hybrid-r01",
+      "cipher_family": "rsa",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "rsa-oaep-hybrid",
+      "record_id": "rsa-oaep-hybrid-r02",
+      "cipher_family": "rsa",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "rsa-oaep-hybrid",
+      "record_id": "rsa-oaep-hybrid-r03",
+      "cipher_family": "rsa",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "running-key-book",
+      "record_id": "running-key-book-r01",
+      "cipher_family": "running_key",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected running_key, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "running-key-book",
+      "record_id": "running-key-book-r02",
+      "cipher_family": "running_key",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected running_key, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "running-key-book",
+      "record_id": "running-key-book-r03",
+      "cipher_family": "running_key",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected running_key, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "scytale-d5",
+      "record_id": "scytale-d5-r01",
+      "cipher_family": "scytale",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected scytale, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "scytale-d5",
+      "record_id": "scytale-d5-r02",
+      "cipher_family": "scytale",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected scytale, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "scytale-d5",
+      "record_id": "scytale-d5-r03",
+      "cipher_family": "scytale",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected scytale, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "sha256",
+      "record_id": "sha256-r01",
+      "cipher_family": "sha256",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected sha256, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 23)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "sha256",
+      "record_id": "sha256-r02",
+      "cipher_family": "sha256",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected sha256, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 23)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "sha256",
+      "record_id": "sha256-r03",
+      "cipher_family": "sha256",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected sha256, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 23)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "sha3-256",
+      "record_id": "sha3-256-r01",
+      "cipher_family": "sha3_256",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected sha3_256, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 12)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "sha3-256",
+      "record_id": "sha3-256-r02",
+      "cipher_family": "sha3_256",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected sha3_256, top-3=['unknown', 'hex_rejected']",
+          "top_hypotheses": [
+            "Unclassified (printable)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "sha3-256",
+      "record_id": "sha3-256-r03",
+      "cipher_family": "sha3_256",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected sha3_256, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 12)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "sha512",
+      "record_id": "sha512-r01",
+      "cipher_family": "sha512",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected sha512, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 23)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "sha512",
+      "record_id": "sha512-r02",
+      "cipher_family": "sha512",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected sha512, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 23)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "sha512",
+      "record_id": "sha512-r03",
+      "cipher_family": "sha512",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "encrypt_only_digest": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected sha512, top-3=['monoalphabetic', 'caesar', 'hex_rejected']",
+          "top_hypotheses": [
+            "Monoalphabetic / transposition (language-like IC)",
+            "Caesar / ROT (best shift 24)",
+            "Hex-shaped but decode failed"
+          ]
+        }
+      ],
+      "notes": [
+        "roundtrip_skipped:encrypt_only",
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "straddle-default",
+      "record_id": "straddle-default-r01",
+      "cipher_family": "straddle_checkerboard",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected straddle_checkerboard, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 10)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "straddle-default",
+      "record_id": "straddle-default-r02",
+      "cipher_family": "straddle_checkerboard",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected straddle_checkerboard, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 10)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "straddle-default",
+      "record_id": "straddle-default-r03",
+      "cipher_family": "straddle_checkerboard",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected straddle_checkerboard, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 10)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "substitution-qwerty",
+      "record_id": "substitution-qwerty-r01",
+      "cipher_family": "substitution",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected substitution, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 6)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "substitution-qwerty",
+      "record_id": "substitution-qwerty-r02",
+      "cipher_family": "substitution",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected substitution, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 6)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "substitution-qwerty",
+      "record_id": "substitution-qwerty-r03",
+      "cipher_family": "substitution",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected substitution, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 6)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "trifid-keyword",
+      "record_id": "trifid-keyword-r01",
+      "cipher_family": "trifid",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected trifid, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "trifid-keyword",
+      "record_id": "trifid-keyword-r02",
+      "cipher_family": "trifid",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected trifid, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "trifid-keyword",
+      "record_id": "trifid-keyword-r03",
+      "cipher_family": "trifid",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected trifid, top-3=['caesar', 'monoalphabetic']",
+          "top_hypotheses": [
+            "Caesar / ROT (best shift 0)",
+            "Monoalphabetic / transposition (language-like IC)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "tripledes-cbc",
+      "record_id": "tripledes-cbc-r01",
+      "cipher_family": "triple_des",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected triple_des, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "tripledes-cbc",
+      "record_id": "tripledes-cbc-r02",
+      "cipher_family": "triple_des",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected triple_des, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "tripledes-cbc",
+      "record_id": "tripledes-cbc-r03",
+      "cipher_family": "triple_des",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected triple_des, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "vernam-otp-demo",
+      "record_id": "vernam-otp-demo-r01",
+      "cipher_family": "vernam",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected vernam, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "vernam-otp-demo",
+      "record_id": "vernam-otp-demo-r02",
+      "cipher_family": "vernam",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected vernam, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "vernam-otp-demo",
+      "record_id": "vernam-otp-demo-r03",
+      "cipher_family": "vernam",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected vernam, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "vic-standard-31415",
+      "record_id": "vic-standard-31415-r01",
+      "cipher_family": "vic",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected vic, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 10)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "vic-standard-31415",
+      "record_id": "vic-standard-31415-r02",
+      "cipher_family": "vic",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected vic, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 10)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "vic-standard-31415",
+      "record_id": "vic-standard-31415-r03",
+      "cipher_family": "vic",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected vic, top-3=['shared_keystream']",
+          "top_hypotheses": [
+            "Integer deck / shared keystream (mod 10)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "vigenere-keyword",
+      "record_id": "vigenere-keyword-r01",
+      "cipher_family": "vigenere",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "vigenere-keyword",
+      "record_id": "vigenere-keyword-r02",
+      "cipher_family": "vigenere",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "vigenere-keyword",
+      "record_id": "vigenere-keyword-r03",
+      "cipher_family": "vigenere",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "x25519-ecdh",
+      "record_id": "x25519-ecdh-r01",
+      "cipher_family": "x25519",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "x25519-ecdh",
+      "record_id": "x25519-ecdh-r02",
+      "cipher_family": "x25519",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "x25519-ecdh",
+      "record_id": "x25519-ecdh-r03",
+      "cipher_family": "x25519",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "xautokey-diff-key",
+      "record_id": "xautokey-diff-key-r01",
+      "cipher_family": "xautokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "xautokey-diff-key",
+      "record_id": "xautokey-diff-key-r02",
+      "cipher_family": "xautokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "xautokey-diff-key",
+      "record_id": "xautokey-diff-key-r03",
+      "cipher_family": "xautokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "xautokey-sum-key",
+      "record_id": "xautokey-sum-key-r01",
+      "cipher_family": "xautokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "xautokey-sum-key",
+      "record_id": "xautokey-sum-key-r02",
+      "cipher_family": "xautokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "xautokey-sum-key",
+      "record_id": "xautokey-sum-key-r03",
+      "cipher_family": "xautokey",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=conflict conflicts=1"
+      ]
+    },
+    {
+      "slug": "xgak-diff-left-s42",
+      "record_id": "xgak-diff-left-s42-r01",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xgak-diff-left-s42",
+      "record_id": "xgak-diff-left-s42-r02",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xgak-diff-left-s42",
+      "record_id": "xgak-diff-left-s42-r03",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xgak-diff-right-s42",
+      "record_id": "xgak-diff-right-s42-r01",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xgak-diff-right-s42",
+      "record_id": "xgak-diff-right-s42-r02",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xgak-diff-right-s42",
+      "record_id": "xgak-diff-right-s42-r03",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xgak-sum-left-s42",
+      "record_id": "xgak-sum-left-s42-r01",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xgak-sum-left-s42",
+      "record_id": "xgak-sum-left-s42-r02",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xgak-sum-left-s42",
+      "record_id": "xgak-sum-left-s42-r03",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xgak-sum-right-s42",
+      "record_id": "xgak-sum-right-s42-r01",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xgak-sum-right-s42",
+      "record_id": "xgak-sum-right-s42-r02",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xgak-sum-right-s42",
+      "record_id": "xgak-sum-right-s42-r03",
+      "cipher_family": "gak",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "ok",
+        "prepare_run": "ok",
+        "pipeline_smoke": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [],
+      "notes": [
+        "pipeline_converged=True stop=complete conflicts=0"
+      ]
+    },
+    {
+      "slug": "xor-sha256-stream",
+      "record_id": "xor-sha256-stream-r01",
+      "cipher_family": "xor_stream",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected xor_stream, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "xor-sha256-stream",
+      "record_id": "xor-sha256-stream-r02",
+      "cipher_family": "xor_stream",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected xor_stream, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    },
+    {
+      "slug": "xor-sha256-stream",
+      "record_id": "xor-sha256-stream-r03",
+      "cipher_family": "xor_stream",
+      "tests": {
+        "registry_lookup": "ok",
+        "encrypt": "ok",
+        "corpus_ciphertext": "ok",
+        "decrypt_roundtrip": "ok",
+        "reencrypt_deterministic": "ok",
+        "profile": "ok",
+        "classifier": "ok",
+        "classifier_family_hit": "soft_fail",
+        "prepare_run": "ok"
+      },
+      "breaks": [],
+      "soft_fails": [
+        {
+          "test": "classifier_family_hit",
+          "detail": "expected xor_stream, top-3=['autokey', 'gak']",
+          "top_hypotheses": [
+            "Autokey / non-periodic polyalphabetic",
+            "GAK / dynamic permutation (Eyes)"
+          ]
+        }
+      ],
+      "notes": [
+        "pipeline_skipped:no_propagator"
+      ]
+    }
+  ]
+}

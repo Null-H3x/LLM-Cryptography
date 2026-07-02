@@ -87,9 +87,17 @@ def _four_square_matrices(key1: str, key2: str) -> tuple[list[list[str]], list[l
     return tl, tr, bl, br
 
 
+def _ciphertext_pairs(text: str) -> list[tuple[str, str]]:
+    """Split even-length ciphertext into consecutive digraphs (no plaintext padding rules)."""
+    text = clean_alpha(text)
+    if len(text) % 2:
+        text += "X"
+    return [(text[i], text[i + 1]) for i in range(0, len(text), 2)]
+
+
 def four_square(text: str, key1: str, key2: str, *, decrypt: bool = False) -> str:
     tl, tr, bl, br = _four_square_matrices(key1, key2)
-    pairs = _prepare_digraphs(text, merge_j=not decrypt)
+    pairs = _ciphertext_pairs(text) if decrypt else _prepare_digraphs(text, merge_j=True)
     out = []
     for left, right in pairs:
         if decrypt:

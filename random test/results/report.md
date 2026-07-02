@@ -1,0 +1,55 @@
+# Random Test Suite Report
+
+- **Started:** 2026-07-02T02:50:59.650114+00:00
+- **Finished:** 2026-07-02T02:57:02.770848+00:00
+- **Seed:** 7689
+- **Records:** 231
+- **Hard breaks:** 0
+- **Soft fails:** 127
+- **Clean records:** 231
+
+## Soft fails (misclassification / non-fatal)
+
+- `adfgvx-keys:classifier_family_hit` × 3
+- `adfgx-keys:classifier_family_hit` × 3
+- `aes-128-cbc:classifier_family_hit` × 3
+- `aes-128-ctr:classifier_family_hit` × 3
+- `aes-128-gcm:classifier_family_hit` × 3
+- `aes-256-cbc:classifier_family_hit` × 3
+- `aes-256-gcm:classifier_family_hit` × 3
+- `affine-a2b5:classifier_family_hit` × 3
+- `atbash:classifier_family_hit` × 3
+- `autokey-ciphertext:classifier_family_hit` × 1
+- `baconian-ab:classifier_family_hit` × 3
+- `beaufort-keyword:classifier_family_hit` × 3
+- `bifid-keyword:classifier_family_hit` × 3
+- `blake2b:classifier_family_hit` × 3
+- `chacha20-poly1305:classifier_family_hit` × 3
+- `columnar-keyword:classifier_family_hit` × 3
+- `enigma-iii-aaa-b:classifier_family_hit` × 3
+- `fernet:classifier_family_hit` × 3
+- `four-square-keys:classifier_family_hit` × 3
+- `gronsfeld-31415:classifier_family_hit` × 3
+- `hill-2x2:classifier_family_hit` × 3
+- `hkdf-aes-gcm:classifier_family_hit` × 3
+- `hmac-sha256:classifier_family_hit` × 3
+- `nihilist-31415:classifier_family_hit` × 3
+- `nomenclator-basic:classifier_family_hit` × 3
+- `pbkdf2-aes-gcm:classifier_family_hit` × 3
+- `pigpen-standard:classifier_family_hit` × 3
+- `playfair-keyword:classifier_family_hit` × 3
+- `polybius-square:classifier_family_hit` × 3
+- `porta-keyword:classifier_family_hit` × 3
+- `railfence-3:classifier_family_hit` × 3
+- `running-key-book:classifier_family_hit` × 3
+- `scytale-d5:classifier_family_hit` × 3
+- `sha256:classifier_family_hit` × 3
+- `sha3-256:classifier_family_hit` × 3
+- `sha512:classifier_family_hit` × 3
+- `straddle-default:classifier_family_hit` × 3
+- `substitution-qwerty:classifier_family_hit` × 3
+- `trifid-keyword:classifier_family_hit` × 3
+- `tripledes-cbc:classifier_family_hit` × 3
+- `vernam-otp-demo:classifier_family_hit` × 3
+- `vic-standard-31415:classifier_family_hit` × 3
+- `xor-sha256-stream:classifier_family_hit` × 3

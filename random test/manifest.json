@@ -1,0 +1,548 @@
+{
+  "seed": 7689,
+  "samples_per_cipher": 3,
+  "cipher_count": 77,
+  "record_count": 231,
+  "generation_errors": [],
+  "manifest": [
+    {
+      "slug": "atbash",
+      "family": "atbash",
+      "count": 3,
+      "path": "random test/corpus/atbash/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "caesar-rot13",
+      "family": "caesar",
+      "count": 3,
+      "path": "random test/corpus/caesar-rot13/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "caesar-rot3",
+      "family": "caesar",
+      "count": 3,
+      "path": "random test/corpus/caesar-rot3/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "affine-a2b5",
+      "family": "affine",
+      "count": 3,
+      "path": "random test/corpus/affine-a2b5/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "railfence-3",
+      "family": "railfence",
+      "count": 3,
+      "path": "random test/corpus/railfence-3/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "scytale-d5",
+      "family": "scytale",
+      "count": 3,
+      "path": "random test/corpus/scytale-d5/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "pigpen-standard",
+      "family": "pigpen",
+      "count": 3,
+      "path": "random test/corpus/pigpen-standard/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "baconian-ab",
+      "family": "baconian",
+      "count": 3,
+      "path": "random test/corpus/baconian-ab/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "polybius-square",
+      "family": "polybius",
+      "count": 3,
+      "path": "random test/corpus/polybius-square/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "substitution-qwerty",
+      "family": "substitution",
+      "count": 3,
+      "path": "random test/corpus/substitution-qwerty/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "nomenclator-basic",
+      "family": "nomenclator",
+      "count": 3,
+      "path": "random test/corpus/nomenclator-basic/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "columnar-keyword",
+      "family": "columnar",
+      "count": 3,
+      "path": "random test/corpus/columnar-keyword/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "autokey-standard",
+      "family": "autokey",
+      "count": 3,
+      "path": "random test/corpus/autokey-standard/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "autokey-beaufort",
+      "family": "autokey",
+      "count": 3,
+      "path": "random test/corpus/autokey-beaufort/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "autokey-ciphertext",
+      "family": "autokey",
+      "count": 3,
+      "path": "random test/corpus/autokey-ciphertext/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "autokey-ciphertext-beaufort",
+      "family": "autokey",
+      "count": 3,
+      "path": "random test/corpus/autokey-ciphertext-beaufort/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "gronsfeld-autokey-31415",
+      "family": "gronsfeld_autokey",
+      "count": 3,
+      "path": "random test/corpus/gronsfeld-autokey-31415/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "gronsfeld-autokey-ct-31415",
+      "family": "gronsfeld_autokey",
+      "count": 3,
+      "path": "random test/corpus/gronsfeld-autokey-ct-31415/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "gak-ctak-right-s42",
+      "family": "gak",
+      "count": 3,
+      "path": "random test/corpus/gak-ctak-right-s42/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "gak-ptak-right-s42",
+      "family": "gak",
+      "count": 3,
+      "path": "random test/corpus/gak-ptak-right-s42/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "xgak-sum-right-s42",
+      "family": "gak",
+      "count": 3,
+      "path": "random test/corpus/xgak-sum-right-s42/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "xgak-diff-right-s42",
+      "family": "gak",
+      "count": 3,
+      "path": "random test/corpus/xgak-diff-right-s42/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "gak-ctak-left-s42",
+      "family": "gak",
+      "count": 3,
+      "path": "random test/corpus/gak-ctak-left-s42/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "gak-ptak-left-s42",
+      "family": "gak",
+      "count": 3,
+      "path": "random test/corpus/gak-ptak-left-s42/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "xgak-sum-left-s42",
+      "family": "gak",
+      "count": 3,
+      "path": "random test/corpus/xgak-sum-left-s42/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "xgak-diff-left-s42",
+      "family": "gak",
+      "count": 3,
+      "path": "random test/corpus/xgak-diff-left-s42/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "porta-autokey-standard",
+      "family": "porta_autokey",
+      "count": 3,
+      "path": "random test/corpus/porta-autokey-standard/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "porta-autokey-ciphertext",
+      "family": "porta_autokey",
+      "count": 3,
+      "path": "random test/corpus/porta-autokey-ciphertext/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "gronsfeld-autokey-beaufort-31415",
+      "family": "gronsfeld_autokey",
+      "count": 3,
+      "path": "random test/corpus/gronsfeld-autokey-beaufort-31415/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "gronsfeld-autokey-beaufort-ct-31415",
+      "family": "gronsfeld_autokey",
+      "count": 3,
+      "path": "random test/corpus/gronsfeld-autokey-beaufort-ct-31415/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "xautokey-sum-key",
+      "family": "xautokey",
+      "count": 3,
+      "path": "random test/corpus/xautokey-sum-key/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "xautokey-diff-key",
+      "family": "xautokey",
+      "count": 3,
+      "path": "random test/corpus/xautokey-diff-key/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "nihilist-autokey-31415",
+      "family": "nihilist_autokey",
+      "count": 3,
+      "path": "random test/corpus/nihilist-autokey-31415/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "nihilist-autokey-ct-31415",
+      "family": "nihilist_autokey",
+      "count": 3,
+      "path": "random test/corpus/nihilist-autokey-ct-31415/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "book-cipher-coords",
+      "family": "book_cipher",
+      "count": 3,
+      "path": "random test/corpus/book-cipher-coords/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "vernam-otp-demo",
+      "family": "vernam",
+      "count": 3,
+      "path": "random test/corpus/vernam-otp-demo/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "vic-standard-31415",
+      "family": "vic",
+      "count": 3,
+      "path": "random test/corpus/vic-standard-31415/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "enigma-iii-aaa-b",
+      "family": "enigma",
+      "count": 3,
+      "path": "random test/corpus/enigma-iii-aaa-b/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "beaufort-keyword",
+      "family": "beaufort",
+      "count": 3,
+      "path": "random test/corpus/beaufort-keyword/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "porta-keyword",
+      "family": "porta",
+      "count": 3,
+      "path": "random test/corpus/porta-keyword/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "running-key-book",
+      "family": "running_key",
+      "count": 3,
+      "path": "random test/corpus/running-key-book/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "vigenere-keyword",
+      "family": "vigenere",
+      "count": 3,
+      "path": "random test/corpus/vigenere-keyword/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "gronsfeld-31415",
+      "family": "gronsfeld",
+      "count": 3,
+      "path": "random test/corpus/gronsfeld-31415/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "nihilist-31415",
+      "family": "nihilist",
+      "count": 3,
+      "path": "random test/corpus/nihilist-31415/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "homophonic-basic",
+      "family": "homophonic",
+      "count": 3,
+      "path": "random test/corpus/homophonic-basic/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "four-square-keys",
+      "family": "four_square",
+      "count": 3,
+      "path": "random test/corpus/four-square-keys/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "hill-2x2",
+      "family": "hill",
+      "count": 3,
+      "path": "random test/corpus/hill-2x2/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "playfair-keyword",
+      "family": "playfair",
+      "count": 3,
+      "path": "random test/corpus/playfair-keyword/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "adfgvx-keys",
+      "family": "adfgvx",
+      "count": 3,
+      "path": "random test/corpus/adfgvx-keys/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "adfgx-keys",
+      "family": "adfgx",
+      "count": 3,
+      "path": "random test/corpus/adfgx-keys/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "bifid-keyword",
+      "family": "bifid",
+      "count": 3,
+      "path": "random test/corpus/bifid-keyword/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "straddle-default",
+      "family": "straddle_checkerboard",
+      "count": 3,
+      "path": "random test/corpus/straddle-default/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "trifid-keyword",
+      "family": "trifid",
+      "count": 3,
+      "path": "random test/corpus/trifid-keyword/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "b64",
+      "family": "base64",
+      "count": 3,
+      "path": "random test/corpus/b64/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "pam5-dibit",
+      "family": "pam5",
+      "count": 3,
+      "path": "random test/corpus/pam5-dibit/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "hex-utf8",
+      "family": "hex",
+      "count": 3,
+      "path": "random test/corpus/hex-utf8/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "manchester-ieee",
+      "family": "manchester",
+      "count": 3,
+      "path": "random test/corpus/manchester-ieee/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "fractionated-morse",
+      "family": "fractionated_morse",
+      "count": 3,
+      "path": "random test/corpus/fractionated-morse/data.jsonl",
+      "encrypt_only": true
+    },
+    {
+      "slug": "aes-128-gcm",
+      "family": "aes_gcm",
+      "count": 3,
+      "path": "random test/corpus/aes-128-gcm/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "aes-256-gcm",
+      "family": "aes_gcm",
+      "count": 3,
+      "path": "random test/corpus/aes-256-gcm/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "aes-128-cbc",
+      "family": "aes_cbc",
+      "count": 3,
+      "path": "random test/corpus/aes-128-cbc/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "aes-256-cbc",
+      "family": "aes_cbc",
+      "count": 3,
+      "path": "random test/corpus/aes-256-cbc/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "aes-128-ctr",
+      "family": "aes_ctr",
+      "count": 3,
+      "path": "random test/corpus/aes-128-ctr/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "chacha20-poly1305",
+      "family": "chacha20_poly1305",
+      "count": 3,
+      "path": "random test/corpus/chacha20-poly1305/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "tripledes-cbc",
+      "family": "triple_des",
+      "count": 3,
+      "path": "random test/corpus/tripledes-cbc/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "fernet",
+      "family": "fernet",
+      "count": 3,
+      "path": "random test/corpus/fernet/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "xor-sha256-stream",
+      "family": "xor_stream",
+      "count": 3,
+      "path": "random test/corpus/xor-sha256-stream/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "pbkdf2-aes-gcm",
+      "family": "pbkdf2",
+      "count": 3,
+      "path": "random test/corpus/pbkdf2-aes-gcm/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "hkdf-aes-gcm",
+      "family": "hkdf",
+      "count": 3,
+      "path": "random test/corpus/hkdf-aes-gcm/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "rsa-oaep-hybrid",
+      "family": "rsa",
+      "count": 3,
+      "path": "random test/corpus/rsa-oaep-hybrid/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "ed25519-sign",
+      "family": "ed25519",
+      "count": 3,
+      "path": "random test/corpus/ed25519-sign/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "x25519-ecdh",
+      "family": "x25519",
+      "count": 3,
+      "path": "random test/corpus/x25519-ecdh/data.jsonl",
+      "encrypt_only": false
+    },
+    {
+      "slug": "sha256",
+      "family": "sha256",
+      "count": 3,
+      "path": "random test/corpus/sha256/data.jsonl",
+      "encrypt_only": true
+    },
+    {
+      "slug": "sha512",
+      "family": "sha512",
+      "count": 3,
+      "path": "random test/corpus/sha512/data.jsonl",
+      "encrypt_only": true
+    },
+    {
+      "slug": "sha3-256",
+      "family": "sha3_256",
+      "count": 3,
+      "path": "random test/corpus/sha3-256/data.jsonl",
+      "encrypt_only": true
+    },
+    {
+      "slug": "blake2b",
+      "family": "blake2b",
+      "count": 3,
+      "path": "random test/corpus/blake2b/data.jsonl",
+      "encrypt_only": true
+    },
+    {
+      "slug": "hmac-sha256",
+      "family": "hmac",
+      "count": 3,
+      "path": "random test/corpus/hmac-sha256/data.jsonl",
+      "encrypt_only": true
+    }
+  ]
+}

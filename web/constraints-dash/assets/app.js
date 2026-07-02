@@ -616,16 +616,24 @@ function renderClassification(data) {
   const p = data.profile || {};
   const chips = [];
   if (p.symbol_class) chips.push(`class: ${p.symbol_class}`);
+  if (p.scan_mode) chips.push("full scan");
+  if (p.has_more_layers) chips.push("peel encoding first");
+  if (p.peel_first) chips.push(`peel: ${p.peel_first}`);
   if (p.index_of_coincidence != null) chips.push(`IC: ${p.index_of_coincidence}`);
-  if (p.shannon_entropy_bits != null) chips.push(`H: ${p.shannon_entropy_bits}`);
   if (p.ic_band) chips.push(`band: ${p.ic_band}`);
-  if (p.deck_size) chips.push(`deck hint: ${p.deck_size}`);
-  if (p.num_messages) chips.push(`msgs: ${p.num_messages}`);
-  if (p.kasiski_periods?.length) chips.push(`kasiski: ${p.kasiski_periods.join(",")}`);
+  if (p.coset_lift != null) chips.push(`coset lift: ${p.coset_lift}`);
+  if (p.kasiski_period != null) chips.push(`kasiski: ${p.kasiski_period}`);
+  if (p.shannon_entropy_bits != null) chips.push(`H: ${p.shannon_entropy_bits}`);
+  if (p.deck_size) chips.push(`deck: ${p.deck_size}`);
+  if (data.num_messages) chips.push(`msgs: ${data.num_messages}`);
+
+  if (data.has_more && p.inner_preview) {
+    chips.push(`inner: ${p.inner_preview.slice(0, 40)}…`);
+  }
 
   profileEl.innerHTML = chips.map((c) => `<span class="classify-chip">${c}</span>`).join("");
   statusEl.textContent = data.top
-    ? `${data.hypotheses.length} hypotheses · top: ${data.top.label} (${Math.round(data.top.confidence * 100)}%)`
+    ? `Full scan · ${data.hypotheses.length} hits · top: ${data.top.label} (${Math.round(data.top.confidence * 100)}%)`
     : "Classified";
 
   hypsEl.innerHTML = "";
@@ -642,8 +650,16 @@ function renderClassification(data) {
       h.dash_mode && h.dash_mode !== "custom" ? `mode: ${h.dash_mode}` : null,
     ].filter(Boolean).join(" · ");
 
+    const metrics = h.metrics || {};
+    const metricLine = Object.entries(metrics)
+      .slice(0, 4)
+      .map(([k, v]) => `${k}: ${v}`)
+      .join(" · ");
+
     let btnHtml = "";
-    if (canRouteRun(h)) {
+    if (h.needs_conversion) {
+      btnHtml = `<span class="hyp-no-run">Encoding layer — decode before route → run</span>`;
+    } else if (canRouteRun(h)) {
       btnHtml = `<button type="button" class="btn btn-primary hyp-route" data-idx="${idx}">Route → run</button>`;
     } else {
       btnHtml = `<span class="hyp-no-run">No propagator — manual decode / corpus only</span>`;
@@ -655,6 +671,7 @@ function renderClassification(data) {
         <span class="hyp-conf">${Math.round(h.confidence * 100)}%</span>
       </div>
       <p class="hyp-meta">${meta}</p>
+      ${metricLine ? `<p class="hyp-meta hyp-metrics">${metricLine}</p>` : ""}
       <ul class="hyp-reason">${reasons}</ul>
       <ul class="hyp-actions">${actions}</ul>
       ${btnHtml}

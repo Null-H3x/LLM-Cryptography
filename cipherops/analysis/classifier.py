@@ -14,7 +14,14 @@ from cipherops.analysis.kasiski import kasiski_examination
 from cipherops.analysis.profile import analyze_ciphertext
 from cipherops.analysis.stream import normalize_stream
 
-PropagatorName = Literal["shared_keystream", "stream_extension", "dynamic_perm", "none"]
+PropagatorName = Literal[
+    "shared_keystream",
+    "stream_extension",
+    "dynamic_perm",
+    "periodic_key",
+    "external_keystream",
+    "none",
+]
 DashMode = Literal["custom", "noita", "fingerprinted", "preset", "none"]
 
 

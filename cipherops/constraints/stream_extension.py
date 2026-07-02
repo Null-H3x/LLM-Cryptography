@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
-from cipherops.ciphers.classical import autokey_decrypt, gronsfeld_autokey_decrypt
+from cipherops.analysis.autokey_solver import (
+    brute_force_autokey_seed,
+    brute_force_gronsfeld_autokey_seed,
+)
+from cipherops.analysis.stream_cipher import STREAM_FAMILIES, stream_decrypt
 from cipherops.ciphers.utils import char_index, clean_alpha, index_char
 from cipherops.constraints.domain import (
     ConstraintState,
@@ -12,7 +16,6 @@ from cipherops.constraints.domain import (
     coerce_symbol,
     plaintext_as_ints,
 )
-from cipherops.analysis.autokey_solver import brute_force_autokey_seed, brute_force_gronsfeld_autokey_seed
 
 
 def _stream_index_for_autokey(
@@ -32,24 +35,59 @@ def _stream_index_for_autokey(
     return ct[lag]
 
 
+def _brute_stream_seed(
+    ciphertext: str,
+    seed_len: int,
+    *,
+    family: str,
+    variant: str,
+    extension: str,
+    mode: str,
+    top_n: int,
+) -> list[dict]:
+    family_norm = family.replace("-", "_")
+    if family_norm == "gronsfeld_autokey":
+        return brute_force_gronsfeld_autokey_seed(ciphertext, seed_len, extension=extension, top_n=top_n)
+    if family_norm in {"porta_autokey", "xautokey", "nihilist_autokey"}:
+        # Generic column: enumerate small seeds where applicable
+        if family_norm == "nihilist_autokey":
+            return brute_force_gronsfeld_autokey_seed(ciphertext, seed_len, extension=extension, top_n=top_n)
+        return brute_force_autokey_seed(
+            ciphertext, seed_len, variant=variant, extension=extension, top_n=top_n
+        )
+    return brute_force_autokey_seed(
+        ciphertext, seed_len, variant=variant, extension=extension, top_n=top_n
+    )
+
+
 def propagate_stream_extension(state: ConstraintState) -> FindingsMap:
     """
     Propagate plaintext/ciphertext-autokey stream constraints from cribs and partial plaintext.
 
     Hypothesis keys:
-    - ``family``: ``autokey`` | ``gronsfeld_autokey`` (default ``autokey``)
-    - ``variant``: ``standard`` | ``beaufort`` (autokey only)
+    - ``family``: ``autokey`` | ``gronsfeld_autokey`` | ``porta_autokey`` | ``xautokey`` | ``nihilist_autokey``
+    - ``variant``: ``standard`` | ``beaufort`` (autokey / gronsfeld autokey)
     - ``extension``: ``plaintext`` | ``ciphertext``
+    - ``mode``: ``sum`` | ``diff`` (xautokey)
     - ``seed_length``: int (required for stream derivation)
     - ``brute_top_n``: if set with short seed, emit ``seed_candidate`` heuristics
     """
     if not state.ciphertext:
         raise ValueError("stream_extension propagator requires state.ciphertext")
 
-    family = state.hypothesis.get("family", "autokey")
+    family = str(state.hypothesis.get("family", "autokey")).replace("-", "_")
     variant = state.hypothesis.get("variant", "standard")
     extension = state.hypothesis.get("extension", "plaintext")
+    mode = state.hypothesis.get("mode", "sum")
     seed_len = int(state.hypothesis.get("seed_length", 3))
+
+    if family == "nihilist_autokey" and extension == "ciphertext":
+        ct_stripped = clean_alpha(state.ciphertext)
+        if not ct_stripped and any(ch.isdigit() for ch in state.ciphertext):
+            raise ValueError(
+                "nihilist_autokey ciphertext extension uses digit-space ciphertext; "
+                "use alpha nihilist-autokey variant or peel encoding first"
+            )
 
     out = FindingsMap(
         meta={
@@ -57,11 +95,14 @@ def propagate_stream_extension(state: ConstraintState) -> FindingsMap:
             "family": family,
             "variant": variant,
             "extension": extension,
+            "mode": mode,
             "seed_length": seed_len,
         }
     )
 
     ct_alpha = clean_alpha(state.ciphertext)
+    if not ct_alpha:
+        raise ValueError("stream_extension requires alphabetic ciphertext")
     ct_ints = [char_index(ch) for ch in ct_alpha]
 
     pt_ints = plaintext_as_ints(state.plaintext_trial)
@@ -82,7 +123,6 @@ def propagate_stream_extension(state: ConstraintState) -> FindingsMap:
                     value=pt_ints[pos],
                 )
 
-    # Derive stream pins from known plaintext symbols
     for i, p in enumerate(pt_ints):
         if p is None:
             continue
@@ -108,7 +148,7 @@ def propagate_stream_extension(state: ConstraintState) -> FindingsMap:
                     source_pt_pos=source_pos,
                 )
         else:
-            if ct_ints[i] is not None:
+            if i < len(ct_ints):
                 out.add(
                     FindingKind.STREAM_PIN,
                     "ct_extension",
@@ -118,34 +158,31 @@ def propagate_stream_extension(state: ConstraintState) -> FindingsMap:
                     note="Ciphertext-autokey extends with prior ciphertext letter index",
                 )
 
-    # Full known plaintext → verify decrypt with declared or brute-recovered seed
     if pt_ints and all(p is not None for p in pt_ints):
         plain_str = "".join(index_char(p) for p in pt_ints)
         declared_seed = state.hypothesis.get("seed")
         verified_seed: str | None = None
         try:
             if declared_seed:
-                if family == "gronsfeld_autokey":
-                    dec = gronsfeld_autokey_decrypt(state.ciphertext, str(declared_seed), extension=extension)
-                else:
-                    dec = autokey_decrypt(
-                        state.ciphertext, str(declared_seed), variant=variant, extension=extension
-                    )
-                if clean_alpha(dec) == plain_str:
-                    verified_seed = str(declared_seed)
-            elif family == "autokey" and seed_len <= 4:
-                hits = brute_force_autokey_seed(
+                dec = stream_decrypt(
                     state.ciphertext,
-                    seed_len,
+                    str(declared_seed),
+                    family=family,
                     variant=variant,
                     extension=extension,
-                    top_n=1,
+                    mode=mode,
                 )
-                if hits and clean_alpha(hits[0]["plaintext"]) == plain_str:
-                    verified_seed = hits[0]["seed"]
-            elif family == "gronsfeld_autokey" and seed_len <= 6:
-                hits = brute_force_gronsfeld_autokey_seed(
-                    state.ciphertext, seed_len, extension=extension, top_n=1
+                if clean_alpha(dec) == plain_str:
+                    verified_seed = str(declared_seed)
+            elif family in STREAM_FAMILIES and seed_len <= 6:
+                hits = _brute_stream_seed(
+                    state.ciphertext,
+                    seed_len,
+                    family=family,
+                    variant=variant,
+                    extension=extension,
+                    mode=mode,
+                    top_n=1,
                 )
                 if hits and clean_alpha(hits[0]["plaintext"]) == plain_str:
                     verified_seed = hits[0]["seed"]
@@ -158,7 +195,7 @@ def propagate_stream_extension(state: ConstraintState) -> FindingsMap:
                     field="seed",
                     value=verified_seed,
                 )
-            elif declared_seed or family in {"autokey", "gronsfeld_autokey"}:
+            elif declared_seed or family in STREAM_FAMILIES:
                 out.add(
                     FindingKind.CONFLICT,
                     "full_decrypt",
@@ -169,31 +206,15 @@ def propagate_stream_extension(state: ConstraintState) -> FindingsMap:
         except ValueError as exc:
             out.add(FindingKind.CONFLICT, "full_decrypt", "hard", error=str(exc))
 
-    # Optional seed brute hints
     top_n = state.hypothesis.get("brute_top_n")
-    if top_n and seed_len <= 4 and family == "autokey":
-        hits = brute_force_autokey_seed(
+    if top_n and seed_len <= 6 and family in STREAM_FAMILIES:
+        hits = _brute_stream_seed(
             state.ciphertext,
             seed_len,
+            family=family,
             variant=variant,
             extension=extension,
-            top_n=int(top_n),
-        )
-        for rank, hit in enumerate(hits):
-            out.add(
-                FindingKind.SEED_CANDIDATE,
-                "brute_force",
-                "heuristic",
-                seed=hit["seed"],
-                score=hit["score"],
-                rank=rank,
-            )
-
-    if top_n and family == "gronsfeld_autokey" and seed_len <= 6:
-        hits = brute_force_gronsfeld_autokey_seed(
-            state.ciphertext,
-            seed_len,
-            extension=extension,
+            mode=mode,
             top_n=int(top_n),
         )
         for rank, hit in enumerate(hits):
@@ -217,13 +238,14 @@ def propagate_from_crib_prefix(
     variant: str = "standard",
     extension: str = "plaintext",
     seed: str | None = None,
+    family: str = "autokey",
 ) -> FindingsMap:
     """Convenience: pin plaintext crib at positions 0..|crib|-1 and propagate."""
     from cipherops.constraints.domain import AlphabetDomain
 
     pins = [Pin(pos=i, pt=ch) for i, ch in enumerate(clean_alpha(crib))]
     hypothesis: dict = {
-        "family": "autokey",
+        "family": family,
         "variant": variant,
         "extension": extension,
         "seed_length": seed_length,

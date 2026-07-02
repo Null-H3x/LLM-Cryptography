@@ -15,6 +15,8 @@ from cipherops.constraints.domain import (
 from cipherops.constraints.shared_keystream import load_noita_state, propagate_shared_keystream
 from cipherops.constraints.stream_extension import propagate_from_crib_prefix, propagate_stream_extension
 from cipherops.constraints.dynamic_perm import propagate_dynamic_perm
+from cipherops.constraints.periodic_key import propagate_periodic_key
+from cipherops.constraints.external_keystream import propagate_external_keystream
 from cipherops.constraints.pipeline import (
     CorpusConfig,
     PipelineResult,
@@ -46,6 +48,8 @@ __all__ = [
     "propagate_stream_extension",
     "propagate_from_crib_prefix",
     "propagate_dynamic_perm",
+    "propagate_periodic_key",
+    "propagate_external_keystream",
     "CorpusConfig",
     "PipelineResult",
     "StopReport",

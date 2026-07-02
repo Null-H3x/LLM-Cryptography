@@ -11,6 +11,7 @@ from cipherops.analysis.deck_parse import parse_integer_decks
 from cipherops.analysis.profile import analyze_ciphertext
 from cipherops.ciphers import encoding
 from cipherops.ciphers.classical import autokey_decrypt, gronsfeld_autokey_decrypt
+from cipherops.analysis.stream_cipher import stream_decrypt
 from cipherops.ciphers.utils import clean_alpha
 from cipherops.constraints.crib_hints import merge_crib_pins
 
@@ -49,14 +50,20 @@ def _step1_preflight_brute(
     if not ct or not clean_alpha(ct):
         return {"skipped": True, "reason": "non_alphabetic_ciphertext"}
 
-    if propagator not in {"stream_extension", "dynamic_perm"}:
+    if propagator not in {"stream_extension", "dynamic_perm", "periodic_key", "external_keystream"}:
         return {"skipped": True, "reason": f"propagator={propagator}"}
 
     profile = property_profile or classification.get("profile") or {}
     if profile.get("symbol_class") and profile["symbol_class"] != "alpha":
         return {"skipped": True, "reason": "not_alpha_stream"}
 
-    lane = "autokey_seed" if propagator == "stream_extension" else "gak_prng"
+    lane_map = {
+        "stream_extension": "autokey_seed",
+        "dynamic_perm": "gak_prng",
+        "periodic_key": "periodic_key",
+        "external_keystream": "running_key",
+    }
+    lane = lane_map[propagator]
     gak_min = int(hypothesis.get("prng_seed", 42)) - 50
     gak_max = int(hypothesis.get("prng_seed", 42)) + 50
 
@@ -100,6 +107,14 @@ def _step1_preflight_brute(
         out["seed_candidates"] = seeds
         out["hypothesis_patch"] = dict(candidates[0].get("hypothesis_patch") or {})
         out["applied"] = f"prng_seeds={seeds[:3]}"
+    elif brute["lane"] == "periodic_key" and top.get("score", 0) >= 0.35:
+        out["hypothesis_patch"] = dict(top.get("hypothesis_patch") or {})
+        out["plaintext_trial"] = top.get("plaintext")
+        out["applied"] = f"periodic {top.get('label')} score={top.get('score')}"
+    elif brute["lane"] == "running_key" and top.get("score", 0) >= 0.35:
+        out["hypothesis_patch"] = dict(top.get("hypothesis_patch") or {})
+        out["plaintext_trial"] = top.get("plaintext")
+        out["applied"] = f"running_key offset={top.get('key')} score={top.get('score')}"
 
     return out
 
@@ -227,8 +242,15 @@ def _step4_dictionary_crib(
 ) -> dict[str, Any]:
     """Slide common words — emit crib pin candidates for stream ciphers."""
     ct = clean_alpha(ciphertext or "")
-    if not ct or propagator != "stream_extension":
-        return {"skipped": True, "reason": "stream_extension_alpha_only"}
+    if not ct:
+        return {"skipped": True, "reason": "no_alpha_ciphertext"}
+
+    if propagator == "periodic_key":
+        return _step4_periodic_crib(ciphertext=ct, hypothesis=hypothesis)
+    if propagator == "external_keystream":
+        return {"skipped": True, "reason": "use_preflight_running_key_offset"}
+    if propagator != "stream_extension":
+        return {"skipped": True, "reason": f"propagator={propagator}"}
 
     family = str(hypothesis.get("family", "autokey"))
     variant = str(hypothesis.get("variant", "standard"))
@@ -250,7 +272,14 @@ def _step4_dictionary_crib(
                     if family == "gronsfeld_autokey":
                         plain = gronsfeld_autokey_decrypt(ct, seed, extension=extension)
                     else:
-                        plain = autokey_decrypt(ct, seed, variant=variant, extension=extension)
+                        plain = stream_decrypt(
+                            ct,
+                            seed,
+                            family=family,
+                            variant=variant,
+                            extension=extension,
+                            mode=str(hypothesis.get("mode", "sum")),
+                        )
                     score = _english_score(plain)
                     detail = f"seed={seed} english={score:.3f}"
                 except ValueError:
@@ -267,6 +296,45 @@ def _step4_dictionary_crib(
                     }
                 )
 
+    hits.sort(key=lambda row: row["score"], reverse=True)
+    top = hits[:8]
+    out: dict[str, Any] = {"candidates": top, "count": len(top)}
+    if top:
+        out["pins"] = top[0]["pins"]
+        out["applied"] = top[0]["detail"]
+    return out
+
+
+def _step4_periodic_crib(
+    *,
+    ciphertext: str,
+    hypothesis: dict[str, Any],
+) -> dict[str, Any]:
+    """Try common cribs against periodic key decrypt at offset 0."""
+    from cipherops.analysis.periodic_solver import _decrypt_periodic
+
+    family = str(hypothesis.get("family", "vigenere"))
+    key = str(hypothesis.get("key", "KEY"))
+    hits: list[dict[str, Any]] = []
+    for word in COMMON_CRIBS:
+        if len(word) < 3:
+            continue
+        pins = [{"pos": i, "pt": ch} for i, ch in enumerate(word)]
+        try:
+            plain = _decrypt_periodic(ciphertext, key, family=family)
+            score = _english_score(plain)
+        except ValueError:
+            score = 0.0
+        if score >= 0.35:
+            hits.append(
+                {
+                    "word": word,
+                    "offset": 0,
+                    "score": round(score, 4),
+                    "pins": pins,
+                    "detail": f"periodic key={key} english={score:.3f}",
+                }
+            )
     hits.sort(key=lambda row: row["score"], reverse=True)
     top = hits[:8]
     out: dict[str, Any] = {"candidates": top, "count": len(top)}
@@ -305,6 +373,8 @@ def _family_from_propagator(propagator: str) -> str:
         "shared_keystream": "noita-eye",
         "stream_extension": "autokey",
         "dynamic_perm": "gak",
+        "periodic_key": "vigenere",
+        "external_keystream": "running_key",
     }.get(propagator, "unknown")
 
 

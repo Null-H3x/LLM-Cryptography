@@ -1,6 +1,6 @@
 # Constraint Propagation
 
-Alphabet abstraction and three family-specific propagators that emit a shared **findings map** (hard pins, eliminations, derived assignments).
+Alphabet abstraction and **five** family-specific propagators that emit a shared **findings map** (hard pins, eliminations, derived assignments).
 
 ## Module
 
@@ -10,8 +10,23 @@ Alphabet abstraction and three family-specific propagators that emit a shared **
 |-----------|------|
 | `domain.py` | `AlphabetDomain`, `ConstraintState`, `FindingsMap`, `merge_findings()` |
 | `shared_keystream.py` | Multi-message depth / shared `K[t]` (Noita model) |
-| `stream_extension.py` | Autokey / Gronsfeld autokey crib + stream pins |
+| `stream_extension.py` | Autokey / Porta / X / Nihilist autokey crib + stream pins |
 | `dynamic_perm.py` | GAK/XGAK seed verification + transition pins |
+| `periodic_key.py` | Vigenère-class repeating key (`K[t mod period]`) |
+| `external_keystream.py` | Running key / book corpus / Vernam OTP |
+| `../analysis/keystream_lanes.py` | Catalog of keystream models + routing metadata |
+
+## Keystream lane catalog
+
+`GET /api/keystream-lanes` (constraints dash) or `list_keystream_models()` returns five models:
+
+| Propagator | Keystream model | Families |
+|------------|-----------------|----------|
+| `shared_keystream` | Shared position-indexed `K[t]` across messages | Noita, integer decks |
+| `stream_extension` | Seed + plaintext/CT extension | autokey, gronsfeld/porta/x/nihilist autokey |
+| `dynamic_perm` | PRNG permutation decks | GAK, XGAK |
+| `periodic_key` | Repeating key mod 26 | vigenere, beaufort, porta, gronsfeld |
+| `external_keystream` | Non-repeating corpus offset | running_key, vernam, book_cipher |
 
 ## Findings kinds
 

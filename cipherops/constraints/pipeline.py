@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 from typing import Any, Callable, Literal
 
 from cipherops.ciphers.classical import autokey_decrypt, gronsfeld_autokey_decrypt
+from cipherops.analysis.stream_cipher import stream_decrypt
 from cipherops.ciphers.utils import char_index, clean_alpha, index_char
 from cipherops.constraints.domain import (
     AlphabetDomain,
@@ -27,9 +28,17 @@ from cipherops.constraints.shared_keystream import (
 )
 from cipherops.constraints.stream_extension import propagate_stream_extension
 from cipherops.constraints.dynamic_perm import propagate_dynamic_perm, _simulate_encrypt_path
+from cipherops.constraints.periodic_key import propagate_periodic_key
+from cipherops.constraints.external_keystream import propagate_external_keystream
 from cipherops.ciphers import gak as gak_cipher
 
-PropagatorName = Literal["shared_keystream", "stream_extension", "dynamic_perm"]
+PropagatorName = Literal[
+    "shared_keystream",
+    "stream_extension",
+    "dynamic_perm",
+    "periodic_key",
+    "external_keystream",
+]
 
 StopStatus = Literal[
     "complete",
@@ -164,6 +173,10 @@ def run_propagator(state: ConstraintState, propagator: PropagatorName) -> Findin
         return propagate_stream_extension(state)
     if propagator == "dynamic_perm":
         return propagate_dynamic_perm(state)
+    if propagator == "periodic_key":
+        return propagate_periodic_key(state)
+    if propagator == "external_keystream":
+        return propagate_external_keystream(state)
     raise ValueError(f"Unknown propagator: {propagator}")
 
 
@@ -276,6 +289,10 @@ def validate_finding(finding: Finding, state: ConstraintState, propagator: Propa
             ok, reason = _validate_stream_extension(finding, state)
         elif propagator == "dynamic_perm":
             ok, reason = _validate_dynamic_perm(finding, state)
+        elif propagator == "periodic_key":
+            ok, reason = _validate_periodic_key(finding, state)
+        elif propagator == "external_keystream":
+            ok, reason = _validate_external_keystream(finding, state)
         else:
             ok, reason = False, f"unknown propagator {propagator}"
     except Exception as exc:  # noqa: BLE001 — validation diagnostic
@@ -377,7 +394,14 @@ def _validate_stream_extension(finding: Finding, state: ConstraintState) -> tupl
         if family == "gronsfeld_autokey":
             dec = gronsfeld_autokey_decrypt(state.ciphertext, seed, extension=extension)
         else:
-            dec = autokey_decrypt(state.ciphertext, seed, variant=variant, extension=extension)
+            dec = stream_decrypt(
+                state.ciphertext,
+                seed,
+                family=family,
+                variant=variant,
+                extension=extension,
+                mode=str(state.hypothesis.get("mode", "sum")),
+            )
         if clean_alpha(dec) == plain_str:
             return True, "seed decrypt verified"
         return False, "seed decrypt mismatch"
@@ -460,6 +484,58 @@ def _validate_dynamic_perm(finding: Finding, state: ConstraintState) -> tuple[bo
     if finding.confidence == "propagated":
         return True, "propagated gak finding"
 
+    return True, "accepted"
+
+
+def _validate_periodic_key(finding: Finding, state: ConstraintState) -> tuple[bool, str]:
+    from cipherops.analysis.periodic_solver import _decrypt_periodic
+
+    if not state.ciphertext:
+        return False, "missing ciphertext"
+    family = str(state.hypothesis.get("family", "vigenere"))
+    kind = finding.kind if isinstance(finding.kind, str) else finding.kind.value
+    data = finding.data
+
+    if kind == FindingKind.ASSIGNMENT.value and data.get("field") == "key":
+        key = str(data["value"])
+        pt_ints = plaintext_as_ints(state.plaintext_trial)
+        if pt_ints is None:
+            return False, "no plaintext to verify key"
+        plain_str = "".join(index_char(p) for p in pt_ints)
+        dec = _decrypt_periodic(state.ciphertext, key, family=family)
+        if clean_alpha(dec) == plain_str:
+            return True, "periodic key verified"
+        return False, "periodic key decrypt mismatch"
+
+    if kind == FindingKind.STREAM_PIN.value and data.get("role") == "key_column":
+        return True, "key column pin accepted"
+
+    if finding.confidence == "propagated":
+        return True, "propagated periodic finding"
+    return True, "accepted"
+
+
+def _validate_external_keystream(finding: Finding, state: ConstraintState) -> tuple[bool, str]:
+    from cipherops.analysis.external_keystream_solver import search_running_key_offsets
+
+    if not state.ciphertext:
+        return False, "missing ciphertext"
+    kind = finding.kind if isinstance(finding.kind, str) else finding.kind.value
+    data = finding.data
+
+    if kind == FindingKind.SEED_CANDIDATE.value and data.get("key_offset") is not None:
+        offset = int(data["key_offset"])
+        corpus = str(state.hypothesis.get("corpus", "running-key-book"))
+        hits = search_running_key_offsets(state.ciphertext, corpus_key=corpus, top_n=1)
+        if hits and hits[0]["offset"] == offset:
+            return True, "corpus offset candidate plausible"
+        return finding.confidence != "hard", "offset candidate heuristic"
+
+    if kind == FindingKind.STREAM_PIN.value:
+        return True, "external keystream pin accepted"
+
+    if finding.confidence == "propagated":
+        return True, "propagated external finding"
     return True, "accepted"
 
 

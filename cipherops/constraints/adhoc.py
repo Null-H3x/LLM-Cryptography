@@ -7,7 +7,8 @@ import re
 from pathlib import Path
 from typing import Any
 
-from cipherops.ciphers.utils import clean_alpha
+from cipherops.analysis.keystream_lanes import default_hypothesis
+from cipherops.analysis.stream_cipher import hypothesis_from_slug
 from cipherops.constraints.domain import AlphabetDomain, ConstraintState, Pin
 from cipherops.constraints.pipeline import CorpusConfig, PropagatorName, build_corpus_configs
 from cipherops.constraints.shared_keystream import load_noita_state
@@ -20,6 +21,17 @@ STREAM_SLUG_PREFIXES = (
     "xautokey-",
 )
 GAK_SLUG_PREFIXES = ("gak-", "xgak-")
+PERIODIC_SLUG_PREFIXES = (
+    "vigenere-",
+    "beaufort-",
+    "porta-",
+    "gronsfeld-",
+)
+EXTERNAL_SLUG_PREFIXES = (
+    "running-key-",
+    "vernam-",
+    "book-cipher-",
+)
 
 
 def propagator_for_slug(slug: str) -> PropagatorName | None:
@@ -29,6 +41,10 @@ def propagator_for_slug(slug: str) -> PropagatorName | None:
         return "stream_extension"
     if any(slug.startswith(p) for p in GAK_SLUG_PREFIXES):
         return "dynamic_perm"
+    if any(slug.startswith(p) for p in PERIODIC_SLUG_PREFIXES):
+        return "periodic_key"
+    if any(slug.startswith(p) for p in EXTERNAL_SLUG_PREFIXES):
+        return "external_keystream"
     return None
 
 
@@ -125,12 +141,7 @@ def build_from_fingerprinted(
 
     if propagator == "stream_extension":
         params = row.get("params", {})
-        family_raw = row.get("cipher_family", "autokey")
-        if "gronsfeld" in family_raw or "gronsfeld" in slug:
-            family = "gronsfeld_autokey"
-        else:
-            family = family_raw.replace("-", "_")
-        hypothesis = _stream_hypothesis_from_params({**params, "family": family})
+        hypothesis = hypothesis_from_slug(slug, params)
         return CorpusConfig(
             slug=f"fingerprinted/{slug}/{row['id']}",
             propagator=propagator,
@@ -144,21 +155,61 @@ def build_from_fingerprinted(
             description=f"Fingerprinted {row['id']}",
         )
 
-    params = row.get("params", {})
-    prng_seed = int(params.get("prng_seed", 42))
-    return CorpusConfig(
-        slug=f"fingerprinted/{slug}/{row['id']}",
-        propagator=propagator,
-        state=ConstraintState(
-            domain=AlphabetDomain(size=26, name="gak"),
-            hypothesis={"mode": params.get("mode", "ctak_right")},
-            ciphertext=row["ciphertext"],
-            plaintext_trial=row.get("plaintext"),
-            seed_candidates=[prng_seed - 1, prng_seed, prng_seed + 1],
-            pins=pins or [],
-        ),
-        description=f"Fingerprinted {row['id']}",
-    )
+    if propagator == "dynamic_perm":
+        params = row.get("params", {})
+        prng_seed = int(params.get("prng_seed", 42))
+        return CorpusConfig(
+            slug=f"fingerprinted/{slug}/{row['id']}",
+            propagator=propagator,
+            state=ConstraintState(
+                domain=AlphabetDomain(size=26, name="gak"),
+                hypothesis={"mode": params.get("mode", "ctak_right"), **params},
+                ciphertext=row["ciphertext"],
+                plaintext_trial=row.get("plaintext"),
+                seed_candidates=[prng_seed - 1, prng_seed, prng_seed + 1],
+                pins=pins or [],
+            ),
+            description=f"Fingerprinted {row['id']}",
+        )
+
+    if propagator == "periodic_key":
+        params = row.get("params", {})
+        family = row.get("cipher_family", "vigenere").replace("-", "_")
+        key = str(params.get("key", params.get("numeric_key", "KEY")))
+        return CorpusConfig(
+            slug=f"fingerprinted/{slug}/{row['id']}",
+            propagator=propagator,
+            state=ConstraintState(
+                domain=AlphabetDomain(size=26, name="latin"),
+                hypothesis={
+                    "family": family,
+                    "key": key,
+                    "period": len(clean_alpha(key)) or 3,
+                    "brute_top_n": 5,
+                },
+                ciphertext=row["ciphertext"],
+                plaintext_trial=row.get("plaintext"),
+                pins=pins or [],
+            ),
+            description=f"Fingerprinted {row['id']}",
+        )
+
+    if propagator == "external_keystream":
+        family = row.get("cipher_family", "running_key").replace("-", "_")
+        return CorpusConfig(
+            slug=f"fingerprinted/{slug}/{row['id']}",
+            propagator=propagator,
+            state=ConstraintState(
+                domain=AlphabetDomain(size=26, name="latin"),
+                hypothesis=default_hypothesis(family),
+                ciphertext=row["ciphertext"],
+                plaintext_trial=row.get("plaintext"),
+                pins=pins or [],
+            ),
+            description=f"Fingerprinted {row['id']}",
+        )
+
+    raise ValueError(f"Unsupported propagator {propagator!r} for slug {slug!r}")
 
 
 def build_from_noita(
@@ -269,6 +320,42 @@ def build_custom_config(payload: dict[str, Any], root: Path | None = None) -> Co
             description=payload.get("description", "Custom GAK dynamic perm"),
         )
 
+    if propagator == "periodic_key":
+        ciphertext = payload.get("ciphertext")
+        if not ciphertext:
+            raise ValueError("ciphertext required for periodic_key")
+        family = str(hypothesis.get("family", "vigenere"))
+        return CorpusConfig(
+            slug=payload.get("slug", "custom/periodic-key"),
+            propagator=propagator,
+            state=ConstraintState(
+                domain=AlphabetDomain(size=26, name="latin"),
+                hypothesis={**default_hypothesis(family), **hypothesis},
+                ciphertext=str(ciphertext),
+                plaintext_trial=payload.get("plaintext") or payload.get("plaintext_trial"),
+                pins=pins,
+            ),
+            description=payload.get("description", "Custom periodic polyalphabetic"),
+        )
+
+    if propagator == "external_keystream":
+        ciphertext = payload.get("ciphertext")
+        if not ciphertext:
+            raise ValueError("ciphertext required for external_keystream")
+        family = str(hypothesis.get("family", "running_key"))
+        return CorpusConfig(
+            slug=payload.get("slug", "custom/external-keystream"),
+            propagator=propagator,
+            state=ConstraintState(
+                domain=AlphabetDomain(size=26, name="latin"),
+                hypothesis={**default_hypothesis(family), **hypothesis},
+                ciphertext=str(ciphertext),
+                plaintext_trial=payload.get("plaintext") or payload.get("plaintext_trial"),
+                pins=pins,
+            ),
+            description=payload.get("description", "Custom external keystream"),
+        )
+
     raise ValueError(f"Unsupported propagator: {propagator}")
 
 
@@ -313,12 +400,22 @@ def list_dashboard_sources(root: Path | None = None) -> dict[str, Any]:
             {
                 "id": "stream_extension",
                 "label": "Stream Extension",
-                "hint": "Autokey / Gronsfeld autokey with crib + seed",
+                "hint": "Autokey / Gronsfeld / Porta / X / Nihilist autokey",
             },
             {
                 "id": "dynamic_perm",
                 "label": "Dynamic Permutation",
                 "hint": "GAK / XGAK seed filter + transition pins",
+            },
+            {
+                "id": "periodic_key",
+                "label": "Periodic Key",
+                "hint": "Vigenère / Beaufort / Porta / Gronsfeld repeating key",
+            },
+            {
+                "id": "external_keystream",
+                "label": "External Keystream",
+                "hint": "Running key / book corpus / Vernam OTP",
             },
         ],
     }

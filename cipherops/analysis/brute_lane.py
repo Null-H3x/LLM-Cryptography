@@ -10,12 +10,13 @@ from cipherops.analysis.autokey_solver import (
     brute_force_gronsfeld_autokey_seed,
 )
 from cipherops.ciphers import gak as gak_cipher
-from cipherops.ciphers.classical import autokey_decrypt, caesar
+from cipherops.analysis.external_keystream_solver import search_running_key_offsets
+from cipherops.analysis.periodic_solver import brute_force_periodic_multi
 from cipherops.ciphers.utils import clean_alpha
 from cipherops.constraints.dynamic_perm import _simulate_encrypt_path
 from cipherops.constraints.domain import plaintext_as_ints
 
-BruteLane = Literal["auto", "caesar", "autokey_seed", "gak_prng"]
+BruteLane = Literal["auto", "caesar", "autokey_seed", "gak_prng", "periodic_key", "running_key"]
 
 
 def _caesar_sweep(ciphertext: str, *, top_n: int) -> list[dict[str, Any]]:
@@ -146,11 +147,18 @@ def resolve_lane(
         return "autokey_seed"
     if propagator == "dynamic_perm":
         return "gak_prng"
+    if propagator == "periodic_key":
+        return "periodic_key"
+    if propagator == "external_keystream":
+        return "running_key"
     if classification and classification.get("profile", {}).get("symbol_class") == "alpha":
         ic_band = classification.get("profile", {}).get("ic_band")
+        coset = (classification.get("profile") or {}).get("coset_ic") or {}
         if ic_band == "language_like":
             return "caesar"
         if ic_band == "flat_polyalphabetic":
+            if coset.get("best_mean_ic") and float(coset["best_mean_ic"]) >= 0.06:
+                return "periodic_key"
             return "autokey_seed"
     return "caesar"
 
@@ -201,6 +209,47 @@ def run_brute_lane(
             plaintext_trial=plaintext_trial,
             alphabet_size=int(hyp.get("alphabet_size", 26)),
         )
+    elif resolved == "periodic_key":
+        candidates = [
+            {
+                "lane": "periodic_key",
+                "rank": rank,
+                "key": hit["key"],
+                "label": f"period={hit['period']} key={hit['key']}",
+                "score": hit["score"],
+                "plaintext_preview": hit["plaintext"][:120],
+                "plaintext": hit["plaintext"],
+                "hypothesis_patch": hit.get("hypothesis_patch", {}),
+            }
+            for rank, hit in enumerate(
+                brute_force_periodic_multi(
+                    ct,
+                    family=str(hyp.get("family", "vigenere")),
+                    max_period=int(hyp.get("period", 12)),
+                    top_n=top_n,
+                )
+            )
+        ]
+    elif resolved == "running_key":
+        candidates = [
+            {
+                "lane": "running_key",
+                "rank": rank,
+                "key": hit["offset"],
+                "label": f"offset={hit['offset']} corpus={hit['corpus']}",
+                "score": hit["score"],
+                "plaintext_preview": hit.get("plaintext_preview"),
+                "plaintext": hit.get("plaintext"),
+                "hypothesis_patch": hit.get("hypothesis_patch", {}),
+            }
+            for rank, hit in enumerate(
+                search_running_key_offsets(
+                    ct,
+                    corpus_key=str(hyp.get("corpus", "running-key-book")),
+                    top_n=top_n,
+                )
+            )
+        ]
     else:
         raise ValueError(f"Unknown brute lane: {resolved}")
 
@@ -219,5 +268,7 @@ def _lane_notes(lane: BruteLane) -> str:
         "caesar": "26-shift sweep scored by English unigrams — best after language-like IC.",
         "autokey_seed": "Enumerates 26^n priming keys; use short seed_length (≤4). Promote seed → re-run loop.",
         "gak_prng": "PRNG seed sweep with roundtrip or encrypt-verify; widen range or add plaintext trial.",
+        "periodic_key": "Coset-IC period guess + column-wise key recovery for Vigenère-class ciphers.",
+        "running_key": "Slide external book corpus; score decrypts by English unigrams.",
     }
     return notes.get(lane, "")

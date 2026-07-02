@@ -21,6 +21,7 @@ sys.path.insert(0, str(ROOT))
 from cipherops.analysis.brute_lane import run_brute_lane
 from cipherops.analysis.classifier import classify_ciphertext, route_to_dash_payload
 from cipherops.constraints.adhoc import build_custom_config, list_dashboard_sources
+from cipherops.analysis.keystream_lanes import list_keystream_models
 from cipherops.constraints.crib_hints import ACTIONABLE_KINDS, crib_pins_from_finding, merge_crib_pins
 from cipherops.constraints.pipeline import finding_fingerprint, run_findings_loop
 from cipherops.constraints.plaintext_view import assemble_plaintext_view
@@ -244,6 +245,10 @@ class DashHandler(BaseHTTPRequestHandler):
 
         if path == "/api/sources":
             _json_response(self, 200, list_dashboard_sources(ROOT))
+            return
+
+        if path == "/api/keystream-lanes":
+            _json_response(self, 200, {"models": list_keystream_models()})
             return
 
         if path == "/api/findings":

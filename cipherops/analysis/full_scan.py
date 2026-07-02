@@ -286,14 +286,44 @@ def _scan_alpha_payload(text: str, *, layer: ScanLayerKind = "payload") -> list[
                     label=f"Vigenère / periodic (period ≈ {top_period}, coset lift {coset_lift:.2f})",
                     score=0.55 + coset_lift * 0.25,
                     layer=layer,
-                    dash_mode="fingerprinted",
+                    propagator="periodic_key",
+                    dash_mode="custom",
                     dataset_slug="vigenere-keyword",
+                    hypothesis={"family": "vigenere", "period": int(top_period), "brute_top_n": 5},
                     metrics={**metrics_base, "coset_lift": round(coset_lift, 4)},
                     reasoning=[
                         f"IC={ic:.4f} flat",
                         f"Kasiski period {top_period}",
                         f"Coset IC lift {coset_lift:.2f} supports periodic polyalphabetic",
                     ],
+                )
+            )
+            hits.append(
+                ScanHit(
+                    family="beaufort",
+                    label=f"Beaufort periodic (period ≈ {top_period})",
+                    score=0.42 + coset_lift * 0.2,
+                    layer=layer,
+                    propagator="periodic_key",
+                    dash_mode="custom",
+                    dataset_slug="beaufort-keyword",
+                    hypothesis={"family": "beaufort", "period": int(top_period), "brute_top_n": 5},
+                    metrics=metrics_base,
+                    reasoning=["Periodic alternative to Vigenère under flat IC"],
+                )
+            )
+            hits.append(
+                ScanHit(
+                    family="gronsfeld",
+                    label=f"Gronsfeld periodic (period ≈ {top_period})",
+                    score=0.4 + coset_lift * 0.18,
+                    layer=layer,
+                    propagator="periodic_key",
+                    dash_mode="custom",
+                    dataset_slug="gronsfeld-31415",
+                    hypothesis={"family": "gronsfeld", "period": int(top_period), "brute_top_n": 5},
+                    metrics=metrics_base,
+                    reasoning=["Numeric-shift periodic variant"],
                 )
             )
 
@@ -332,6 +362,37 @@ def _scan_alpha_payload(text: str, *, layer: ScanLayerKind = "payload") -> list[
                 hypothesis={"mode": "ctak_right"},
                 metrics=metrics_base,
                 reasoning=["Flat IC compatible with dynamic perm — needs plaintext/seed to confirm"],
+            )
+        )
+        hits.append(
+            ScanHit(
+                family="running_key",
+                label="Running key / external book keystream",
+                score=0.36 + min(0.15, ak_score / 25.0),
+                layer=layer,
+                propagator="external_keystream",
+                dash_mode="custom",
+                dataset_slug="running-key-book",
+                hypothesis={"family": "running_key", "corpus": "running-key-book", "brute_top_n": 5},
+                metrics={**metrics_base, "autokey_probe_score": round(ak_score, 4)},
+                reasoning=[
+                    "Flat IC — non-repeating external keystream alternative to autokey",
+                    "Try corpus offset search if autokey seed probe weak",
+                ],
+            )
+        )
+        hits.append(
+            ScanHit(
+                family="vernam",
+                label="Vernam OTP (non-repeating key; depth if key reused)",
+                score=0.28,
+                layer=layer,
+                propagator="external_keystream",
+                dash_mode="custom",
+                dataset_slug="vernam-otp-demo",
+                hypothesis={"family": "vernam"},
+                metrics=metrics_base,
+                reasoning=["Flat IC compatible with OTP — needs key material or two-depth reuse"],
             )
         )
 

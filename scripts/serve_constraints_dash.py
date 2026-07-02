@@ -22,6 +22,7 @@ from cipherops.analysis.classifier import classify_ciphertext, route_to_dash_pay
 from cipherops.constraints.adhoc import build_custom_config, list_dashboard_sources
 from cipherops.constraints.crib_hints import ACTIONABLE_KINDS, crib_pins_from_finding, merge_crib_pins
 from cipherops.constraints.pipeline import finding_fingerprint, run_findings_loop
+from cipherops.constraints.plaintext_view import assemble_plaintext_view
 from cipherops.constraints.prepare_run import merge_prepare_into_payload, prepare_run
 
 # In-memory cache of last analysis per client session (uuid).
@@ -126,6 +127,62 @@ def _run_analysis(payload: dict[str, Any]) -> dict[str, Any]:
         "findings_count": len(findings),
         "plaintext_view": plaintext_view,
     }
+
+
+def _best_routable_hypothesis_index(classification: dict[str, Any]) -> int:
+    for i, h in enumerate(classification.get("hypotheses") or []):
+        if h.get("needs_conversion"):
+            continue
+        prop = h.get("dash_propagator") or h.get("propagator")
+        if prop and prop != "none":
+            return i
+        if h.get("dash_mode") == "noita":
+            return i
+        if h.get("dash_mode") == "fingerprinted" and h.get("dataset_slug"):
+            return i
+    return 0
+
+
+def _resolve_route_context(
+    payload: dict[str, Any],
+    classification: dict[str, Any],
+    hypothesis_index: int,
+) -> tuple[dict[str, Any], int, dict[str, Any] | None, str | None, list[list[int]] | None]:
+    """Prepare first, re-classify after encoding peel, return routing context."""
+    prepared = None
+    if not payload.get("skip_prepare"):
+        prepared = prepare_run(
+            classification,
+            hypothesis_index,
+            ciphertext=payload.get("ciphertext"),
+            ciphertexts=payload.get("ciphertexts"),
+            pins=payload.get("pins"),
+        )
+
+    work_classification = classification
+    work_index = hypothesis_index
+    work_ct: str | None = payload.get("ciphertext")
+    work_decks: list[list[int]] | None = payload.get("ciphertexts")
+
+    if prepared:
+        if prepared.get("ciphertext"):
+            work_ct = prepared["ciphertext"]
+            work_decks = None
+        if prepared.get("ciphertexts"):
+            work_decks = prepared["ciphertexts"]
+            work_ct = None
+
+        if prepared.get("peeled"):
+            if work_decks:
+                work_classification = classify_ciphertext(
+                    work_decks,
+                    deck_size=int(prepared["deck_size"]) if prepared.get("deck_size") else None,
+                )
+            elif work_ct:
+                work_classification = classify_ciphertext(work_ct)
+            work_index = _best_routable_hypothesis_index(work_classification)
+
+    return work_classification, work_index, prepared, work_ct, work_decks
 
 
 class DashHandler(BaseHTTPRequestHandler):
@@ -299,25 +356,24 @@ class DashHandler(BaseHTTPRequestHandler):
                     _json_response(self, 400, {"error": "classification required"})
                     return
                 idx = int(payload.get("hypothesis_index", 0))
+                work_classification, work_index, prepared, work_ct, work_decks = _resolve_route_context(
+                    payload, classification, idx
+                )
+                merged_pins = payload.get("pins")
+                if prepared and prepared.get("pins"):
+                    merged_pins = merge_crib_pins(payload.get("pins") or [], prepared["pins"])
+
                 analyze_payload = route_to_dash_payload(
-                    classification,
-                    idx,
-                    ciphertext=payload.get("ciphertext"),
-                    pins=payload.get("pins"),
+                    work_classification,
+                    work_index,
+                    ciphertext=work_ct,
+                    pins=merged_pins,
                     max_rounds=int(payload.get("max_rounds", 10)),
                 )
-                prepared = None
-                if not payload.get("skip_prepare"):
-                    prepared = prepare_run(
-                        classification,
-                        idx,
-                        ciphertext=payload.get("ciphertext"),
-                        ciphertexts=payload.get("ciphertexts"),
-                        pins=payload.get("pins"),
-                    )
+                if work_decks is not None:
+                    analyze_payload["ciphertexts"] = work_decks
+                if prepared:
                     analyze_payload = merge_prepare_into_payload(analyze_payload, prepared)
-                    if prepared.get("ciphertext"):
-                        payload = {**payload, "ciphertext": prepared["ciphertext"]}
                 hyp_override = payload.get("hypothesis_override")
                 if hyp_override:
                     base = dict(analyze_payload.get("hypothesis") or {})
@@ -332,12 +388,12 @@ class DashHandler(BaseHTTPRequestHandler):
                     analyze_payload["plaintext"] = prepared["plaintext_trial"]
                 session_id = payload.get("session") or str(uuid.uuid4())
                 result = _run_analysis(analyze_payload)
-                result["classification"] = classification
+                result["classification"] = work_classification
                 result["last_payload"] = analyze_payload
                 if prepared:
                     result["prepare"] = prepared
                 _SESSION_CACHE[session_id] = result
-                hyp = (classification.get("hypotheses") or [{}])[idx]
+                hyp = (work_classification.get("hypotheses") or [{}])[work_index]
                 response: dict[str, Any] = {
                     "session": session_id,
                     "config": result["config"],
@@ -348,7 +404,7 @@ class DashHandler(BaseHTTPRequestHandler):
                     "plaintext_view": result["plaintext_view"],
                     "actionable_kinds": sorted(ACTIONABLE_KINDS),
                     "route": {
-                        "hypothesis_index": idx,
+                        "hypothesis_index": work_index,
                         "label": hyp.get("label"),
                         "propagator": hyp.get("dash_propagator") or hyp.get("propagator"),
                         "deck_size": hyp.get("deck_size") or result["config"].get("deck_size"),
@@ -356,6 +412,11 @@ class DashHandler(BaseHTTPRequestHandler):
                 }
                 if prepared:
                     response["prepare"] = prepared
+                if work_index != idx or (prepared and prepared.get("peeled")):
+                    response["route"]["original_hypothesis_index"] = idx
+                    response["reclassified"] = bool(prepared and prepared.get("peeled"))
+                if prepared and prepared.get("peeled"):
+                    response["classification"] = work_classification
                 _json_response(self, 200, response)
             except Exception as exc:  # noqa: BLE001
                 _json_response(self, 400, {"error": str(exc)})

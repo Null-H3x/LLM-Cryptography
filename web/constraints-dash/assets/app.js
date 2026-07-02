@@ -10,10 +10,69 @@ const state = {
   lastConfig: null,
   selectedFinding: null,
   lastPrepare: null,
+  lastError: null,
   actionableKinds: new Set(["pt_difference", "equality", "keystream_pin", "assignment", "stream_pin"]),
 };
 
 const $ = (id) => document.getElementById(id);
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function verboseWrite(level, message, detail) {
+  const el = $("verbose-log");
+  if (!el) return;
+  const ts = new Date().toISOString().slice(11, 19);
+  const cls = level === "error" ? "v-err" : level === "warn" ? "v-warn" : level === "ok" ? "v-ok" : "v-dim";
+  let line = `[${ts}] <span class="${cls}">${escapeHtml(message)}</span>`;
+  if (detail !== undefined) {
+    const text = typeof detail === "string" ? detail : JSON.stringify(detail, null, 2);
+    line += `\n<span class="v-dim">${escapeHtml(text)}</span>`;
+  }
+  el.innerHTML += `${line}\n`;
+  if ($("verbose-autoscroll")?.checked) {
+    el.scrollTop = el.scrollHeight;
+  }
+  if (level === "error") state.lastError = message;
+}
+
+async function apiFetch(path, options = {}) {
+  const method = options.method || "GET";
+  verboseWrite("info", `${method} ${path}`);
+  try {
+    const res = await fetch(path, options);
+    const text = await res.text();
+    let data;
+    try {
+      data = text ? JSON.parse(text) : {};
+    } catch {
+      data = { raw: text };
+    }
+    if (!res.ok) {
+      const errMsg = data.error || res.statusText || `HTTP ${res.status}`;
+      verboseWrite("error", `${method} ${path} → ${res.status}`, errMsg);
+      throw new Error(errMsg);
+    }
+    verboseWrite("ok", `${method} ${path} → ${res.status}`);
+    return data;
+  } catch (err) {
+    if (!(err instanceof Error) || !err.message) {
+      verboseWrite("error", `${method} ${path}`, String(err));
+    }
+    throw err;
+  }
+}
+
+function clearVerbose() {
+  const el = $("verbose-log");
+  if (el) el.textContent = "Cleared.\n";
+  state.lastError = null;
+}
 
 function log(msg) {
   const el = $("log");
@@ -103,7 +162,7 @@ async function fetchCribHint(finding, anchorPt) {
   let existingPins = [];
   try { existingPins = parsePins(); } catch { existingPins = []; }
 
-  const res = await fetch("/api/crib-from-finding", {
+  const res = await apiFetch("/api/crib-from-finding", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -113,9 +172,7 @@ async function fetchCribHint(finding, anchorPt) {
       existing_pins: existingPins,
     }),
   });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || "Crib hint failed");
-  return data;
+  return res;
 }
 
 function showFindingDetail(row) {
@@ -203,10 +260,10 @@ function renderStop(stop) {
   stop.suggestions.forEach((s) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <span class="sugg-priority ${s.priority}">${s.priority}</span>
-      <span class="sugg-action">${s.action}</span>
-      ${s.detail ? `<span class="sugg-meta">${s.detail}</span>` : ""}
-      ${s.example ? `<span class="sugg-meta sugg-example">e.g. ${s.example}</span>` : ""}
+      <span class="sugg-priority ${escapeHtml(s.priority)}">${escapeHtml(s.priority)}</span>
+      <span class="sugg-action">${escapeHtml(s.action)}</span>
+      ${s.detail ? `<span class="sugg-meta">${escapeHtml(s.detail)}</span>` : ""}
+      ${s.example ? `<span class="sugg-meta sugg-example">e.g. ${escapeHtml(s.example)}</span>` : ""}
     `;
     if (s.example && s.example.trim().startsWith("[")) {
       li.classList.add("sugg-clickable");
@@ -271,11 +328,11 @@ function renderFindings(rows) {
     if (isActionableFinding(row)) tr.classList.add("actionable");
     const confClass = `badge badge-${row.confidence || "propagated"}`;
     tr.innerHTML = `
-      <td>${row.round ?? "—"}</td>
-      <td class="kind">${row.kind}</td>
-      <td><span class="${confClass}">${row.confidence}</span></td>
-      <td>${row.source}</td>
-      <td class="data-preview">${JSON.stringify(row.data || {})}</td>
+      <td>${escapeHtml(row.round ?? "—")}</td>
+      <td class="kind">${escapeHtml(row.kind)}</td>
+      <td><span class="${confClass}">${escapeHtml(row.confidence)}</span></td>
+      <td>${escapeHtml(row.source)}</td>
+      <td class="data-preview">${escapeHtml(JSON.stringify(row.data || {}))}</td>
     `;
     tr.addEventListener("click", () => {
       body.querySelectorAll("tr").forEach((r) => r.classList.remove("selected"));
@@ -309,9 +366,8 @@ async function fetchFindings() {
   if (round !== "") params.set("round", round);
   if (q) params.set("q", q);
 
-  const res = await fetch(`/api/findings?${params}`);
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || "Failed to load findings");
+  const res = await apiFetch(`/api/findings?${params}`);
+  const data = res;
 
   state.total = data.total;
   if (data.config) state.lastConfig = data.config;
@@ -374,11 +430,17 @@ function renderPrepare(prepare) {
     card.className = "prepare-step";
     const skipped = step.skipped ? "skipped" : step.error ? "error" : step.applied ? "ok" : "info";
     card.classList.add(`prepare-${skipped}`);
-    const detail = step.applied || step.reason || step.notes || step.error || step.encoding || "";
+    const stepName = typeof step.name === "string" ? step.name : "step";
+    const detailRaw = step.applied
+      || step.reason
+      || (typeof step.notes === "string" ? step.notes : "")
+      || step.error
+      || step.encoding
+      || "";
     card.innerHTML = `
-      <span class="prepare-step-num">${step.step}</span>
-      <span class="prepare-step-name">${step.name.replace(/_/g, " ")}</span>
-      <span class="prepare-step-detail">${detail}</span>
+      <span class="prepare-step-num">${escapeHtml(step.step ?? "?")}</span>
+      <span class="prepare-step-name">${escapeHtml(stepName.replace(/_/g, " "))}</span>
+      <span class="prepare-step-detail">${escapeHtml(detailRaw)}</span>
     `;
     stepsEl.appendChild(card);
   });
@@ -431,7 +493,17 @@ async function handleRunResponse(data) {
 
   if (data.prepare) {
     renderPrepare(data.prepare);
+    verboseWrite("ok", "Prepare complete", data.prepare.notes);
     log(`Prepare: ${data.prepare.notes?.join("; ") || "done"}`);
+  }
+
+  if (data.reclassified && data.classification) {
+    state.classification = data.classification;
+    renderClassification(data.classification);
+    verboseWrite("info", "Re-classified after encoding peel");
+    if (data.prepare?.ciphertext) {
+      $("ciphertext").value = data.prepare.ciphertext;
+    }
   }
 
   if (data.actionable_kinds) {
@@ -487,7 +559,7 @@ function renderPlaintextView(view) {
         <span class="pt-msg-label">${msg.label}</span>
         <span class="pt-msg-meta">${msg.known}/${msg.length} known</span>
       </div>
-      <pre class="pt-msg-text">${msg.text || "—"}</pre>
+      <pre class="pt-msg-text">${escapeHtml(msg.text || "—")}</pre>
     `;
     box.appendChild(block);
   });
@@ -508,9 +580,8 @@ function renderPlaintextView(view) {
 
 async function fetchPlaintextView() {
   if (!state.session) return;
-  const res = await fetch(`/api/plaintext-view?session=${encodeURIComponent(state.session)}`);
-  const data = await res.json();
-  if (res.ok) renderPlaintextView(data.plaintext_view);
+  const res = await apiFetch(`/api/plaintext-view?session=${encodeURIComponent(state.session)}`);
+  renderPlaintextView(res.plaintext_view);
 }
 
 function updateBruteHint(stop) {
@@ -540,7 +611,7 @@ async function runBruteForce() {
   $("brute-status").textContent = "Running…";
   setStatus("run", "BRUTING");
   try {
-    const res = await fetch("/api/brute-force", {
+    const data = await apiFetch("/api/brute-force", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -554,8 +625,6 @@ async function runBruteForce() {
         gak_seed_max: Number($("brute-gak-max").value) || 500,
       }),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Brute failed");
     state.lastBrute = data;
     renderBruteResults(data);
     log(`Brute [${data.lane}]: ${data.count} candidate(s)`);
@@ -583,10 +652,10 @@ function renderBruteResults(data) {
     const preview = c.plaintext_preview || c.plaintext || "";
     card.innerHTML = `
       <div class="brute-card-head">
-        <span class="brute-label">${c.label}</span>
-        <span class="brute-score">${c.score != null ? `score ${c.score}` : c.detail || ""}</span>
+        <span class="brute-label">${escapeHtml(c.label)}</span>
+        <span class="brute-score">${c.score != null ? `score ${escapeHtml(c.score)}` : escapeHtml(c.detail || "")}</span>
       </div>
-      ${preview ? `<pre class="brute-preview">${preview}</pre>` : ""}
+      ${preview ? `<pre class="brute-preview">${escapeHtml(preview)}</pre>` : ""}
       <button type="button" class="btn btn-ghost brute-apply" data-idx="${idx}">Apply → re-run loop</button>
     `;
     card.querySelector(".brute-apply").addEventListener("click", () => applyBruteCandidate(idx));
@@ -616,23 +685,24 @@ async function applyBruteCandidate(index) {
   if (c.hypothesis_patch) body.hypothesis_override = c.hypothesis_patch;
   if (c.plaintext) body.plaintext_trial = c.plaintext;
   try {
-    const res = await fetch("/api/route-run", {
+    const data = await apiFetch("/api/route-run", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Re-run failed");
     await handleRunResponse(data);
   } catch (err) {
     log(`ERROR: ${err.message}`);
+    verboseWrite("error", "Apply brute re-run failed", err.message);
     setStatus("err", "ERROR");
   }
 }
 
 function canRouteRun(h) {
   if (!h) return false;
+  if (h.needs_conversion) return true;
   if (h.propagator && h.propagator !== "none") return true;
+  if (h.dash_propagator && h.dash_propagator !== "none") return true;
   if (h.dash_mode === "noita") return true;
   if (h.dash_mode === "fingerprinted" && h.dataset_slug) return true;
   return false;
@@ -661,7 +731,7 @@ async function routeAndRun(hypothesisIndex) {
   }
 
   try {
-    const res = await fetch("/api/route-run", {
+    const data = await apiFetch("/api/route-run", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -673,11 +743,10 @@ async function routeAndRun(hypothesisIndex) {
         max_rounds: Number($("max-rounds").value) || 10,
       }),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Route → run failed");
     await handleRunResponse(data);
   } catch (err) {
     log(`ERROR: ${err.message}`);
+    verboseWrite("error", "Route → prepare → run failed", err.message);
     setStatus("err", "ERROR");
   }
 }
@@ -714,7 +783,7 @@ function renderClassification(data) {
     chips.push(`inner: ${p.inner_preview.slice(0, 40)}…`);
   }
 
-  profileEl.innerHTML = chips.map((c) => `<span class="classify-chip">${c}</span>`).join("");
+  profileEl.innerHTML = chips.map((c) => `<span class="classify-chip">${escapeHtml(c)}</span>`).join("");
   statusEl.textContent = data.top
     ? `Full scan · ${data.hypotheses.length} hits · top: ${data.top.label} (${Math.round(data.top.confidence * 100)}%)`
     : "Classified";
@@ -724,8 +793,8 @@ function renderClassification(data) {
     const card = document.createElement("div");
     const isRouted = state.routedIndex === idx;
     card.className = `hyp-card${idx === 0 ? " top" : ""}${isRouted ? " routed" : ""}`;
-    const reasons = (h.reasoning || []).map((r) => `<li>${r}</li>`).join("");
-    const actions = (h.actions || []).map((a) => `<li>${a}</li>`).join("");
+    const reasons = (h.reasoning || []).map((r) => `<li>${escapeHtml(r)}</li>`).join("");
+    const actions = (h.actions || []).map((a) => `<li>${escapeHtml(a)}</li>`).join("");
     const prop = h.dash_propagator || h.propagator;
     const meta = [
       prop && prop !== "none" ? `prop: ${prop.replace(/_/g, " ")}` : "prop: —",
@@ -736,23 +805,26 @@ function renderClassification(data) {
     const metrics = h.metrics || {};
     const metricLine = Object.entries(metrics)
       .slice(0, 4)
-      .map(([k, v]) => `${k}: ${v}`)
+      .map(([k, v]) => `${escapeHtml(k)}: ${escapeHtml(v)}`)
       .join(" · ");
 
     let btnHtml = "";
     if (canRouteRun(h)) {
-      const peelNote = h.needs_conversion ? " · prepare will peel encoding" : "";
-      btnHtml = `<button type="button" class="btn btn-primary hyp-route" data-idx="${idx}">Route → prepare → run</button>${peelNote ? `<span class="hyp-no-run">${peelNote.trim()}</span>` : ""}`;
+      const label = h.needs_conversion ? "Peel → prepare → run" : "Route → prepare → run";
+      btnHtml = `<button type="button" class="btn btn-primary hyp-route" data-idx="${idx}">${label}</button>`;
+      if (h.needs_conversion) {
+        btnHtml += `<span class="hyp-no-run">encoding layer — will decode and re-scan</span>`;
+      }
     } else {
       btnHtml = `<span class="hyp-no-run">No propagator — manual decode / corpus only</span>`;
     }
 
     card.innerHTML = `
       <div class="hyp-card-header">
-        <span class="hyp-label">${h.label}</span>
+        <span class="hyp-label">${escapeHtml(h.label)}</span>
         <span class="hyp-conf">${Math.round(h.confidence * 100)}%</span>
       </div>
-      <p class="hyp-meta">${meta}</p>
+      <p class="hyp-meta">${escapeHtml(meta)}</p>
       ${metricLine ? `<p class="hyp-meta hyp-metrics">${metricLine}</p>` : ""}
       <ul class="hyp-reason">${reasons}</ul>
       <ul class="hyp-actions">${actions}</ul>
@@ -777,20 +849,20 @@ async function runClassification() {
   setStatus("run", "SCANNING");
 
   try {
-    const res = await fetch("/api/classify", {
+    const data = await apiFetch("/api/classify", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ciphertext: ct }),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Classify failed");
     renderClassification(data);
+    verboseWrite("ok", "Classification complete", { top: data.top?.label, count: data.hypotheses?.length });
     log(`Classification: ${data.top?.label || "done"} (${data.hypotheses?.length || 0} hypotheses)`);
     log("Pick a hypothesis in Classification and click Route → prepare → run.");
     setStatus("idle", "IDENTIFIED");
   } catch (err) {
     $("classify-status").textContent = "Error";
     log(`Classification error: ${err.message}`);
+    verboseWrite("error", "Classification failed", err.message);
     setStatus("err", "ERROR");
   }
 }
@@ -843,11 +915,24 @@ function bindEvents() {
   });
 
   $("brute-run-btn").addEventListener("click", runBruteForce);
+  $("verbose-clear").addEventListener("click", clearVerbose);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  window.addEventListener("error", (event) => {
+    verboseWrite("error", "JS error", `${event.message} @ ${event.filename}:${event.lineno}`);
+  });
+  window.addEventListener("unhandledrejection", (event) => {
+    verboseWrite("error", "Unhandled promise", event.reason?.message || String(event.reason));
+  });
+
   bindEvents();
   resetInferred();
   setStatus("idle", "IDLE");
-  log("Constraints Dash ready. Paste ciphertext → Identify → Route → run in Classification.");
+  log("Constraints Dash ready. Paste ciphertext → Identify → Route → prepare → run.");
+  verboseWrite("info", "Constraints Dash ready");
+
+  apiFetch("/api/health")
+    .then((data) => verboseWrite("ok", "API health", data))
+    .catch((err) => verboseWrite("error", "API health check failed", err.message));
 });

@@ -18,7 +18,17 @@
     </div>
     <div class="topbar-meta">
       <span id="status-pill" class="pill pill-idle">IDLE</span>
-      <span class="meta-item">identify → route → prepare → run → recover</span>
+      <span class="meta-item meta-flow">identify → route → prepare → run → recover</span>
+      <details id="verbose-panel" class="verbose-panel">
+        <summary>Verbose</summary>
+        <div class="verbose-body">
+          <div class="verbose-toolbar">
+            <button type="button" id="verbose-clear" class="btn btn-ghost btn-tiny">Clear</button>
+            <label class="verbose-toggle"><input type="checkbox" id="verbose-autoscroll" checked /> autoscroll</label>
+          </div>
+          <pre id="verbose-log" class="verbose-log">Ready.</pre>
+        </div>
+      </details>
     </div>
   </header>
 
